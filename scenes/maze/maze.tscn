@@ -1,0 +1,121 @@
+[gd_scene load_steps=13 format=3 uid="uid://bxhbngi466nlm"]
+
+[ext_resource type="Script" path="res://scenes/maze/maze.gd" id="1_hm3yb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kqi7t"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sqpaw"]
+size = Vector3(0.5, 7, 7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7whrk"]
+size = Vector3(0.5, 7, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_750nu"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3j1lg"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_330lg"]
+size = Vector3(7, 7, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dfoiw"]
+size = Vector3(7, 7, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4axp5"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y85e5"]
+no_depth_test = true
+shading_mode = 2
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xbqyc"]
+material = SubResource("StandardMaterial3D_y85e5")
+radius = 0.45
+height = 0.9
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_flyxa"]
+radius = 0.436
+
+[node name="Maze" type="Node3D"]
+script = ExtResource("1_hm3yb")
+
+[node name="Box" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_kqi7t")
+
+[node name="X+" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, 0, 0)
+shape = SubResource("BoxShape3D_sqpaw")
+
+[node name="X+Mesh" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_7whrk")
+
+[node name="X-" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 0, 0)
+shape = SubResource("BoxShape3D_sqpaw")
+
+[node name="X-Mesh" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_7whrk")
+
+[node name="Y+" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
+shape = SubResource("BoxShape3D_750nu")
+
+[node name="Y+Mesh" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, 0)
+visible = false
+mesh = SubResource("BoxMesh_3j1lg")
+
+[node name="Y-" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, 0)
+shape = SubResource("BoxShape3D_750nu")
+
+[node name="Y-Mesh" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
+visible = false
+mesh = SubResource("BoxMesh_3j1lg")
+
+[node name="Z+" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25)
+shape = SubResource("BoxShape3D_330lg")
+
+[node name="Z+Mesh" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25)
+visible = false
+mesh = SubResource("BoxMesh_dfoiw")
+
+[node name="Z-" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25)
+shape = SubResource("BoxShape3D_330lg")
+
+[node name="Z-Mesh" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25)
+visible = false
+mesh = SubResource("BoxMesh_dfoiw")
+
+[node name="Chambers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, -3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Chambers"]
+visible = false
+mesh = SubResource("SphereMesh_4axp5")
+
+[node name="Lopta" type="RigidBody3D" parent="."]
+gravity_scale = 2.0
+continuous_cd = true
+can_sleep = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lopta"]
+mesh = SubResource("SphereMesh_xbqyc")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lopta"]
+shape = SubResource("SphereShape3D_flyxa")
