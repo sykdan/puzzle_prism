@@ -15,8 +15,6 @@ func _ready():
 	$Maze.size = size
 	MazeGen.generated.connect(self.generated)
 	MazeGen._generate_maze(size)
-	$Maze/Lopta.position = $Maze/Chambers.position
-	
 
 func generated(maze):
 	$Maze.add_maze_data(maze)
