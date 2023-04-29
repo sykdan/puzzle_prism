@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Qube2"
-run/main_scene="res://control.tscn"
+run/main_scene="res://scenes/[main]/main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -29,4 +29,5 @@ occlusion_culling/use_occlusion_culling=true
 [xr]
 
 openxr/enabled=true
+openxr/default_action_map="res://assets/godot/openxr_action_map.tres"
 shaders/enabled=true

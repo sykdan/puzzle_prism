@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddh2rol6pafi2"]
+
+[ext_resource type="Script" path="res://scenes/screen/screen.gd" id="1_vy1sl"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_crqn2"]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qha2s"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_crqn2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nfjwq"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_qha2s")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_133xu"]
+size = Vector3(1, 1, 0.05)
+
+[node name="Screen" type="Node3D"]
+script = ExtResource("1_vy1sl")
+
+[node name="Viewport" type="SubViewport" parent="." groups=["screen_internals"]]
+transparent_bg = true
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_nfjwq")
+
+[node name="ScreenArea" type="Area3D" parent="."]
+
+[node name="Shape" type="CollisionShape3D" parent="ScreenArea"]
+shape = SubResource("BoxShape3D_133xu")
