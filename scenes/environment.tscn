@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2830qnod2j82"]
+
+[ext_resource type="Texture2D" uid="uid://bwyjsl1ilc6c0" path="res://assets/textures/milkyway_2020_8k.jpg" id="1_wjqdo"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_158s8"]
+panorama = ExtResource("1_wjqdo")
+
+[sub_resource type="Sky" id="Sky_43n7u"]
+sky_material = SubResource("PanoramaSkyMaterial_158s8")
+
+[sub_resource type="Environment" id="Environment_fxxhb"]
+background_mode = 2
+sky = SubResource("Sky_43n7u")
+ambient_light_source = 2
+ambient_light_color = Color(0.95, 0.92, 0.65, 1)
+ambient_light_energy = 0.19
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43uwq"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.921569, 0.701961, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3clff"]
+material = SubResource("StandardMaterial3D_43uwq")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_shmjo"]
+_data = [Vector2(0, 0), 0.0, 3.77576, 0, 0, Vector2(1, 0), -3.52414, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1677"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rme80"]
+material = SubResource("StandardMaterial3D_u1677")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_fxxhb")
+
+[node name="Yellow" type="CPUParticles3D" parent="."]
+gi_mode = 0
+amount = 200
+lifetime = 5.0
+preprocess = 5.0
+mesh = SubResource("SphereMesh_3clff")
+emission_shape = 2
+emission_sphere_radius = 50.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_shmjo")
+hue_variation_min = 0.09
+hue_variation_max = 0.64
+
+[node name="White" type="CPUParticles3D" parent="."]
+gi_mode = 0
+amount = 200
+lifetime = 5.0
+preprocess = 5.0
+mesh = SubResource("SphereMesh_rme80")
+emission_shape = 2
+emission_sphere_radius = 50.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+scale_amount_min = 0.4
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_shmjo")
+hue_variation_min = 0.09
+hue_variation_max = 0.64
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.993242, 0.116064, 0, -0.116064, 0.993242, 0, 4.36571, 0)
