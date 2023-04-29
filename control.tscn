@@ -6,24 +6,24 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_862ls"]
 
-[sub_resource type="Sky" id="Sky_d66v6"]
+[sub_resource type="Sky" id="Sky_43n7u"]
 sky_material = SubResource("ProceduralSkyMaterial_862ls")
 
 [sub_resource type="Environment" id="Environment_fxxhb"]
 background_mode = 2
-sky = SubResource("Sky_d66v6")
+sky = SubResource("Sky_43n7u")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_m4qbq")
 
 [node name="XRPlayer" parent="." instance=ExtResource("2_fb7he")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(35, 0, 0, 0, 35, 0, 0, 0, 35, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fxxhb")
 
 [node name="Maze" parent="." instance=ExtResource("3_gw4gx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.799999, 33.5719, -20.2306)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.799999, 23.3719, -20.2306)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.993242, 0.116064, 0, -0.116064, 0.993242, 0, 4.36571, 0)

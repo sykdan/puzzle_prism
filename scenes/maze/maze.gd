@@ -1,17 +1,24 @@
 extends Node3D
 
-const CHAMBER_SIZE = 1.0
-const WALL_SIZE = 0.5
+signal ready_to_play
+signal _built_floor
+signal built_all
 
-var CHAMBER = preload("./chamber.tscn")
+@onready var LEVEL = preload("./level.tscn")
 
 var cull_from = Vector3i.DOWN
 
-@export var size: Vector3i = Vector3i.ONE * 10 : set = resize
+@export var size: Vector2i = Vector2i.ONE * 10
+@export var levels: int = 10
+var current_level = 0
+var is_ready = false
 
-func resize(newsize: Vector3i):
+var _next_floor_start
+
+func resize():
 	# Calculate the size of the box
-	var box_sizes = (newsize + Vector3i.ONE) * CHAMBER_SIZE + (newsize - Vector3i.ONE) * WALL_SIZE
+	var box = Vector3i(size.x, levels, size.y)
+	var box_sizes = (box + Vector3i.ONE) * Shared.CHAMBER_SIZE + (box - Vector3i.ONE) * Shared.WALL_SIZE
 	
 	# Position colliders
 	$"Box/X+".shape.size = box_sizes
@@ -21,104 +28,82 @@ func resize(newsize: Vector3i):
 	$"Box/Y+Mesh".mesh.size = box_sizes
 	$"Box/Z+Mesh".mesh.size = box_sizes
 	
-	$"Box/X+".shape.size.x = WALL_SIZE 
-	$"Box/Y+".shape.size.y = WALL_SIZE
-	$"Box/Z+".shape.size.z = WALL_SIZE
-	$"Box/X+Mesh".mesh.size.x = WALL_SIZE
-	$"Box/Y+Mesh".mesh.size.y = WALL_SIZE
-	$"Box/Z+Mesh".mesh.size.z = WALL_SIZE
+	$"Box/X+".shape.size.x = Shared.WALL_SIZE 
+	$"Box/Y+".shape.size.y = Shared.WALL_SIZE
+	$"Box/Z+".shape.size.z = Shared.WALL_SIZE
+	$"Box/X+Mesh".mesh.size.x = Shared.WALL_SIZE
+	$"Box/Y+Mesh".mesh.size.y = Shared.WALL_SIZE
+	$"Box/Z+Mesh".mesh.size.z = Shared.WALL_SIZE
 	
-	$"Box/X+".position.x = (box_sizes.x - WALL_SIZE)/2
-	$"Box/Y+".position.y = (box_sizes.y - WALL_SIZE)/2
-	$"Box/Z+".position.z = (box_sizes.z - WALL_SIZE)/2
-	$"Box/X-".position.x = (box_sizes.x - WALL_SIZE)/-2
-	$"Box/Y-".position.y = (box_sizes.y - WALL_SIZE)/-2
-	$"Box/Z-".position.z = (box_sizes.z - WALL_SIZE)/-2
-	$"Box/X+Mesh".position.x = (box_sizes.x - WALL_SIZE)/2
-	$"Box/Y+Mesh".position.y = (box_sizes.y - WALL_SIZE)/2
-	$"Box/Z+Mesh".position.z = (box_sizes.z - WALL_SIZE)/2
-	$"Box/X-Mesh".position.x = (box_sizes.x - WALL_SIZE)/-2
-	$"Box/Y-Mesh".position.y = (box_sizes.y - WALL_SIZE)/-2
-	$"Box/Z-Mesh".position.z = (box_sizes.z - WALL_SIZE)/-2
-	
-	var d = max(box_sizes.x,box_sizes.y,box_sizes.z) + WALL_SIZE
-	$XRay/CollisionShape3D.shape.size = Vector3(d, CHAMBER_SIZE, d)
+	$"Box/X+".position.x = (box_sizes.x - Shared.WALL_SIZE)/2
+	$"Box/Y+".position.y = (box_sizes.y - Shared.WALL_SIZE)/2
+	$"Box/Z+".position.z = (box_sizes.z - Shared.WALL_SIZE)/2
+	$"Box/X-".position.x = (box_sizes.x - Shared.WALL_SIZE)/-2
+	$"Box/Y-".position.y = (box_sizes.y - Shared.WALL_SIZE)/-2
+	$"Box/Z-".position.z = (box_sizes.z - Shared.WALL_SIZE)/-2
+	$"Box/X+Mesh".position.x = (box_sizes.x - Shared.WALL_SIZE)/2
+	$"Box/Y+Mesh".position.y = (box_sizes.y - Shared.WALL_SIZE)/2
+	$"Box/Z+Mesh".position.z = (box_sizes.z - Shared.WALL_SIZE)/2
+	$"Box/X-Mesh".position.x = (box_sizes.x - Shared.WALL_SIZE)/-2
+	$"Box/Y-Mesh".position.y = (box_sizes.y - Shared.WALL_SIZE)/-2
+	$"Box/Z-Mesh".position.z = (box_sizes.z - Shared.WALL_SIZE)/-2
 	
 	# Move the Chambers node, so that it is positioned at the bottom-left and we can
 	# position individual chambers as multiples of WALL_SIZE later on.
-	$Chambers.position = box_sizes/-2 + Vector3.ONE * (WALL_SIZE + CHAMBER_SIZE/2)
+	$Levels.position = box_sizes/-2 + Vector3.ONE * (Shared.WALL_SIZE + Shared.CHAMBER_SIZE/2)
+	# Start from the top and continue downward
+	$Levels.position.y *= -1
 
 func _ready():
-	resize(size)
+	MazeGen.generated.connect(_maze_generated)
+	resize()
 
-func clear_maze_data():
-	for c in $Chambers.get_children():
+func clear_game():
+	for c in $Levels.get_children():
 		c.queue_free()
 
-func add_maze_data(data):
-	for d in data:
-		var c = CHAMBER.instantiate()
-		$Chambers.add_child(c)
-		c.position = d.position * (CHAMBER_SIZE + WALL_SIZE)
-		c.get_node("X").disabled = d.x_passage
-		c.get_node("Y").disabled = d.y_passage
-		c.get_node("Z").disabled = d.z_passage
-		c.get_node("XMesh").visible = !d.x_passage
-		c.get_node("YMesh").visible = !d.y_passage
-		c.get_node("ZMesh").visible = !d.z_passage
-	
-	cull_snap_to_top()
-	$Lopta.position = $Chambers.position + Vector3i(3,5,2) * (CHAMBER_SIZE + WALL_SIZE)
+func create_game():
+	is_ready = false
+	_next_floor_start = Vector2i(
+		randi_range(0, size.x-1),
+		randi_range(0, size.y-1)
+	)
+	$Lopta.position = $Levels.position
+	$Lopta.position += Vector3(_next_floor_start.x,0,_next_floor_start.y) * Shared.NODE_SIZE
+	clear_game()
+	await get_tree().process_frame
+	_add_floor()
+
+func _add_floor():
+	print("add floor.")
+	if $Levels.get_child_count() < levels:
+		var l = LEVEL.instantiate()
+		l.position.y = $Levels.get_child_count() * -Shared.NODE_SIZE
+		l.hide()
+		$Levels.add_child(l)
+		MazeGen.__generate_maze(size, _next_floor_start)
+	else:
+		emit_signal(&"built_all")
+		reveal(levels-1)
 
 func _physics_process(delta):
 	pass#print($XRay.position - $Lopta.position)
 
-func __get_culled_axis(v: Vector3):
-	if cull_from.x:
-		return v.x
-	if cull_from.y:
-		return v.y
-	if cull_from.z:
-		return v.z
+func _maze_generated(data, end):
+	$Levels.get_child(-1).build(size, data, end)
+	_next_floor_start = end
+	emit_signal(&"_built_floor")
+	_add_floor()
 
-func __hide_pass_1():
-	var bodies = $XRay.get_overlapping_bodies()
-
-func __hide_pass_2():
-	var bodies = $XRay.get_overlapping_bodies()
-
-func cull_snap_to_top():
-	var top = Vector3(cull_from) * -($Chambers.position - Vector3.ONE * (WALL_SIZE/2))
-	$XRay.position = top
-
-func perform_culling():
-	var culled_axis = cull_from.abs().max_axis_index()
-	var factor = cull_from[culled_axis]
-	const XYZ = "XYZ"
+func reveal(level: int):
+	if level >= $Levels.get_child_count():
+		return
 	
-	print($Lopta.position)
-	print(factor)
-	
-	while factor * ($XRay.position - $Lopta.position)[culled_axis] > CHAMBER_SIZE:
-		var bodies
-		
-		var keep = XYZ[culled_axis]
-		bodies = $XRay.get_overlapping_bodies()
-		for b in bodies:
-			if not b.is_in_group(&"chamber"): continue
-			b.get_node("XMesh").hide()
-			b.get_node("YMesh").hide()
-			b.get_node("ZMesh").hide()
-		$XRay.position -= cull_from * (CHAMBER_SIZE + WALL_SIZE)
-		await get_tree().physics_frame
-		await get_tree().physics_frame
-		await get_tree().physics_frame
-		
-		if factor == 1:
-			bodies = $XRay.get_overlapping_bodies()
-			for b in bodies:
-				if not b.is_in_group(&"chamber"): continue
-				b.get_node(keep + "Mesh").hide()
+	$Levels.get_child(level).show()
 
-func _on_button_pressed():
-	perform_culling()
+func _on__built_floor():
+	if not is_ready and ($Levels.get_child_count() == 2 or $Levels.get_child_count() == levels):
+		is_ready = true
+		emit_signal(&"ready_to_play")
+		reveal(0)
+		reveal(1)

@@ -17,11 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MazeGen="*res://scripts/mazegenerator.gd"
+MazeGen="*res://scripts/maze_generator.gd"
+Shared="*res://scripts/metadata.gd"
 
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 occlusion_culling/use_occlusion_culling=true
 
 [xr]

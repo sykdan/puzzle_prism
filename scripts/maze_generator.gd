@@ -1,47 +1,42 @@
 extends Node
 
 # warning-ignore:UNUSED_SIGNAL
-signal generated(maze_data)
+signal generated(maze_data, furthest_away)
 
 var thread: Thread
 
-func i2v(size: Vector3i, i: int) -> Vector3i: 
-	return Vector3i(i % size.x, (i % (size.x*size.y)) / size.x, i / (size.x*size.y))
+func i2v(size: Vector2i, i: int) -> Vector2i: 
+	return Vector2i(i % size.x, (i % (size.x*size.y)) / size.x)
 
-func v2i(size: Vector3i, v: Vector3i) -> int:
-	return v.x + size.x * v.y + (size.x * size.y) * v.z
+func v2i(size: Vector2i, v: Vector2i) -> int:
+	return v.x + size.x * v.y
 
 class MazeNode:
 	var added = false
 	
-	var position: Vector3i = Vector3i.ZERO 
+	var position: Vector2i = Vector2i.ZERO 
 	var next_walk: int = -1
 	
 	var x_passage = false
 	var y_passage = false
-	var z_passage = false
 	
 	var distance_from_start = null
 
-func __adjust_index_next_step(now: Vector3i, size: Vector3i, previous: Vector3i) -> Vector3i:
+func __adjust_index_next_step(now: Vector2i, size: Vector2i, previous: Vector2i) -> Vector2i:
 	while true:
-		var direction := Vector3i.ZERO
+		var direction := Vector2i.ZERO
 		
-		match randi_range(0,5):
+		match randi_range(0,3):
 			0:
-				direction = Vector3i.UP
+				direction = Vector2i.UP
 			1:
-				direction = Vector3i.LEFT
+				direction = Vector2i.LEFT
 			2:
-				direction = Vector3i.RIGHT
+				direction = Vector2i.RIGHT
 			3:
-				direction = Vector3i.DOWN
-			4:
-				direction = Vector3i.FORWARD
-			5:
-				direction = Vector3i.BACK
+				direction = Vector2i.DOWN
 			_:
-				direction = Vector3i.ZERO
+				direction = Vector2i.ZERO
 		
 		var would_be = now + direction
 		
@@ -51,15 +46,22 @@ func __adjust_index_next_step(now: Vector3i, size: Vector3i, previous: Vector3i)
 			continue
 		if would_be.y < 0 or would_be.y >= size.y:
 			continue
-		if would_be.z < 0 or would_be.z >= size.z:
-			continue
 		
 		return would_be
-	return Vector3.ZERO # Suppress editor errors. This will not be returned, ever.
+	return Vector2i.ZERO # Suppress editor errors. This will not be returned, ever.
+
+func _generate_maze(size: Vector2i, start=null):
+	if thread is Thread:
+		print("wait shit")
+		thread.wait_to_finish()
+	else:
+		thread = Thread.new()
+	thread.start(func(): self.__generate_maze(size, start))
 
 # Main generation fn
-func _generate_maze(size: Vector3i):
-	var N = size.x * size.y * size.z
+func __generate_maze(size: Vector2i, start: Vector2i):
+	print("gen")
+	var N = size.x * size.y
 	
 	# Initialize the game field
 	var field: Array[MazeNode] = []
@@ -73,20 +75,21 @@ func _generate_maze(size: Vector3i):
 			m.x_passage = true
 		if m.position.y == size.y - 1:
 			m.y_passage = true
-		if m.position.z == size.z - 1:
-			m.z_passage = true
 		
 		field[i] = m
 	
 	# We mark one random node as part of the maze to kick off the algorithm
-	var start = randi() % N
-		
-	var start_node = field[start]
+	var start_node
+	if start == null:
+		start_node = field[randi() % N]
+	else:
+		start_node = field[v2i(size, start)]
+	
 	start_node.added = true
 	start_node.distance_from_start = 0
 	
 	var walk = 0 # Go through all nodes
-	var previous = Vector3i.ONE * -1
+	var previous = Vector2i.ONE * -1
 	
 	var furthest_away: MazeNode = start_node
 	
@@ -135,8 +138,6 @@ func _generate_maze(size: Vector3i):
 					node.x_passage = true
 				elif diff == size.x:
 					node.y_passage = true
-				elif diff > 0:
-					node.z_passage = true
 					
 				node = field[next]
 				
@@ -144,12 +145,10 @@ func _generate_maze(size: Vector3i):
 					node.x_passage = true
 				elif diff == -size.x:
 					node.y_passage = true
-				elif diff < 0:
-					node.z_passage = true
 		
 		walk += 1
 	
-	emit_signal(&"generated", field)
+	emit_signal(&"generated", field, furthest_away.position)
 
 func _exit_tree():
 	if thread is Thread:

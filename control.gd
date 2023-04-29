@@ -1,20 +1,17 @@
 extends Node3D
 
 var ms: Vector2 = Vector2.ZERO
-
 var interface : XRInterface
-
 var holding = false
 
-
+var size = Vector3i.ONE * 7
 
 func _ready():
 	ms = get_viewport().get_mouse_position()
-	
-	var size = Vector3i.ONE * 7
-	$Maze.size = size
-	MazeGen.generated.connect(self.generated)
-	MazeGen._generate_maze(size)
+	$Maze.size = Vector2i(size.x, size.y)
+	$Maze.levels = 7
+	$Maze.resize()
+	$Maze.create_game()
 
 func generated(maze):
 	$Maze.add_maze_data(maze)
