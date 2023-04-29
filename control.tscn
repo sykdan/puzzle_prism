@@ -19,6 +19,17 @@ script = ExtResource("1_m4qbq")
 [node name="XRPlayer" parent="." instance=ExtResource("2_fb7he")]
 transform = Transform3D(35, 0, 0, 0, 35, 0, 0, 0, 35, 0, 0, 0)
 
+[node name="LeftHand" parent="XRPlayer/LeftHand" index="0"]
+transform = Transform3D(0.948876, 0.315649, 0, -0.103806, 0.312054, 0.944376, 0.298091, -0.896096, 0.328867, 0, -0.08, -0.06)
+visible = true
+
+[node name="MeshInstance3D" parent="XRPlayer/LeftHand" index="1"]
+visible = true
+
+[node name="RightHand" parent="XRPlayer/RightHand" index="0"]
+transform = Transform3D(0.948876, -0.315649, 0, 0.103806, 0.312054, 0.944376, -0.298091, -0.896096, 0.328867, 0, -0.08, -0.06)
+visible = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fxxhb")
 
@@ -53,6 +64,8 @@ offset_right = 107.0
 offset_bottom = 158.0
 text = "Test"
 
+[connection signal="haptic" from="Maze/Marble" to="." method="_on_marble_haptic"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 
 [editable path="XRPlayer"]
+[editable path="Maze"]

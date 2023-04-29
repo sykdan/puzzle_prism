@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6o16das8tist"]
+
+[ext_resource type="Shader" path="res://scenes/maze/goal.gdshader" id="1_lmajb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yrjr"]
+render_priority = 0
+shader = ExtResource("1_lmajb")
+
+[sub_resource type="BoxMesh" id="BoxMesh_57ck4"]
+material = SubResource("ShaderMaterial_8yrjr")
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y2rt4"]
+size = Vector3(1, 0.15, 1)
+
+[node name="Goal" type="Area3D"]
+
+[node name="Glow" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_57ck4")
+skeleton = NodePath("../Shape")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_y2rt4")

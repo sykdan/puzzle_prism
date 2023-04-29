@@ -52,7 +52,6 @@ func __adjust_index_next_step(now: Vector2i, size: Vector2i, previous: Vector2i)
 
 func _generate_maze(size: Vector2i, start=null):
 	if thread is Thread:
-		print("wait shit")
 		thread.wait_to_finish()
 	else:
 		thread = Thread.new()
@@ -60,7 +59,6 @@ func _generate_maze(size: Vector2i, start=null):
 
 # Main generation fn
 func __generate_maze(size: Vector2i, start: Vector2i):
-	print("gen")
 	var N = size.x * size.y
 	
 	# Initialize the game field

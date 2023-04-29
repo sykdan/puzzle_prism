@@ -1,6 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bxhbngi466nlm"]
 
 [ext_resource type="Script" path="res://scenes/maze/maze.gd" id="1_hm3yb"]
+[ext_resource type="Script" path="res://scenes/maze/Marble.gd" id="2_bxwkj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kqi7t"]
 friction = 0.0
@@ -14,9 +15,6 @@ size = Vector3(0.5, 7, 7)
 [sub_resource type="BoxShape3D" id="BoxShape3D_750nu"]
 size = Vector3(7, 0.5, 7)
 
-[sub_resource type="BoxMesh" id="BoxMesh_3j1lg"]
-size = Vector3(7, 0.5, 7)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_330lg"]
 size = Vector3(7, 7, 0.5)
 
@@ -24,7 +22,7 @@ size = Vector3(7, 7, 0.5)
 size = Vector3(7, 7, 0.5)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_45dme"]
-friction = 0.2
+friction = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y85e5"]
 shading_mode = 2
@@ -65,20 +63,6 @@ mesh = SubResource("BoxMesh_7whrk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 shape = SubResource("BoxShape3D_750nu")
 
-[node name="Y+Mesh" type="MeshInstance3D" parent="Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, 0)
-visible = false
-mesh = SubResource("BoxMesh_3j1lg")
-
-[node name="Y-" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, 0)
-shape = SubResource("BoxShape3D_750nu")
-
-[node name="Y-Mesh" type="MeshInstance3D" parent="Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
-visible = false
-mesh = SubResource("BoxMesh_3j1lg")
-
 [node name="Z+" type="CollisionShape3D" parent="Box"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.25)
 shape = SubResource("BoxShape3D_330lg")
@@ -98,17 +82,18 @@ mesh = SubResource("BoxMesh_dfoiw")
 [node name="Levels" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, -3)
 
-[node name="Lopta" type="RigidBody3D" parent="."]
+[node name="Marble" type="RigidBody3D" parent="." groups=["marble"]]
 physics_material_override = SubResource("PhysicsMaterial_45dme")
 gravity_scale = 4.08
 can_sleep = false
 linear_damp_mode = 1
+script = ExtResource("2_bxwkj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lopta"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Marble"]
 mesh = SubResource("SphereMesh_xbqyc")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lopta"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Marble"]
 shape = SubResource("SphereShape3D_flyxa")
 
 [connection signal="_built_floor" from="." to="." method="_on__built_floor"]

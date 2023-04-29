@@ -49,7 +49,6 @@ func grip_tick():
 	if not gripping:
 		return
 	
-	print("shift by ", pos_diff.length())
 	gripped_object.position += pos_diff
 	gripped_object.transform.basis = $Grip/Transform.global_transform.basis
 	
