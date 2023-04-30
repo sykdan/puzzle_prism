@@ -28,7 +28,7 @@ transparent_bg = true
 [node name="Screen" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_nfjwq")
 
-[node name="ScreenArea" type="Area3D" parent="Screen"]
+[node name="ScreenArea" type="Area3D" parent="Screen" groups=["screen"]]
 
 [node name="Shape" type="CollisionShape3D" parent="Screen/ScreenArea"]
 shape = SubResource("BoxShape3D_133xu")

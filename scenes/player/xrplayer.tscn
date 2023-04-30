@@ -52,6 +52,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00800002, -0.03, 0.075)
 [node name="Shape" type="CollisionShape3D" parent="LeftHand/LeftHand/Grip"]
 shape = SubResource("SphereShape3D_dfwr2")
 
+[node name="Pointer" type="RayCast3D" parent="LeftHand/LeftHand"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+enabled = false
+target_position = Vector3(0, -5, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="GripOrigin" type="Node3D" parent="LeftHand"]
 
 [node name="RightHand" type="XRController3D" parent="."]
@@ -74,7 +82,9 @@ shape = SubResource("SphereShape3D_dfwr2")
 
 [node name="Transform" type="Node3D" parent="Grip"]
 
-[node name="StartXR" parent="." instance=ExtResource("4_21n4l")]
+[node name="XR" parent="." instance=ExtResource("4_21n4l")]
 
-[connection signal="xr_ended" from="StartXR" to="." method="_on_start_xr_xr_ended"]
-[connection signal="xr_started" from="StartXR" to="." method="_on_start_xr_xr_started"]
+[connection signal="button_pressed" from="LeftHand" to="." method="_on_left_hand_button_pressed"]
+[connection signal="button_pressed" from="RightHand" to="." method="_on_right_hand_button_pressed"]
+[connection signal="xr_ended" from="XR" to="." method="_on_start_xr_xr_ended"]
+[connection signal="xr_started" from="XR" to="." method="_on_start_xr_xr_started"]

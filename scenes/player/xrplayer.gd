@@ -1,5 +1,9 @@
 extends XROrigin3D
 
+signal recentered
+
+@onready var pointer = $LeftHand/LeftHand/Pointer
+
 var fade_modulate: float = 1.0 :
 	set(new_fade_modulate):
 		fade_modulate = new_fade_modulate
@@ -8,6 +12,10 @@ var fade_modulate: float = 1.0 :
 var gripping = false
 var gripped_object = null
 var grip_last_transform = Transform3D.IDENTITY
+
+var pointer_enabled = true :
+	set(is_pointer_enabled):
+		%Pointer.enabled = is_pointer_enabled
 
 func grip_object(object: Node3D):
 	gripped_object = object
@@ -23,6 +31,39 @@ func drop_object():
 func _ready():
 	$XRCamera3D/Curtain.show()
 	fade_modulate = fade_modulate
+	pointer_enabled = pointer_enabled
+	
+	if $XR.xr_interface is OpenXRInterface:
+		var interface: OpenXRInterface = $XR.xr_interface
+		interface.pose_recentered.connect(recenter)
+
+func _process(delta):
+	if pointer_enabled:
+		if pointer.is_colliding():
+			hover()
+
+func hover():
+	var obj = pointer.get_collider()
+	if not obj.is_in_group("screen"):
+		return
+	var screen: Screen = obj.get_node("../..")
+	var coords = screen.get_screen_position(pointer.get_collision_point())
+	
+	var e = InputEventMouseMotion.new()
+	e.position = coords
+	screen.dispatch_event(e)
+
+func click():
+	var obj = pointer.get_collider()
+	if not obj.is_in_group("screen"):
+		return
+	var screen: Screen = obj.get_node("../..")
+	var coords = screen.get_screen_position(pointer.get_collision_point())
+	
+	var e = InputEventMouseButton.new()
+	e.position = coords
+	e.button_index = MOUSE_BUTTON_LEFT
+	screen.dispatch_event(e)
 
 func _physics_process(delta):
 	grip_tick()
@@ -68,5 +109,21 @@ func translate_gripped_object(by: Vector3):
 	$Grip/Transform.global_position += by
 	grip_tick()
 
+func recenter():
+	emit_signal(&"recentered")
 
+func _on_left_hand_button_pressed(name):
+	if name == &"trigger_click":
+		if not $LeftHand.is_ancestor_of(pointer):
+			pointer.reparent($LeftHand/LeftHand, false)
+		elif pointer_enabled:
+			if pointer.is_colliding():
+				click()
 
+func _on_right_hand_button_pressed(name):
+	if name == &"trigger_click":
+		if not $RightHand.is_ancestor_of(pointer):
+			pointer.reparent($RightHand/RightHand, false)
+		elif pointer_enabled:
+			if pointer.is_colliding():
+				click()

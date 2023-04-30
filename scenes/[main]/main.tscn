@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c64vm4imnyo84"]
+[gd_scene load_steps=11 format=3 uid="uid://c64vm4imnyo84"]
 
 [ext_resource type="Script" path="res://scenes/[main]/main.gd" id="1_8lrat"]
 [ext_resource type="PackedScene" uid="uid://bswem8qs5ajyr" path="res://scenes/player/xrplayer.tscn" id="2_j0igu"]
 [ext_resource type="PackedScene" uid="uid://c2830qnod2j82" path="res://scenes/environment.tscn" id="3_lj3b8"]
-[ext_resource type="PackedScene" uid="uid://bxhbngi466nlm" path="res://scenes/maze/maze.tscn" id="4_103o0"]
 [ext_resource type="PackedScene" uid="uid://ddh2rol6pafi2" path="res://scenes/screen/screen.tscn" id="4_irsm0"]
 [ext_resource type="PackedScene" uid="uid://bp3r18kuc2vop" path="res://scenes/screen/screens/main_menu.tscn" id="5_obkmr"]
+[ext_resource type="FontFile" uid="uid://cu65u1ihfhxkg" path="res://assets/fonts/Jost-Thin.ttf" id="6_4phfg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2g67v"]
 viewport_path = NodePath("Screen/Viewport")
@@ -20,7 +20,10 @@ albedo_texture = SubResource("ViewportTexture_2g67v")
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_yfmc5")
-size = Vector2(100, 60)
+size = Vector2(140, 84)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ls73b"]
+size = Vector3(9, 9, 9)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8lrat")
@@ -36,22 +39,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -84)
 size = Vector2i(1125, 675)
 
 [node name="MainMenu" parent="Screen/Viewport" index="0" instance=ExtResource("5_obkmr")]
-offset_right = 0.0
 
 [node name="Screen" parent="Screen" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
 mesh = SubResource("QuadMesh_hwwxo")
 
-[node name="Maze" parent="." instance=ExtResource("4_103o0")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.799999, 23.3719, -20.2306)
+[node name="Title" type="Label3D" parent="Screen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 59, 0)
+pixel_size = 0.1784
+outline_modulate = Color(0, 0, 0, 0)
+text = "KOSTKA"
+font = ExtResource("6_4phfg")
+font_size = 164
 
+[node name="Cube" type="MeshInstance3D" parent="Screen/Title"]
+unique_name_in_owner = true
+transform = Transform3D(0.766044, 0.642788, 0, -0.454519, 0.541675, 0.707107, 0.454519, -0.541675, 0.707107, -23, 0, 0)
+mesh = SubResource("BoxMesh_ls73b")
+skeleton = NodePath("../..")
+
+[connection signal="recentered" from="XRPlayer" to="." method="_on_xr_player_recentered"]
 [connection signal="area_entered" from="XRPlayer/LeftHand/LeftHand/Grip" to="." method="_hand_can_grip" binds= [&"left", true]]
 [connection signal="area_exited" from="XRPlayer/LeftHand/LeftHand/Grip" to="." method="_hand_can_grip" binds= [&"left", false]]
 [connection signal="area_entered" from="XRPlayer/RightHand/RightHand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]
 [connection signal="area_exited" from="XRPlayer/RightHand/RightHand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
-[connection signal="level_finished" from="Maze" to="." method="_on_maze_level_finished"]
-[connection signal="haptic" from="Maze/Marble" to="." method="_on_marble_haptic"]
 
 [editable path="XRPlayer"]
 [editable path="Screen"]
-[editable path="Maze"]
