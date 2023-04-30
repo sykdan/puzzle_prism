@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxhbngi466nlm"]
+[gd_scene load_steps=16 format=3 uid="uid://bxhbngi466nlm"]
 
 [ext_resource type="Script" path="res://scenes/maze/maze.gd" id="1_hm3yb"]
 [ext_resource type="Script" path="res://scenes/maze/Marble.gd" id="2_bxwkj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_op8j6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kqi7t"]
 friction = 0.0
@@ -22,11 +24,24 @@ size = Vector3(7, 7, 0.5)
 size = Vector3(7, 7, 0.5)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_45dme"]
-friction = 0.4
+friction = 0.0
+
+[sub_resource type="Gradient" id="Gradient_yhsmy"]
+colors = PackedColorArray(1, 0.435294, 0, 1, 1, 0.654902, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pb85s"]
+gradient = SubResource("Gradient_yhsmy")
+fill_from = Vector2(0.5, 0.6)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y85e5"]
 shading_mode = 2
-albedo_color = Color(1, 0, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_pb85s")
+metallic_specular = 0.0
+roughness = 0.55
+emission_enabled = true
+emission = Color(1, 0.654902, 0, 1)
+emission_energy_multiplier = 0.71
 
 [sub_resource type="SphereMesh" id="SphereMesh_xbqyc"]
 material = SubResource("StandardMaterial3D_y85e5")
@@ -39,6 +54,11 @@ radius = 0.4
 [node name="Maze" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 script = ExtResource("1_hm3yb")
+
+[node name="BoxArea" type="Area3D" parent="." groups=["boxarea"]]
+
+[node name="Shape" type="CollisionShape3D" parent="BoxArea"]
+shape = SubResource("BoxShape3D_op8j6")
 
 [node name="Box" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_kqi7t")

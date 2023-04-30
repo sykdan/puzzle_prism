@@ -20,30 +20,36 @@ albedo_texture = SubResource("ViewportTexture_2g67v")
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_yfmc5")
-size = Vector2(50, 30)
+size = Vector2(100, 60)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8lrat")
 
 [node name="XRPlayer" parent="." instance=ExtResource("2_j0igu")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_lj3b8")]
 
 [node name="Screen" parent="." instance=ExtResource("4_irsm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -84)
 
 [node name="Viewport" parent="Screen" index="0"]
 size = Vector2i(1125, 675)
 
 [node name="MainMenu" parent="Screen/Viewport" index="0" instance=ExtResource("5_obkmr")]
+offset_right = 0.0
 
 [node name="Screen" parent="Screen" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
 mesh = SubResource("QuadMesh_hwwxo")
 
 [node name="Maze" parent="." instance=ExtResource("4_103o0")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.799999, 23.3719, -20.2306)
 
+[connection signal="area_entered" from="XRPlayer/LeftHand/LeftHand/Grip" to="." method="_hand_can_grip" binds= [&"left", true]]
+[connection signal="area_exited" from="XRPlayer/LeftHand/LeftHand/Grip" to="." method="_hand_can_grip" binds= [&"left", false]]
+[connection signal="area_entered" from="XRPlayer/RightHand/RightHand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]
+[connection signal="area_exited" from="XRPlayer/RightHand/RightHand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
+[connection signal="level_finished" from="Maze" to="." method="_on_maze_level_finished"]
 [connection signal="haptic" from="Maze/Marble" to="." method="_on_marble_haptic"]
 
 [editable path="XRPlayer"]

@@ -127,8 +127,8 @@ func _build_floor_fragment(extents, position):
 	cs.shape = shape
 	cs.position = position
 	
-	add_child(mi)
-	add_child(cs)
+	$Floor.add_child(mi)
+	$Floor.add_child(cs)
 
 func _goal_collision(body: PhysicsBody3D):
 	if body.is_in_group("marble") and not is_finished:

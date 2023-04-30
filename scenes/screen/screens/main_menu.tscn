@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp3r18kuc2vop"]
+[gd_scene load_steps=12 format=3 uid="uid://bp3r18kuc2vop"]
 
 [ext_resource type="Texture2D" uid="uid://dmuvg10fdrgwb" path="res://assets/textures/buttons.png" id="1_gqp6o"]
 [ext_resource type="Texture2D" uid="uid://cm70ewdu2yx6" path="res://assets/textures/buttons-hover.png" id="2_osrrb"]
@@ -11,6 +11,9 @@ region = Rect2(0, 0, 283, 675)
 atlas = ExtResource("2_osrrb")
 region = Rect2(0, 0, 283, 675)
 
+[sub_resource type="LabelSettings" id="LabelSettings_7sbkw"]
+font_size = 85
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjkmc"]
 atlas = ExtResource("1_gqp6o")
 region = Rect2(284, 0, 278, 675)
@@ -19,14 +22,6 @@ region = Rect2(284, 0, 278, 675)
 atlas = ExtResource("2_osrrb")
 region = Rect2(284, 0, 278, 675)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hxien"]
-atlas = ExtResource("1_gqp6o")
-region = Rect2(563, 0, 278, 675)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k2j1e"]
-atlas = ExtResource("2_osrrb")
-region = Rect2(563, 0, 278, 675)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1nmh"]
 atlas = ExtResource("1_gqp6o")
 region = Rect2(842, 0, 283, 675)
@@ -34,6 +29,14 @@ region = Rect2(842, 0, 283, 675)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mejfd"]
 atlas = ExtResource("2_osrrb")
 region = Rect2(842, 0, 283, 675)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxien"]
+atlas = ExtResource("1_gqp6o")
+region = Rect2(563, 0, 278, 675)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2j1e"]
+atlas = ExtResource("2_osrrb")
+region = Rect2(563, 0, 278, 675)
 
 [node name="MainMenu" type="ColorRect"]
 custom_minimum_size = Vector2(1125, 675)
@@ -44,43 +47,49 @@ offset_right = -27.0
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.254902, 0.254902, 0.254902, 0)
+color = Color(0, 0, 0, 0.32549)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Hello world!"
-
-[node name="Buttons" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 1
-
-[node name="Easy" type="TextureButton" parent="Buttons"]
+[node name="Easy" type="TextureButton" parent="."]
 layout_mode = 2
+offset_right = 283.0
+offset_bottom = 675.0
 texture_normal = SubResource("AtlasTexture_6svja")
 texture_pressed = SubResource("AtlasTexture_dnpt0")
 texture_hover = SubResource("AtlasTexture_dnpt0")
 
-[node name="Medium" type="TextureButton" parent="Buttons"]
+[node name="Text" type="Label" parent="Easy"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 229.0
+offset_right = 262.0
+offset_bottom = 348.0
+rotation = -0.287979
+text = "LEHKÁ"
+label_settings = SubResource("LabelSettings_7sbkw")
+
+[node name="Medium" type="TextureButton" parent="."]
 layout_mode = 2
+offset_left = 284.0
+offset_right = 562.0
+offset_bottom = 675.0
 texture_normal = SubResource("AtlasTexture_qjkmc")
 texture_pressed = SubResource("AtlasTexture_mxyf6")
 texture_hover = SubResource("AtlasTexture_mxyf6")
 
-[node name="Hard" type="TextureButton" parent="Buttons"]
+[node name="Custom" type="TextureButton" parent="."]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_hxien")
-texture_pressed = SubResource("AtlasTexture_k2j1e")
-texture_hover = SubResource("AtlasTexture_k2j1e")
-
-[node name="Custom" type="TextureButton" parent="Buttons"]
-layout_mode = 2
+offset_left = 842.0
+offset_right = 1125.0
+offset_bottom = 675.0
 texture_normal = SubResource("AtlasTexture_e1nmh")
 texture_pressed = SubResource("AtlasTexture_mejfd")
 texture_hover = SubResource("AtlasTexture_mejfd")
+
+[node name="Hard" type="TextureButton" parent="."]
+layout_mode = 2
+offset_left = 563.0
+offset_right = 841.0
+offset_bottom = 675.0
+texture_normal = SubResource("AtlasTexture_hxien")
+texture_pressed = SubResource("AtlasTexture_k2j1e")
+texture_hover = SubResource("AtlasTexture_k2j1e")

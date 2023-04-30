@@ -21,6 +21,7 @@ func drop_object():
 	gripped_object = null
 
 func _ready():
+	$XRCamera3D/Curtain.show()
 	fade_modulate = fade_modulate
 
 func _physics_process(delta):
@@ -30,7 +31,7 @@ func _on_start_xr_xr_ended():
 	pass # Replace with function body.
 
 func _on_start_xr_xr_started():
-	pass # Replace with function body.
+	XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
 func grip_tick():
 	var midpoint = (
@@ -64,4 +65,8 @@ func translate_gripped_object(by: Vector3):
 	if not gripped_object:
 		return
 	
-	$Grip/Transform.position += by
+	$Grip/Transform.global_position += by
+	grip_tick()
+
+
+

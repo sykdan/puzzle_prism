@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/maze/level.gd" id="1_tk5t6"]
 
-[node name="Level" type="StaticBody3D"]
+[node name="Level" type="Node3D"]
 script = ExtResource("1_tk5t6")
+
+[node name="Floor" type="StaticBody3D" parent="."]
