@@ -1,5 +1,10 @@
 extends XROrigin3D
 
+var fade_modulate: float = 1.0 :
+	set(new_fade_modulate):
+		fade_modulate = new_fade_modulate
+		$XRCamera3D/Curtain.material_override.albedo_color.a = fade_modulate
+
 var gripping = false
 var gripped_object = null
 var grip_last_transform = Transform3D.IDENTITY
@@ -14,6 +19,9 @@ func grip_object(object: Node3D):
 func drop_object():
 	gripping = false
 	gripped_object = null
+
+func _ready():
+	fade_modulate = fade_modulate
 
 func _physics_process(delta):
 	grip_tick()
@@ -51,10 +59,9 @@ func grip_tick():
 	
 	gripped_object.position += pos_diff
 	gripped_object.transform.basis = $Grip/Transform.global_transform.basis
+
+func translate_gripped_object(by: Vector3):
+	if not gripped_object:
+		return
 	
-#	if slide_up > 0:
-#		var movement = delta
-#		slide_up -= delta
-#		if slide_up < 0:
-#			movement += slide_up
-#		$HandMidpoint/Origin.translation += movement * $HandMidpoint/Origin.transform.basis.y * ($PuzzleCube.ChamberUnit + $PuzzleCube.WallUnit)/2
+	$Grip/Transform.position += by

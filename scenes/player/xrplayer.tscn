@@ -1,9 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://bswem8qs5ajyr"]
+[gd_scene load_steps=8 format=3 uid="uid://bswem8qs5ajyr"]
 
 [ext_resource type="Script" path="res://scenes/player/xrplayer.gd" id="1_tgpk5"]
 [ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="2_1fxpe"]
 [ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="3_n6phu"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_21n4l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmsa8"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_slryp"]
+flip_faces = true
+radius = 2.5
+height = 5.0
+radial_segments = 4
+rings = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ul1b7"]
 
@@ -13,6 +26,12 @@ script = ExtResource("1_tgpk5")
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 current = true
+
+[node name="Curtain" type="MeshInstance3D" parent="XRCamera3D"]
+material_override = SubResource("StandardMaterial3D_nmsa8")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("SphereMesh_slryp")
 
 [node name="LeftHand" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)

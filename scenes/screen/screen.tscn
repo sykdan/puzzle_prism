@@ -22,13 +22,13 @@ size = Vector3(1, 1, 0.05)
 [node name="Screen" type="Node3D"]
 script = ExtResource("1_vy1sl")
 
-[node name="Viewport" type="SubViewport" parent="." groups=["screen_internals"]]
+[node name="Viewport" type="SubViewport" parent="."]
 transparent_bg = true
 
 [node name="Screen" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_nfjwq")
 
-[node name="ScreenArea" type="Area3D" parent="."]
+[node name="ScreenArea" type="Area3D" parent="Screen"]
 
-[node name="Shape" type="CollisionShape3D" parent="ScreenArea"]
+[node name="Shape" type="CollisionShape3D" parent="Screen/ScreenArea"]
 shape = SubResource("BoxShape3D_133xu")

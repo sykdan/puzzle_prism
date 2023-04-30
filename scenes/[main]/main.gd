@@ -10,6 +10,9 @@ func _ready():
 	$Maze.levels = 3
 	$Maze.resize()
 	$Maze.create_game()
+	
+	var tw = create_tween()
+	tw.tween_property($XRPlayer, "fade_modulate", 0, 2)
 
 func generated(maze):
 	$Maze.add_maze_data(maze)

@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c64vm4imnyo84"]
+[gd_scene load_steps=10 format=3 uid="uid://c64vm4imnyo84"]
 
 [ext_resource type="Script" path="res://scenes/[main]/main.gd" id="1_8lrat"]
 [ext_resource type="PackedScene" uid="uid://bswem8qs5ajyr" path="res://scenes/player/xrplayer.tscn" id="2_j0igu"]
 [ext_resource type="PackedScene" uid="uid://c2830qnod2j82" path="res://scenes/environment.tscn" id="3_lj3b8"]
 [ext_resource type="PackedScene" uid="uid://bxhbngi466nlm" path="res://scenes/maze/maze.tscn" id="4_103o0"]
 [ext_resource type="PackedScene" uid="uid://ddh2rol6pafi2" path="res://scenes/screen/screen.tscn" id="4_irsm0"]
+[ext_resource type="PackedScene" uid="uid://bp3r18kuc2vop" path="res://scenes/screen/screens/main_menu.tscn" id="5_obkmr"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2g67v"]
-viewport_path = NodePath("Viewport")
+viewport_path = NodePath("Screen/Viewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfmc5"]
 resource_local_to_scene = true
@@ -19,6 +20,7 @@ albedo_texture = SubResource("ViewportTexture_2g67v")
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_yfmc5")
+size = Vector2(50, 30)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8lrat")
@@ -29,31 +31,18 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_lj3b8")]
 
 [node name="Screen" parent="." instance=ExtResource("4_irsm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
-viewport_size = Vector2i(800, 400)
-screen_size = Vector2(8, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -55)
 
-[node name="Control" type="Control" parent="Screen/Viewport" index="0"]
-custom_minimum_size = Vector2(800, 400)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Viewport" parent="Screen" index="0"]
+size = Vector2i(1125, 675)
 
-[node name="ColorRect" type="ColorRect" parent="Screen/Viewport/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainMenu" parent="Screen/Viewport" index="0" instance=ExtResource("5_obkmr")]
 
 [node name="Screen" parent="Screen" index="1"]
 mesh = SubResource("QuadMesh_hwwxo")
 
 [node name="Maze" parent="." instance=ExtResource("4_103o0")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.799999, 23.3719, -20.2306)
-visible = false
 
 [connection signal="haptic" from="Maze/Marble" to="." method="_on_marble_haptic"]
 
