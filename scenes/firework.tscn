@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cca841edfvobf"]
+
+[sub_resource type="StandardMaterial3D" id="16"]
+albedo_color = Color(0.984314, 0.643137, 0.0509804, 1)
+emission_enabled = true
+emission = Color(0.984314, 0.643137, 0.0509804, 1)
+emission_energy_multiplier = 0.67
+
+[sub_resource type="SphereMesh" id="17"]
+material = SubResource("16")
+radius = 0.1
+height = 0.2
+radial_segments = 4
+rings = 1
+
+[sub_resource type="Curve" id="14"]
+_data = [Vector2(0, 0.281818), 0.0, 2.10909, 0, 0, Vector2(0.5, 0.5), -1.61173, -1.61173, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Firework" type="CPUParticles3D"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
+top_level = true
+amount = 20
+lifetime = 3.0
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 0.41
+lifetime_randomness = 0.76
+mesh = SubResource("17")
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_max = 5.0
+scale_amount_curve = SubResource("14")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.9
+one_shot = true
+autostart = true
+
+[connection signal="ready" from="." to="." method="set_as_top_level" binds= [true]]
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

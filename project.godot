@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MazeGen="*res://scripts/maze_generator.gd"
 Shared="*res://scripts/metadata.gd"
+SaveFile="*res://scripts/save_file.gd"
 
 [rendering]
 

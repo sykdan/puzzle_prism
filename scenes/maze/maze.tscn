@@ -51,11 +51,11 @@ height = 0.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_flyxa"]
 radius = 0.4
 
-[node name="Maze" type="Node3D" groups=["maze"]]
+[node name="Maze" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 script = ExtResource("1_hm3yb")
 
-[node name="BoxArea" type="Area3D" parent="." groups=["boxarea"]]
+[node name="BoxArea" type="Area3D" parent="." groups=["maze"]]
 
 [node name="Shape" type="CollisionShape3D" parent="BoxArea"]
 shape = SubResource("BoxShape3D_op8j6")

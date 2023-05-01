@@ -30,7 +30,6 @@ shadow_offset = Vector2(0, 0)
 [node name="Detail" type="Panel"]
 custom_minimum_size = Vector2(1125, 675)
 theme = ExtResource("1_maj4p")
-metadata/_edit_lock_ = true
 
 [node name="PuzzleType" type="Label" parent="."]
 layout_mode = 1

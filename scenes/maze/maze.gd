@@ -8,7 +8,8 @@ signal built_all
 signal level_finished
 signal game_ended
 
-@onready var LEVEL = preload("./level.tscn")
+var LEVEL = preload("./level.tscn")
+var FIREWORK = preload("res://scenes/firework.tscn")
 
 var cull_from = Vector3i.DOWN
 
@@ -68,10 +69,6 @@ func _ready():
 	MazeGen.generated.connect(_maze_generated)
 	resize()
 
-func clear_game():
-	for c in $Levels.get_children():
-		c.queue_free()
-
 func create_game():
 	is_ready = false
 	_next_floor_start = Vector2i(
@@ -80,8 +77,6 @@ func create_game():
 	)
 	$Marble.position = $Levels.position
 	$Marble.position += Vector3(_next_floor_start.x,0,_next_floor_start.y) * Shared.NODE_SIZE
-	clear_game()
-	await get_tree().process_frame
 	_add_floor()
 
 func _add_floor():
@@ -135,7 +130,7 @@ func floor_finished(level_number):
 		$"Box/Y+".position.y -= Shared.NODE_SIZE
 		
 		
-		emit_signal("level_finished")
+		emit_signal(&"level_finished")
 		await get_tree().process_frame
 		
 		var tw = get_tree().create_tween()
@@ -153,7 +148,11 @@ func floor_finished(level_number):
 			$Box.hide()
 			$Marble.freeze = true
 			$Marble.hide()
-			emit_signal("game_ended")
+			var f = FIREWORK.instantiate()
+			f.global_position = $Marble.global_position
+			add_child(f)
+			await f.tree_exited
+			emit_signal(&"game_ended")
 		
 		await tw.finished
 		level.queue_free()

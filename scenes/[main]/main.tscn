@@ -79,6 +79,7 @@ enabled = false
 
 [node name="Viewport" parent="DetailsScreen" index="0"]
 size = Vector2i(1125, 675)
+render_target_update_mode = 4
 
 [node name="Detail" parent="DetailsScreen/Viewport" index="0" instance=ExtResource("7_w2n2j")]
 
@@ -88,11 +89,16 @@ material_override = SubResource("StandardMaterial3D_scbr5")
 mesh = SubResource("QuadMesh_hwwxo")
 
 [connection signal="recentered" from="XRPlayer" to="." method="_on_xr_player_recentered"]
+[connection signal="area_entered" from="XRPlayer/LeftHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"left", true]]
+[connection signal="area_exited" from="XRPlayer/LeftHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"left", false]]
+[connection signal="area_entered" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]
+[connection signal="area_exited" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
 [connection signal="pressed" from="MainScreen/Viewport/MainMenu/Easy" to="." method="select_difficulty" binds= [&"easy"]]
 [connection signal="pressed" from="MainScreen/Viewport/MainMenu/Medium" to="." method="select_difficulty" binds= [&"medium"]]
 [connection signal="pressed" from="MainScreen/Viewport/MainMenu/Hard" to="." method="select_difficulty" binds= [&"hard"]]
 [connection signal="pressed" from="MainScreen/Viewport/MainMenu/Custom" to="." method="select_difficulty" binds= [&"custom"]]
 [connection signal="pressed" from="DetailsScreen/Viewport/Detail/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="DetailsScreen/Viewport/Detail/Play" to="." method="_on_play_pressed"]
 
 [editable path="XRPlayer"]
 [editable path="MainScreen"]

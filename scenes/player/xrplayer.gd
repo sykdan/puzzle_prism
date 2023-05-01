@@ -22,7 +22,7 @@ var gripping = false
 var gripped_object = null
 var grip_last_transform = Transform3D.IDENTITY
 
-var pointer_enabled = true :
+var pointer_enabled = false :
 	set(is_pointer_enabled):
 		pointer.enabled = is_pointer_enabled
 		pointer.visible = is_pointer_enabled
