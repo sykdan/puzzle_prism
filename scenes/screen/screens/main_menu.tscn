@@ -12,7 +12,7 @@ region = Rect2(0, 0, 283, 675)
 atlas = ExtResource("2_osrrb")
 region = Rect2(0, 0, 283, 675)
 
-[sub_resource type="LabelSettings" id="LabelSettings_7sbkw"]
+[sub_resource type="LabelSettings" id="LabelSettings_y4v2x"]
 font_size = 84
 font_color = Color(0.168627, 0.866667, 0.337255, 1)
 outline_color = Color(0, 0, 0, 0)
@@ -75,17 +75,16 @@ shadow_size = 0
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(2, 2)
 
-[node name="MainMenu" type="ColorRect"]
+[node name="MainMenu" type="Control"]
 custom_minimum_size = Vector2(1125, 675)
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1.0
 offset_right = -27.0
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
 
 [node name="Easy" type="TextureButton" parent="."]
 layout_mode = 2
@@ -97,14 +96,14 @@ texture_hover = SubResource("AtlasTexture_dnpt0")
 
 [node name="Text" type="Label" parent="Easy"]
 layout_mode = 0
-offset_left = -8.0
+offset_left = -5.0
 offset_top = 229.0
-offset_right = 262.0
+offset_right = 265.0
 offset_bottom = 354.0
 rotation = -0.287979
 theme_override_fonts/font = ExtResource("3_xg1c1")
 text = "LEHKÁ"
-label_settings = SubResource("LabelSettings_7sbkw")
+label_settings = SubResource("LabelSettings_y4v2x")
 
 [node name="Description" type="Label" parent="Easy"]
 layout_mode = 1

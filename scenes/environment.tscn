@@ -82,4 +82,4 @@ hue_variation_min = 0.09
 hue_variation_max = 0.64
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.993242, 0.116064, 0, -0.116064, 0.993242, 0, 4.36571, 0)
+transform = Transform3D(1, 0, 0, 0, 0.620258, 0.784398, 0, -0.784398, 0.620258, 0, 4.36571, 0)

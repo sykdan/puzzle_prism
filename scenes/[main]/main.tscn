@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c64vm4imnyo84"]
+[gd_scene load_steps=13 format=3 uid="uid://c64vm4imnyo84"]
 
 [ext_resource type="Script" path="res://scenes/[main]/main.gd" id="1_8lrat"]
 [ext_resource type="PackedScene" uid="uid://bswem8qs5ajyr" path="res://scenes/player/xrplayer.tscn" id="2_j0igu"]
@@ -6,24 +6,30 @@
 [ext_resource type="PackedScene" uid="uid://ddh2rol6pafi2" path="res://scenes/screen/screen.tscn" id="4_irsm0"]
 [ext_resource type="PackedScene" uid="uid://bp3r18kuc2vop" path="res://scenes/screen/screens/main_menu.tscn" id="5_obkmr"]
 [ext_resource type="FontFile" uid="uid://cu65u1ihfhxkg" path="res://assets/fonts/Jost-Thin.ttf" id="6_4phfg"]
+[ext_resource type="PackedScene" uid="uid://d372r333xd1jr" path="res://scenes/screen/screens/detail_menu.tscn" id="7_w2n2j"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2g67v"]
-viewport_path = NodePath("Screen/Viewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_48al0"]
+viewport_path = NodePath("MainScreen/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfmc5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc5dv"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_2g67v")
+albedo_texture = SubResource("ViewportTexture_48al0")
 
 [sub_resource type="QuadMesh" id="QuadMesh_hwwxo"]
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
-material = SubResource("StandardMaterial3D_yfmc5")
 size = Vector2(140, 84)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ls73b"]
-size = Vector3(9, 9, 9)
+[sub_resource type="ViewportTexture" id="ViewportTexture_khjgr"]
+viewport_path = NodePath("DetailsScreen/Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scbr5"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_khjgr")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8lrat")
@@ -32,37 +38,64 @@ script = ExtResource("1_8lrat")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_lj3b8")]
 
-[node name="Screen" parent="." instance=ExtResource("4_irsm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -84)
+[node name="MainScreen" parent="." instance=ExtResource("4_irsm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -94)
 
-[node name="Viewport" parent="Screen" index="0"]
+[node name="Viewport" parent="MainScreen" index="0"]
 size = Vector2i(1125, 675)
 
-[node name="MainMenu" parent="Screen/Viewport" index="0" instance=ExtResource("5_obkmr")]
+[node name="MainMenu" parent="MainScreen/Viewport" index="0" instance=ExtResource("5_obkmr")]
+offset_right = 0.0
+offset_bottom = 0.0
 
-[node name="Screen" parent="Screen" index="1"]
+[node name="Screen" parent="MainScreen" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+material_override = SubResource("StandardMaterial3D_pc5dv")
 mesh = SubResource("QuadMesh_hwwxo")
 
-[node name="Title" type="Label3D" parent="Screen"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 59, 0)
+[node name="ScreenArea" parent="MainScreen/Screen" index="0"]
+visible = false
+
+[node name="Title" type="Label3D" parent="MainScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 66, 0)
 pixel_size = 0.1784
 outline_modulate = Color(0, 0, 0, 0)
-text = "KOSTKA"
+text = "Puzzle Prism"
 font = ExtResource("6_4phfg")
 font_size = 164
 
-[node name="Cube" type="MeshInstance3D" parent="Screen/Title"]
-unique_name_in_owner = true
-transform = Transform3D(0.766044, 0.642788, 0, -0.454519, 0.541675, 0.707107, 0.454519, -0.541675, 0.707107, -23, 0, 0)
-mesh = SubResource("BoxMesh_ls73b")
-skeleton = NodePath("../..")
+[node name="Header" type="Label3D" parent="MainScreen/Title"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 13, 0)
+pixel_size = 0.0946
+outline_modulate = Color(0, 0, 0, 0)
+text = "the"
+font = ExtResource("6_4phfg")
+font_size = 164
+
+[node name="DetailsScreen" parent="." instance=ExtResource("4_irsm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -94)
+visible = false
+enabled = false
+
+[node name="Viewport" parent="DetailsScreen" index="0"]
+size = Vector2i(1125, 675)
+
+[node name="Detail" parent="DetailsScreen/Viewport" index="0" instance=ExtResource("7_w2n2j")]
+
+[node name="Screen" parent="DetailsScreen" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+material_override = SubResource("StandardMaterial3D_scbr5")
+mesh = SubResource("QuadMesh_hwwxo")
 
 [connection signal="recentered" from="XRPlayer" to="." method="_on_xr_player_recentered"]
-[connection signal="area_entered" from="XRPlayer/LeftHand/LeftHand/Grip" to="." method="_hand_can_grip" binds= [&"left", true]]
-[connection signal="area_exited" from="XRPlayer/LeftHand/LeftHand/Grip" to="." method="_hand_can_grip" binds= [&"left", false]]
-[connection signal="area_entered" from="XRPlayer/RightHand/RightHand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]
-[connection signal="area_exited" from="XRPlayer/RightHand/RightHand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
+[connection signal="pressed" from="MainScreen/Viewport/MainMenu/Easy" to="." method="select_difficulty" binds= [&"easy"]]
+[connection signal="pressed" from="MainScreen/Viewport/MainMenu/Medium" to="." method="select_difficulty" binds= [&"medium"]]
+[connection signal="pressed" from="MainScreen/Viewport/MainMenu/Hard" to="." method="select_difficulty" binds= [&"hard"]]
+[connection signal="pressed" from="MainScreen/Viewport/MainMenu/Custom" to="." method="select_difficulty" binds= [&"custom"]]
+[connection signal="pressed" from="DetailsScreen/Viewport/Detail/Back" to="." method="_on_back_pressed"]
 
 [editable path="XRPlayer"]
-[editable path="Screen"]
+[editable path="MainScreen"]
+[editable path="MainScreen/Viewport/MainMenu"]
+[editable path="DetailsScreen"]
+[editable path="DetailsScreen/Viewport/Detail"]

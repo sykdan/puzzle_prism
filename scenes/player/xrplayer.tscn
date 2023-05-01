@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bswem8qs5ajyr"]
+[gd_scene load_steps=16 format=3 uid="uid://bswem8qs5ajyr"]
 
 [ext_resource type="Script" path="res://scenes/player/xrplayer.gd" id="1_tgpk5"]
 [ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="2_1fxpe"]
 [ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="3_n6phu"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_21n4l"]
+[ext_resource type="Shader" path="res://scenes/player/floor.gdshader" id="5_s38ep"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmsa8"]
 transparency = 1
@@ -22,6 +23,54 @@ rings = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dfwr2"]
 radius = 0.047
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ox0mo"]
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_00g2n"]
+material = SubResource("StandardMaterial3D_ox0mo")
+top_radius = 0.005
+bottom_radius = 0.005
+height = 1.0
+radial_segments = 16
+rings = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_712pb"]
+render_priority = 0
+shader = ExtResource("5_s38ep")
+shader_parameter/bar_size = 0.1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uocn8"]
+material = SubResource("ShaderMaterial_712pb")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xsatl"]
+_surfaces = [{
+"aabb": AABB(-1.05, 0.311122, -1.05, 2.1, 0.5, 2.1),
+"format": 4097,
+"index_count": 96,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0, 6, 0, 8, 0, 7, 0, 9, 0, 11, 0, 10, 0, 12, 0, 1, 0, 6, 0, 4, 0, 5, 0, 9, 0, 13, 0, 3, 0, 14, 0, 2, 0, 0, 0, 7, 0, 1, 0, 4, 0, 10, 0, 5, 0, 12, 0, 15, 0, 0, 0, 13, 0, 11, 0, 3, 0, 2, 0, 8, 0, 0, 0, 1, 0, 12, 0, 5, 0, 0, 0, 12, 0, 5, 0, 13, 0, 0, 0, 2, 0, 4, 0, 1, 0, 5, 0, 3, 0, 13, 0, 3, 0, 4, 0, 2, 0, 6, 0, 7, 0, 15, 0, 7, 0, 9, 0, 15, 0, 10, 0, 8, 0, 6, 0, 10, 0, 14, 0, 8, 0, 11, 0, 9, 0, 7, 0, 10, 0, 11, 0, 14, 0, 12, 0, 6, 0, 15, 0, 4, 0, 9, 0, 10, 0, 13, 0, 14, 0, 11, 0, 2, 0, 7, 0, 8, 0, 1, 0, 10, 0, 6, 0, 5, 0, 15, 0, 9, 0, 0, 0, 11, 0, 7, 0, 3, 0, 8, 0, 14, 0),
+"primitive": 3,
+"vertex_count": 16,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 191, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 191, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 191, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 63, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 63, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 63, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 191, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 191, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 63, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 63, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 63, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 191, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 63, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 63, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 191)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b6j08"]
+resource_name = "Plane"
+_surfaces = [{
+"aabb": AABB(-1.05, 0.311122, -1.05, 2.1, 0.5, 2.1),
+"attribute_data": PackedByteArray(31, 12, 195, 60, 32, 12, 195, 60, 0, 0, 128, 63, 0, 0, 0, 0, 159, 231, 121, 63, 32, 12, 195, 60, 159, 231, 121, 63, 159, 231, 121, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 31, 12, 195, 60, 32, 12, 195, 60, 159, 231, 121, 63, 32, 12, 195, 60, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 31, 12, 195, 60, 159, 231, 121, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 31, 12, 195, 60, 159, 231, 121, 63, 159, 231, 121, 63, 159, 231, 121, 63, 159, 231, 121, 63, 159, 231, 121, 63, 159, 231, 121, 63, 32, 12, 195, 60, 31, 12, 195, 60, 32, 12, 195, 60, 31, 12, 195, 60, 32, 12, 195, 60, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 12, 195, 60, 32, 12, 195, 60, 31, 12, 195, 60, 159, 231, 121, 63, 31, 12, 195, 60, 159, 231, 121, 63, 159, 231, 121, 63, 159, 231, 121, 63, 159, 231, 121, 63, 32, 12, 195, 60, 159, 231, 121, 63, 32, 12, 195, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 31, 12, 195, 60, 32, 12, 195, 60, 31, 12, 195, 60, 159, 231, 121, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 159, 231, 121, 63, 32, 12, 195, 60, 159, 231, 121, 63, 159, 231, 121, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 31, 12, 195, 60, 159, 231, 121, 63, 159, 231, 121, 63, 32, 12, 195, 60, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 31, 12, 195, 60, 32, 12, 195, 60, 159, 231, 121, 63, 159, 231, 121, 63),
+"format": 4119,
+"index_count": 96,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0, 6, 0, 8, 0, 7, 0, 9, 0, 11, 0, 10, 0, 12, 0, 14, 0, 13, 0, 15, 0, 17, 0, 16, 0, 18, 0, 20, 0, 19, 0, 21, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 27, 0, 29, 0, 28, 0, 30, 0, 32, 0, 31, 0, 33, 0, 35, 0, 34, 0, 0, 0, 1, 0, 36, 0, 37, 0, 39, 0, 38, 0, 5, 0, 40, 0, 0, 0, 2, 0, 4, 0, 1, 0, 5, 0, 3, 0, 40, 0, 3, 0, 4, 0, 2, 0, 6, 0, 7, 0, 41, 0, 7, 0, 9, 0, 41, 0, 42, 0, 44, 0, 43, 0, 10, 0, 45, 0, 8, 0, 11, 0, 9, 0, 7, 0, 10, 0, 11, 0, 45, 0, 12, 0, 13, 0, 46, 0, 15, 0, 16, 0, 47, 0, 18, 0, 19, 0, 48, 0, 21, 0, 22, 0, 49, 0, 24, 0, 25, 0, 50, 0, 27, 0, 28, 0, 51, 0, 30, 0, 31, 0, 52, 0, 33, 0, 34, 0, 53, 0),
+"primitive": 3,
+"vertex_count": 54,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 191, 255, 127, 0, 0, 255, 255, 255, 63, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 191, 255, 127, 0, 0, 255, 255, 255, 63, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 191, 255, 127, 0, 0, 255, 255, 255, 63, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 63, 255, 127, 0, 0, 254, 255, 255, 63, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 63, 255, 127, 0, 0, 254, 255, 255, 63, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 63, 255, 127, 0, 0, 255, 255, 255, 63, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 191, 255, 127, 255, 255, 255, 255, 255, 191, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 191, 255, 127, 255, 255, 254, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 191, 255, 127, 255, 255, 254, 255, 255, 191, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 63, 255, 127, 255, 255, 255, 255, 255, 191, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 63, 255, 127, 255, 255, 254, 255, 255, 191, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 63, 255, 127, 255, 255, 255, 255, 255, 191, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 191, 255, 255, 255, 255, 255, 255, 255, 191, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 191, 255, 255, 255, 255, 255, 255, 255, 191, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 191, 255, 255, 255, 255, 255, 255, 255, 191, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 63, 255, 127, 255, 127, 255, 255, 255, 63, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 63, 255, 127, 255, 127, 255, 255, 255, 63, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 63, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 191, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 191, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 191, 255, 127, 255, 127, 255, 255, 255, 63, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 191, 255, 255, 255, 127, 255, 255, 255, 191, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 63, 255, 255, 255, 127, 255, 255, 255, 191, 102, 102, 134, 63, 111, 75, 159, 62, 102, 102, 134, 63, 255, 255, 255, 127, 255, 255, 255, 191, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 63, 0, 0, 255, 127, 255, 255, 255, 191, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 191, 0, 0, 255, 127, 255, 255, 255, 191, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 191, 0, 0, 255, 127, 255, 255, 255, 191, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 191, 255, 255, 255, 127, 255, 255, 255, 191, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 63, 255, 255, 255, 127, 255, 255, 255, 191, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 63, 255, 255, 255, 127, 255, 255, 255, 191, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 63, 0, 0, 255, 127, 255, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 191, 0, 0, 255, 127, 255, 255, 255, 191, 0, 0, 128, 63, 111, 75, 159, 62, 0, 0, 128, 191, 0, 0, 255, 127, 255, 255, 255, 191, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 191, 255, 127, 0, 0, 255, 255, 255, 63, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 63, 255, 127, 0, 0, 254, 255, 255, 63, 102, 102, 134, 191, 111, 75, 159, 62, 102, 102, 134, 191, 255, 127, 0, 0, 254, 255, 255, 63, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 191, 255, 127, 0, 0, 254, 255, 255, 63, 0, 0, 128, 191, 111, 75, 159, 62, 0, 0, 128, 63, 255, 127, 0, 0, 255, 255, 255, 63, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 191, 255, 127, 255, 255, 254, 255, 255, 191, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 63, 255, 127, 254, 255, 254, 255, 255, 191, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 191, 255, 127, 254, 255, 254, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 191, 255, 127, 254, 255, 254, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 63, 255, 127, 255, 255, 254, 255, 255, 191, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 191, 255, 255, 255, 255, 255, 255, 255, 191, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 63, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 191, 255, 127, 255, 127, 255, 255, 255, 63, 102, 102, 134, 63, 184, 165, 79, 63, 102, 102, 134, 191, 255, 255, 255, 127, 255, 255, 255, 191, 102, 102, 134, 191, 184, 165, 79, 63, 102, 102, 134, 63, 0, 0, 255, 127, 255, 255, 255, 191, 0, 0, 128, 191, 184, 165, 79, 63, 0, 0, 128, 191, 255, 255, 255, 127, 255, 255, 255, 191, 0, 0, 128, 63, 184, 165, 79, 63, 0, 0, 128, 63, 0, 0, 255, 127, 255, 255, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xsatl")
 
 [node name="XRPlayer" type="XROrigin3D"]
 world_scale = 40.0
@@ -43,22 +92,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 tracker = &"left_hand"
 pose = &"aim"
 
-[node name="LeftHand" parent="LeftHand" instance=ExtResource("2_1fxpe")]
+[node name="Hand" parent="LeftHand" instance=ExtResource("2_1fxpe")]
 hand_material_override = SubResource("StandardMaterial3D_ul1b7")
 
-[node name="Grip" type="Area3D" parent="LeftHand/LeftHand"]
+[node name="Grip" type="Area3D" parent="LeftHand/Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00800002, -0.03, 0.075)
 
-[node name="Shape" type="CollisionShape3D" parent="LeftHand/LeftHand/Grip"]
+[node name="Shape" type="CollisionShape3D" parent="LeftHand/Hand/Grip"]
 shape = SubResource("SphereShape3D_dfwr2")
 
-[node name="Pointer" type="RayCast3D" parent="LeftHand/LeftHand"]
+[node name="Pointer" type="RayCast3D" parent="LeftHand/Hand"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00590068, -0.00925946, -0.0124956)
 enabled = false
 target_position = Vector3(0, -5, 0)
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Laser" type="MeshInstance3D" parent="LeftHand/Hand/Pointer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+gi_mode = 0
+mesh = SubResource("CylinderMesh_00g2n")
 
 [node name="GripOrigin" type="Node3D" parent="LeftHand"]
 
@@ -67,13 +121,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 tracker = &"right_hand"
 pose = &"aim"
 
-[node name="RightHand" parent="RightHand" instance=ExtResource("3_n6phu")]
+[node name="Hand" parent="RightHand" instance=ExtResource("3_n6phu")]
 hand_material_override = SubResource("StandardMaterial3D_ul1b7")
 
-[node name="Grip" type="Area3D" parent="RightHand/RightHand"]
+[node name="Grip" type="Area3D" parent="RightHand/Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00800002, -0.03, 0.075)
 
-[node name="Shape" type="CollisionShape3D" parent="RightHand/RightHand/Grip"]
+[node name="Shape" type="CollisionShape3D" parent="RightHand/Hand/Grip"]
 shape = SubResource("SphereShape3D_dfwr2")
 
 [node name="GripOrigin" type="Node3D" parent="RightHand"]
@@ -84,7 +138,18 @@ shape = SubResource("SphereShape3D_dfwr2")
 
 [node name="XR" parent="." instance=ExtResource("4_21n4l")]
 
-[connection signal="button_pressed" from="LeftHand" to="." method="_on_left_hand_button_pressed"]
-[connection signal="button_pressed" from="RightHand" to="." method="_on_right_hand_button_pressed"]
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, 0, 0)
+mesh = SubResource("PlaneMesh_uocn8")
+
+[node name="Stand" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.811, 0)
+mesh = SubResource("ArrayMesh_b6j08")
+skeleton = NodePath("")
+
+[connection signal="button_pressed" from="LeftHand" to="." method="_on_button_pressed" binds= [&"left", true]]
+[connection signal="button_released" from="LeftHand" to="." method="_on_button_pressed" binds= [&"left", false]]
+[connection signal="button_pressed" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", true]]
+[connection signal="button_released" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", false]]
 [connection signal="xr_ended" from="XR" to="." method="_on_start_xr_xr_ended"]
 [connection signal="xr_started" from="XR" to="." method="_on_start_xr_xr_started"]

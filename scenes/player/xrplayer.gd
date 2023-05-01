@@ -2,12 +2,21 @@ extends XROrigin3D
 
 signal recentered
 
-@onready var pointer = $LeftHand/LeftHand/Pointer
+@onready var pointer = $LeftHand/Hand/Pointer
+
+var laser_length: float = 1.0 :
+	set(new_laser_length):
+		if laser_length == new_laser_length:
+			return
+		var l: MeshInstance3D = pointer.get_node("Laser")
+		l.transform.basis.y.y = new_laser_length
+		l.transform.origin.y = new_laser_length / -2
+		laser_length = new_laser_length
 
 var fade_modulate: float = 1.0 :
 	set(new_fade_modulate):
-		fade_modulate = new_fade_modulate
 		$XRCamera3D/Curtain.material_override.albedo_color.a = fade_modulate
+		fade_modulate = new_fade_modulate
 
 var gripping = false
 var gripped_object = null
@@ -15,7 +24,9 @@ var grip_last_transform = Transform3D.IDENTITY
 
 var pointer_enabled = true :
 	set(is_pointer_enabled):
-		%Pointer.enabled = is_pointer_enabled
+		pointer.enabled = is_pointer_enabled
+		pointer.visible = is_pointer_enabled
+		pointer_enabled = is_pointer_enabled
 
 func grip_object(object: Node3D):
 	gripped_object = object
@@ -32,6 +43,7 @@ func _ready():
 	$XRCamera3D/Curtain.show()
 	fade_modulate = fade_modulate
 	pointer_enabled = pointer_enabled
+	laser_length = laser_length
 	
 	if $XR.xr_interface is OpenXRInterface:
 		var interface: OpenXRInterface = $XR.xr_interface
@@ -39,21 +51,24 @@ func _ready():
 
 func _process(delta):
 	if pointer_enabled:
-		if pointer.is_colliding():
-			hover()
+		if not pointer.is_colliding() or not hover():
+			laser_length = 0.2
 
 func hover():
 	var obj = pointer.get_collider()
 	if not obj.is_in_group("screen"):
-		return
+		return false
 	var screen: Screen = obj.get_node("../..")
-	var coords = screen.get_screen_position(pointer.get_collision_point())
+	var dest_point = pointer.get_collision_point()
+	var coords = screen.get_screen_position(dest_point)
+	laser_length = pointer.global_position.distance_to(dest_point) / world_scale
 	
 	var e = InputEventMouseMotion.new()
 	e.position = coords
 	screen.dispatch_event(e)
+	return true
 
-func click():
+func click(down: bool):
 	var obj = pointer.get_collider()
 	if not obj.is_in_group("screen"):
 		return
@@ -63,6 +78,7 @@ func click():
 	var e = InputEventMouseButton.new()
 	e.position = coords
 	e.button_index = MOUSE_BUTTON_LEFT
+	e.pressed = down
 	screen.dispatch_event(e)
 
 func _physics_process(delta):
@@ -112,18 +128,20 @@ func translate_gripped_object(by: Vector3):
 func recenter():
 	emit_signal(&"recentered")
 
-func _on_left_hand_button_pressed(name):
+func _on_button_pressed(name: StringName, hand: StringName, pressed: bool):
+	var hand_node: XRController3D
+	match hand:
+		&"left":
+			hand_node = $LeftHand
+		&"right":
+			hand_node = $RightHand
+		_:
+			return
+	
 	if name == &"trigger_click":
-		if not $LeftHand.is_ancestor_of(pointer):
-			pointer.reparent($LeftHand/LeftHand, false)
+		if not hand_node.is_ancestor_of(pointer) and pressed:
+			pointer.reparent(hand_node.get_node("Hand"), false)
+			pointer.position.x *= -1
 		elif pointer_enabled:
 			if pointer.is_colliding():
-				click()
-
-func _on_right_hand_button_pressed(name):
-	if name == &"trigger_click":
-		if not $RightHand.is_ancestor_of(pointer):
-			pointer.reparent($RightHand/RightHand, false)
-		elif pointer_enabled:
-			if pointer.is_colliding():
-				click()
+				click(pressed)

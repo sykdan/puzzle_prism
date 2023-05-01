@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://gntxn5uxxtun"]
+
+[ext_resource type="FontFile" uid="uid://gl2c4uwueqgw" path="res://assets/fonts/Jost-SemiBold.ttf" id="1_lfvwn"]
+
+[resource]
+default_font = ExtResource("1_lfvwn")
+Button/font_sizes/font_size = 32

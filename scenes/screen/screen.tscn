@@ -14,7 +14,6 @@ albedo_texture = SubResource("ViewportTexture_crqn2")
 [sub_resource type="QuadMesh" id="QuadMesh_nfjwq"]
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
-material = SubResource("StandardMaterial3D_qha2s")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_133xu"]
 size = Vector3(1, 1, 0.05)
@@ -26,6 +25,7 @@ script = ExtResource("1_vy1sl")
 transparent_bg = true
 
 [node name="Screen" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_qha2s")
 mesh = SubResource("QuadMesh_nfjwq")
 
 [node name="ScreenArea" type="Area3D" parent="Screen" groups=["screen"]]

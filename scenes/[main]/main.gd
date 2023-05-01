@@ -74,3 +74,15 @@ func _on_maze_level_finished():
 
 func _on_xr_player_recentered():
 	pass # Replace with function body.
+
+func select_difficulty(difficulty):
+	$MainScreen.enabled = false
+	$MainScreen.hide()
+	$DetailsScreen.enabled = true
+	$DetailsScreen.show()
+
+func _on_back_pressed():
+	$MainScreen.enabled = true
+	$MainScreen.show()
+	$DetailsScreen.enabled = false
+	$DetailsScreen.hide()

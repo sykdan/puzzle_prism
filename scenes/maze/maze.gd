@@ -1,4 +1,5 @@
 extends Node3D
+class_name Maze
 
 signal ready_to_play
 signal _built_floor
