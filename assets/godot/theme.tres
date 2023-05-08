@@ -1,8 +1,12 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://gntxn5uxxtun"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://gntxn5uxxtun"]
 
 [ext_resource type="FontFile" uid="uid://gl2c4uwueqgw" path="res://assets/fonts/Jost-SemiBold.ttf" id="1_lfvwn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7fee"]
 
 [resource]
 default_font = ExtResource("1_lfvwn")
 Button/font_sizes/font_size = 32
+Label/font_sizes/font_size = 48
 LineEdit/font_sizes/font_size = 48
+SpinBox/icons/updown = SubResource("AtlasTexture_f7fee")

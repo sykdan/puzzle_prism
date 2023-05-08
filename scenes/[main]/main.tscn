@@ -61,6 +61,8 @@ text = "the"
 font = ExtResource("6_4phfg")
 font_size = 164
 
+[connection signal="init_done" from="XRPlayer" to="." method="player_ready"]
+[connection signal="init_error" from="XRPlayer" to="." method="player_error"]
 [connection signal="area_entered" from="XRPlayer/LeftHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"left", true]]
 [connection signal="area_exited" from="XRPlayer/LeftHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"left", false]]
 [connection signal="area_entered" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]

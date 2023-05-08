@@ -10,11 +10,15 @@ var _do_tween_upwards = false
 var current_maze: Maze = null
 var maze_start_time: int = 0
 
-func _ready():
+func player_ready():
 	$XRPlayer.pointer_enabled = true
 	var tw = create_tween()
 	tw.tween_property($XRPlayer, "fade_modulate", 0, 2)
 	await get_tree().create_timer(3).timeout
+
+func player_error():
+	OS.alert("Nebylo detekováno zařízení pro virtuální realitu.\nPřipojte prosím Váš headset a zkuste to znovu.\nHra bude nyní uzavřena.", "Nelze spustit hru")
+	get_tree().quit(1)
 
 func _process(delta):
 	if not is_holding_maze:
@@ -59,7 +63,7 @@ func _on_maze_level_finished():
 		await get_tree().create_timer(1).timeout
 		_do_tween_upwards = false
 
-func _on_gui_play(difficulty):
+func _on_gui_play(difficulty, params: Vector3i):
 	var size: Vector2i
 	var levels: int
 	
@@ -72,6 +76,9 @@ func _on_gui_play(difficulty):
 	elif difficulty == &"hard":
 		size = Vector2i.ONE * 14
 		levels = 14
+	elif difficulty == &"custom":
+		size = Vector2i(params.x, params.y)
+		levels = params.z
 	
 	current_maze = maze.instantiate()
 	

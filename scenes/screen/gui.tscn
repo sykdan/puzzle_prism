@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d372r333xd1jr"]
+[gd_scene load_steps=33 format=3 uid="uid://d372r333xd1jr"]
 
 [ext_resource type="Script" path="res://scenes/screen/gui.gd" id="1_loh61"]
 [ext_resource type="Texture2D" uid="uid://dmuvg10fdrgwb" path="res://assets/textures/buttons.png" id="1_xyax6"]
@@ -9,6 +9,8 @@
 [ext_resource type="Theme" uid="uid://gntxn5uxxtun" path="res://assets/godot/theme.tres" id="5_742ch"]
 [ext_resource type="LabelSettings" uid="uid://btasn3a2kk8vq" path="res://assets/godot/title_label.tres" id="6_61q3x"]
 [ext_resource type="Texture2D" uid="uid://b2jl8tubu2wsn" path="res://assets/textures/arrow-left-circle-custom.png" id="7_628lv"]
+[ext_resource type="Texture2D" uid="uid://cfnbo67l1d4ve" path="res://assets/textures/minus-custom.png" id="7_e3tev"]
+[ext_resource type="Texture2D" uid="uid://dvvbdj4vcqwwf" path="res://assets/textures/plus-custom.png" id="8_8b2ar"]
 [ext_resource type="AudioStream" uid="uid://6s5alo8upy5s" path="res://assets/audio/select.wav" id="8_t6vti"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7tud2"]
@@ -317,40 +319,32 @@ grow_horizontal = 2
 text = "Těžká"
 label_settings = ExtResource("6_61q3x")
 
-[node name="Controls" type="HBoxContainer" parent="DifficultyDetail"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 143.0
-offset_right = -100.0
-offset_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Config" type="VBoxContainer" parent="DifficultyDetail/Controls"]
+[node name="Records" type="Control" parent="DifficultyDetail"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Records" type="VBoxContainer" parent="DifficultyDetail/Controls"]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
+anchors_preset = 0
+offset_left = 332.0
+offset_top = 143.0
+offset_right = 792.0
+offset_bottom = 538.0
 
-[node name="Label" type="Label" parent="DifficultyDetail/Controls/Records"]
+[node name="Label" type="Label" parent="DifficultyDetail/Records"]
 layout_mode = 2
+offset_right = 460.0
+offset_bottom = 61.0
 text = "Rekordy"
 label_settings = SubResource("LabelSettings_4bx0l")
 vertical_alignment = 2
 
-[node name="1" type="Panel" parent="DifficultyDetail/Controls/Records"]
+[node name="1" type="Panel" parent="DifficultyDetail/Records"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+offset_top = 65.0
+offset_right = 460.0
+offset_bottom = 125.0
 
-[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/1"]
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Records/1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -358,7 +352,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/1/RecordBox"]
+[node name="Number" type="Label" parent="DifficultyDetail/Records/1/RecordBox"]
 modulate = Color(1, 0.74902, 0, 1)
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -369,7 +363,7 @@ label_settings = SubResource("LabelSettings_cypv0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/1/RecordBox"]
+[node name="Name" type="Label" parent="DifficultyDetail/Records/1/RecordBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -378,17 +372,20 @@ label_settings = SubResource("LabelSettings_cypv0")
 vertical_alignment = 1
 clip_text = true
 
-[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/1/RecordBox"]
+[node name="Time" type="Label" parent="DifficultyDetail/Records/1/RecordBox"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
 
-[node name="2" type="Panel" parent="DifficultyDetail/Controls/Records"]
+[node name="2" type="Panel" parent="DifficultyDetail/Records"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+offset_top = 129.0
+offset_right = 460.0
+offset_bottom = 189.0
 
-[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/2"]
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Records/2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -396,7 +393,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/2/RecordBox"]
+[node name="Number" type="Label" parent="DifficultyDetail/Records/2/RecordBox"]
 modulate = Color(0.733333, 0.733333, 0.733333, 1)
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -407,7 +404,7 @@ label_settings = SubResource("LabelSettings_cypv0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/2/RecordBox"]
+[node name="Name" type="Label" parent="DifficultyDetail/Records/2/RecordBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -416,17 +413,20 @@ label_settings = SubResource("LabelSettings_cypv0")
 vertical_alignment = 1
 clip_text = true
 
-[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/2/RecordBox"]
+[node name="Time" type="Label" parent="DifficultyDetail/Records/2/RecordBox"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
 
-[node name="3" type="Panel" parent="DifficultyDetail/Controls/Records"]
+[node name="3" type="Panel" parent="DifficultyDetail/Records"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+offset_top = 193.0
+offset_right = 460.0
+offset_bottom = 253.0
 
-[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/3"]
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Records/3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -434,7 +434,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/3/RecordBox"]
+[node name="Number" type="Label" parent="DifficultyDetail/Records/3/RecordBox"]
 self_modulate = Color(0.74902, 0.427451, 0.180392, 1)
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -445,7 +445,7 @@ label_settings = SubResource("LabelSettings_cypv0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/3/RecordBox"]
+[node name="Name" type="Label" parent="DifficultyDetail/Records/3/RecordBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -454,17 +454,20 @@ label_settings = SubResource("LabelSettings_cypv0")
 vertical_alignment = 1
 clip_text = true
 
-[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/3/RecordBox"]
+[node name="Time" type="Label" parent="DifficultyDetail/Records/3/RecordBox"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
 
-[node name="4" type="Panel" parent="DifficultyDetail/Controls/Records"]
+[node name="4" type="Panel" parent="DifficultyDetail/Records"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+offset_top = 257.0
+offset_right = 460.0
+offset_bottom = 317.0
 
-[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/4"]
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Records/4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -472,7 +475,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/4/RecordBox"]
+[node name="Number" type="Label" parent="DifficultyDetail/Records/4/RecordBox"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -482,7 +485,7 @@ label_settings = SubResource("LabelSettings_cypv0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/4/RecordBox"]
+[node name="Name" type="Label" parent="DifficultyDetail/Records/4/RecordBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -491,17 +494,20 @@ label_settings = SubResource("LabelSettings_cypv0")
 vertical_alignment = 1
 clip_text = true
 
-[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/4/RecordBox"]
+[node name="Time" type="Label" parent="DifficultyDetail/Records/4/RecordBox"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
 
-[node name="5" type="Panel" parent="DifficultyDetail/Controls/Records"]
+[node name="5" type="Panel" parent="DifficultyDetail/Records"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+offset_top = 321.0
+offset_right = 460.0
+offset_bottom = 381.0
 
-[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/5"]
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Records/5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -509,7 +515,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/5/RecordBox"]
+[node name="Number" type="Label" parent="DifficultyDetail/Records/5/RecordBox"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -519,7 +525,7 @@ label_settings = SubResource("LabelSettings_cypv0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/5/RecordBox"]
+[node name="Name" type="Label" parent="DifficultyDetail/Records/5/RecordBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -528,11 +534,137 @@ label_settings = SubResource("LabelSettings_cypv0")
 vertical_alignment = 1
 clip_text = true
 
-[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/5/RecordBox"]
+[node name="Time" type="Label" parent="DifficultyDetail/Records/5/RecordBox"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
+
+[node name="Config" type="VBoxContainer" parent="DifficultyDetail"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.5
+offset_top = -213.5
+offset_right = 391.5
+offset_bottom = 199.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Maze" type="Label" parent="DifficultyDetail/Config"]
+layout_mode = 2
+text = "Bludiště"
+
+[node name="HSep1" type="HSeparator" parent="DifficultyDetail/Config"]
+layout_mode = 2
+
+[node name="Height" type="HBoxContainer" parent="DifficultyDetail/Config"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DifficultyDetail/Config/Height"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Výška"
+
+[node name="-" type="Button" parent="DifficultyDetail/Config/Height"]
+texture_filter = 1
+custom_minimum_size = Vector2(78, 78)
+layout_mode = 2
+icon = ExtResource("7_e3tev")
+icon_alignment = 1
+
+[node name="Value" type="SpinBox" parent="DifficultyDetail/Config/Height"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 3.0
+max_value = 30.0
+value = 5.0
+alignment = 1
+
+[node name="+" type="Button" parent="DifficultyDetail/Config/Height"]
+texture_filter = 1
+custom_minimum_size = Vector2(78, 78)
+layout_mode = 2
+icon = ExtResource("8_8b2ar")
+icon_alignment = 1
+
+[node name="Width" type="HBoxContainer" parent="DifficultyDetail/Config"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DifficultyDetail/Config/Width"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Šířka"
+
+[node name="-" type="Button" parent="DifficultyDetail/Config/Width"]
+texture_filter = 1
+custom_minimum_size = Vector2(78, 78)
+layout_mode = 2
+icon = ExtResource("7_e3tev")
+icon_alignment = 1
+
+[node name="Value" type="SpinBox" parent="DifficultyDetail/Config/Width"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 3.0
+max_value = 30.0
+value = 5.0
+alignment = 1
+
+[node name="+" type="Button" parent="DifficultyDetail/Config/Width"]
+texture_filter = 1
+custom_minimum_size = Vector2(78, 78)
+layout_mode = 2
+icon = ExtResource("8_8b2ar")
+icon_alignment = 1
+
+[node name="HSep2" type="HSeparator" parent="DifficultyDetail/Config"]
+layout_mode = 2
+
+[node name="Cube" type="Label" parent="DifficultyDetail/Config"]
+layout_mode = 2
+text = "Kostka"
+
+[node name="Levels" type="HBoxContainer" parent="DifficultyDetail/Config"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DifficultyDetail/Config/Levels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Počet úrovní"
+
+[node name="-" type="Button" parent="DifficultyDetail/Config/Levels"]
+texture_filter = 1
+custom_minimum_size = Vector2(78, 78)
+layout_mode = 2
+icon = ExtResource("7_e3tev")
+icon_alignment = 1
+
+[node name="Value" type="SpinBox" parent="DifficultyDetail/Config/Levels"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 3.0
+max_value = 30.0
+value = 5.0
+alignment = 1
+
+[node name="+" type="Button" parent="DifficultyDetail/Config/Levels"]
+texture_filter = 1
+custom_minimum_size = Vector2(78, 78)
+layout_mode = 2
+icon = ExtResource("8_8b2ar")
+icon_alignment = 1
 
 [node name="Back" type="Button" parent="DifficultyDetail"]
 layout_mode = 0
@@ -727,6 +859,12 @@ autowrap_mode = 2
 [connection signal="pressed" from="Results/NewRecord/Yes" to="." method="scoreboard_submit"]
 [connection signal="pressed" from="Results/NewRecord/No" to="." method="back_to_main"]
 [connection signal="enter" from="SubmitScore/Keyboard" to="." method="_on_name_enter"]
+[connection signal="pressed" from="DifficultyDetail/Config/Height/-" to="." method="custom_edit_button_diff" binds= ["Height", -1]]
+[connection signal="pressed" from="DifficultyDetail/Config/Height/+" to="." method="custom_edit_button_diff" binds= ["Height", 1]]
+[connection signal="pressed" from="DifficultyDetail/Config/Width/-" to="." method="custom_edit_button_diff" binds= ["Width", -1]]
+[connection signal="pressed" from="DifficultyDetail/Config/Width/+" to="." method="custom_edit_button_diff" binds= ["Width", 1]]
+[connection signal="pressed" from="DifficultyDetail/Config/Levels/-" to="." method="custom_edit_button_diff" binds= ["Levels", -1]]
+[connection signal="pressed" from="DifficultyDetail/Config/Levels/+" to="." method="custom_edit_button_diff" binds= ["Levels", 1]]
 [connection signal="pressed" from="DifficultyDetail/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="DifficultyDetail/Back" to="." method="switch_to" binds= ["MainMenu"]]
 [connection signal="pressed" from="DifficultyDetail/Play" to="." method="_on_play_pressed"]

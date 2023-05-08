@@ -1,6 +1,6 @@
 extends Node
 
-signal play(difficulty)
+signal play(difficulty, params)
 signal at_screen(screen)
 
 var difficulty = null
@@ -22,7 +22,8 @@ func switch_to(screen_type):
 
 func difficulty_selected(diff: StringName):
 	difficulty = diff
-	$DifficultyDetail/Controls/Records.show()
+	$DifficultyDetail/Records.show()
+	$DifficultyDetail/Config.hide()
 	
 	if difficulty == &"easy":
 		$DifficultyDetail/Type.text = "Lehká"
@@ -34,13 +35,14 @@ func difficulty_selected(diff: StringName):
 		$DifficultyDetail/Type.text = "Těžká"
 		setup_leaderboard_items(SaveFile.hard)
 	if difficulty == &"custom":
-		$DifficultyDetail/Controls/Records.hide()
+		$DifficultyDetail/Records.hide()
+		$DifficultyDetail/Config.show()
 		$DifficultyDetail/Type.text = "Vlastní"
 	
 	switch_to(^"DifficultyDetail")
 
 func setup_leaderboard_items(items: Array):
-	var r = $DifficultyDetail/Controls/Records
+	var r = $DifficultyDetail/Records
 	
 	for c in r.get_children():
 		if c is Label: continue
@@ -56,7 +58,14 @@ func setup_leaderboard_items(items: Array):
 		idx += 1
 
 func _on_play_pressed():
-	play.emit(difficulty)
+	var params = null
+	if difficulty == &"custom":
+		params = Vector3i(
+			$DifficultyDetail/Config/Height/Value.value,
+			$DifficultyDetail/Config/Width/Value.value,
+			$DifficultyDetail/Config/Levels/Value.value
+		)
+	play.emit(difficulty, params)
 	switch_to(null)
 
 func finish_game(time_took):
@@ -85,3 +94,6 @@ func _on_name_enter():
 func scoreboard_submit():
 	$SubmitScore/NameEnter.text = ""
 	switch_to(^"SubmitScore")
+	
+func custom_edit_button_diff(property, delta):
+	$DifficultyDetail/Config.get_node(property).get_node("Value").value += delta

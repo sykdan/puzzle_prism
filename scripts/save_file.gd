@@ -43,5 +43,7 @@ func push_score(name, time, to_where: StringName):
 	store_save()
 
 func will_highscore(time, which: StringName):
+	if which == &"custom":
+		return false
 	var dest: Array = get(which)
 	return len(dest) < 5 or (dest.back().time < time)
