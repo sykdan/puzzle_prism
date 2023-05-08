@@ -152,4 +152,4 @@ skeleton = NodePath("")
 [connection signal="button_pressed" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", true]]
 [connection signal="button_released" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", false]]
 [connection signal="xr_ended" from="XR" to="." method="_on_start_xr_xr_ended"]
-[connection signal="xr_started" from="XR" to="." method="_on_start_xr_xr_started"]
+[connection signal="xr_started" from="XR" to="." method="_on_start_xr_xr_started" flags=6]

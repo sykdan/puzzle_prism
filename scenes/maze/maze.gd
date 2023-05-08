@@ -148,14 +148,20 @@ func floor_finished(level_number):
 			$Box.hide()
 			$Marble.freeze = true
 			$Marble.hide()
-			var f = FIREWORK.instantiate()
-			f.global_position = $Marble.global_position
-			add_child(f)
-			await f.tree_exited
+			
+			await firework().tree_exited
+			
 			emit_signal(&"game_ended")
 		
 		await tw.finished
 		level.queue_free()
+
+func firework():
+	var f = FIREWORK.instantiate()
+	get_parent().add_child(f)
+	print($Marble.global_position)
+	f.global_position = $Marble.global_position
+	return f
 
 func _create_temp_wall_outline(level):
 	var fake_wall_x = BoxMesh.new()

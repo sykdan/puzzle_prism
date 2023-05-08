@@ -1,0 +1,1 @@
+ssh seminar.jirovcovka.net "~/puzzle_prism/run_from_ssh.sh"

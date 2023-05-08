@@ -1,7 +1,5 @@
 extends XROrigin3D
 
-signal recentered
-
 @onready var pointer = $LeftHand/Hand/Pointer
 
 var laser_length: float = 1.0 :
@@ -48,6 +46,9 @@ func _ready():
 	if $XR.xr_interface is OpenXRInterface:
 		var interface: OpenXRInterface = $XR.xr_interface
 		interface.pose_recentered.connect(recenter)
+	if $XR.xr_interface is WebXRInterface:
+		var interface: WebXRInterface = $XR.xr_interface
+		interface.reference_space_reset.connect(recenter)
 
 func _process(delta):
 	if pointer_enabled:
@@ -85,11 +86,11 @@ func _physics_process(delta):
 	grip_tick()
 
 func _on_start_xr_xr_ended():
-	pass # Replace with function body.
+	pass
 
 func _on_start_xr_xr_started():
-	XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
-
+	recenter()
+	
 func grip_tick():
 	var midpoint = (
 		$RightHand/GripOrigin.global_position +
@@ -126,7 +127,7 @@ func translate_gripped_object(by: Vector3):
 	grip_tick()
 
 func recenter():
-	emit_signal(&"recentered")
+	XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
 func _on_button_pressed(name: StringName, hand: StringName, pressed: bool):
 	var hand_node: XRController3D

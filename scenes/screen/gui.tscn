@@ -1,0 +1,741 @@
+[gd_scene load_steps=31 format=3 uid="uid://d372r333xd1jr"]
+
+[ext_resource type="Script" path="res://scenes/screen/gui.gd" id="1_loh61"]
+[ext_resource type="Texture2D" uid="uid://dmuvg10fdrgwb" path="res://assets/textures/buttons.png" id="1_xyax6"]
+[ext_resource type="Texture2D" uid="uid://cm70ewdu2yx6" path="res://assets/textures/buttons-hover.png" id="2_w525u"]
+[ext_resource type="FontFile" uid="uid://gl2c4uwueqgw" path="res://assets/fonts/Jost-SemiBold.ttf" id="3_pq6w7"]
+[ext_resource type="PackedScene" uid="uid://d22qcs5yxerbl" path="res://scenes/keyboard/keyboard.tscn" id="4_640c5"]
+[ext_resource type="AudioStream" uid="uid://dsjmit8r4bu6x" path="res://assets/audio/hover.wav" id="4_xf24v"]
+[ext_resource type="Theme" uid="uid://gntxn5uxxtun" path="res://assets/godot/theme.tres" id="5_742ch"]
+[ext_resource type="LabelSettings" uid="uid://btasn3a2kk8vq" path="res://assets/godot/title_label.tres" id="6_61q3x"]
+[ext_resource type="Texture2D" uid="uid://b2jl8tubu2wsn" path="res://assets/textures/arrow-left-circle-custom.png" id="7_628lv"]
+[ext_resource type="AudioStream" uid="uid://6s5alo8upy5s" path="res://assets/audio/select.wav" id="8_t6vti"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7tud2"]
+font_size = 64
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uqqvn"]
+font_size = 120
+font_color = Color(1, 0.858824, 0, 1)
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_djmiw"]
+font_size = 40
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4bx0l"]
+font_size = 40
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_386sp"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_cypv0"]
+font_size = 40
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7pidh"]
+font_size = 28
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6svja"]
+atlas = ExtResource("1_xyax6")
+region = Rect2(0, 0, 283, 675)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnpt0"]
+atlas = ExtResource("2_w525u")
+region = Rect2(0, 0, 283, 675)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y4v2x"]
+font_size = 84
+font_color = Color(0.168627, 0.866667, 0.337255, 1)
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4plq"]
+line_spacing = -17.0
+font_size = 30
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkmc"]
+atlas = ExtResource("1_xyax6")
+region = Rect2(284, 0, 278, 675)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxyf6"]
+atlas = ExtResource("2_w525u")
+region = Rect2(284, 0, 278, 675)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7rkbg"]
+font_size = 67
+font_color = Color(0.937255, 0.792157, 0.0313726, 1)
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxien"]
+atlas = ExtResource("1_xyax6")
+region = Rect2(563, 0, 278, 675)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2j1e"]
+atlas = ExtResource("2_w525u")
+region = Rect2(563, 0, 278, 675)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4tk3"]
+font_size = 84
+font_color = Color(0.94902, 0.258824, 0.211765, 1)
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1nmh"]
+atlas = ExtResource("1_xyax6")
+region = Rect2(842, 0, 283, 675)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mejfd"]
+atlas = ExtResource("2_w525u")
+region = Rect2(842, 0, 283, 675)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mnhch"]
+font_size = 65
+font_color = Color(0.654902, 0.333333, 0.760784, 1)
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[node name="GUI" type="Control"]
+custom_minimum_size = Vector2(1125, 675)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_loh61")
+
+[node name="hover_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xf24v")
+volume_db = -12.0
+
+[node name="play_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_t6vti")
+
+[node name="Results" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(1125, 675)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_742ch")
+
+[node name="Congrats" type="Label" parent="Results"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -532.5
+offset_top = 13.0
+offset_right = 533.5
+offset_bottom = 138.0
+grow_horizontal = 2
+text = "Hotovo! Kostka je vyřešená!"
+label_settings = ExtResource("6_61q3x")
+horizontal_alignment = 1
+
+[node name="TimeHeader" type="Label" parent="Results"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -63.0
+offset_top = 216.0
+offset_right = 63.0
+offset_bottom = 341.0
+grow_horizontal = 2
+text = "Čas:"
+label_settings = SubResource("LabelSettings_7tud2")
+
+[node name="Time" type="Label" parent="Results"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -172.5
+offset_top = 275.0
+offset_right = 173.5
+offset_bottom = 452.0
+grow_horizontal = 2
+text = "99:99"
+label_settings = SubResource("LabelSettings_uqqvn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue" type="Button" parent="Results"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.5
+offset_top = -148.0
+offset_right = 65.5
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "OK"
+
+[node name="NewRecord" type="HBoxContainer" parent="Results"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 527.0
+offset_right = 1066.0
+offset_bottom = 619.0
+theme_override_constants/separation = 20
+
+[node name="RecordText" type="Label" parent="Results/NewRecord"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Nový rekord! Chceš se podepsat?"
+label_settings = SubResource("LabelSettings_djmiw")
+vertical_alignment = 1
+
+[node name="Yes" type="Button" parent="Results/NewRecord"]
+layout_mode = 2
+text = "Ano, chci!"
+
+[node name="No" type="Button" parent="Results/NewRecord"]
+layout_mode = 2
+text = "Ne, díky"
+
+[node name="SubmitScore" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(1125, 675)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_742ch")
+
+[node name="TimeHeader" type="Label" parent="SubmitScore"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -249.0
+offset_top = 64.0
+offset_right = 249.0
+offset_bottom = 189.0
+grow_horizontal = 2
+text = "Napiš své jméno:"
+label_settings = SubResource("LabelSettings_7tud2")
+
+[node name="Keyboard" parent="SubmitScore" node_paths=PackedStringArray("target") instance=ExtResource("4_640c5")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = 27.5
+offset_right = 218.0
+offset_bottom = 164.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(218, 68)
+target = NodePath("../NameEnter")
+
+[node name="NameEnter" type="LineEdit" parent="SubmitScore"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.5
+offset_top = -151.0
+offset_right = 300.5
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Jméno..."
+alignment = 1
+max_length = 20
+
+[node name="DifficultyDetail" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(1125, 675)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_742ch")
+
+[node name="Type" type="Label" parent="DifficultyDetail"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.5
+offset_top = 13.0
+offset_right = 107.5
+offset_bottom = 138.0
+grow_horizontal = 2
+text = "Těžká"
+label_settings = ExtResource("6_61q3x")
+
+[node name="Controls" type="HBoxContainer" parent="DifficultyDetail"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 143.0
+offset_right = -100.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Config" type="VBoxContainer" parent="DifficultyDetail/Controls"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Records" type="VBoxContainer" parent="DifficultyDetail/Controls"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DifficultyDetail/Controls/Records"]
+layout_mode = 2
+text = "Rekordy"
+label_settings = SubResource("LabelSettings_4bx0l")
+vertical_alignment = 2
+
+[node name="1" type="Panel" parent="DifficultyDetail/Controls/Records"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/1/RecordBox"]
+modulate = Color(1, 0.74902, 0, 1)
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+text = "1."
+label_settings = SubResource("LabelSettings_cypv0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/1/RecordBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_cypv0")
+vertical_alignment = 1
+clip_text = true
+
+[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/1/RecordBox"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_7pidh")
+
+[node name="2" type="Panel" parent="DifficultyDetail/Controls/Records"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/2/RecordBox"]
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+text = "2."
+label_settings = SubResource("LabelSettings_cypv0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/2/RecordBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_cypv0")
+vertical_alignment = 1
+clip_text = true
+
+[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/2/RecordBox"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_7pidh")
+
+[node name="3" type="Panel" parent="DifficultyDetail/Controls/Records"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/3/RecordBox"]
+self_modulate = Color(0.74902, 0.427451, 0.180392, 1)
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+text = "3."
+label_settings = SubResource("LabelSettings_cypv0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/3/RecordBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_cypv0")
+vertical_alignment = 1
+clip_text = true
+
+[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/3/RecordBox"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_7pidh")
+
+[node name="4" type="Panel" parent="DifficultyDetail/Controls/Records"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/4/RecordBox"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+text = "4."
+label_settings = SubResource("LabelSettings_cypv0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/4/RecordBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_cypv0")
+vertical_alignment = 1
+clip_text = true
+
+[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/4/RecordBox"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_7pidh")
+
+[node name="5" type="Panel" parent="DifficultyDetail/Controls/Records"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="RecordBox" type="HBoxContainer" parent="DifficultyDetail/Controls/Records/5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Number" type="Label" parent="DifficultyDetail/Controls/Records/5/RecordBox"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+text = "5."
+label_settings = SubResource("LabelSettings_cypv0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DifficultyDetail/Controls/Records/5/RecordBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_cypv0")
+vertical_alignment = 1
+clip_text = true
+
+[node name="Time" type="Label" parent="DifficultyDetail/Controls/Records/5/RecordBox"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
+label_settings = SubResource("LabelSettings_7pidh")
+
+[node name="Back" type="Button" parent="DifficultyDetail"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 169.0
+offset_bottom = 80.0
+text = "Zpátky"
+icon = ExtResource("7_628lv")
+
+[node name="Play" type="Button" parent="DifficultyDetail"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.5
+offset_top = -120.0
+offset_right = 80.5
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "HRÁT"
+
+[node name="MainMenu" type="Control" parent="."]
+custom_minimum_size = Vector2(1125, 675)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Easy" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_right = 283.0
+offset_bottom = 675.0
+texture_normal = SubResource("AtlasTexture_6svja")
+texture_pressed = SubResource("AtlasTexture_dnpt0")
+texture_hover = SubResource("AtlasTexture_dnpt0")
+
+[node name="Text" type="Label" parent="MainMenu/Easy"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 229.0
+offset_right = 265.0
+offset_bottom = 354.0
+rotation = -0.287979
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "LEHKÁ"
+label_settings = SubResource("LabelSettings_y4v2x")
+
+[node name="Description" type="Label" parent="MainMenu/Easy"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -120.0
+offset_right = -4.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "Jednoduchá kostka na uvolnění."
+label_settings = SubResource("LabelSettings_q4plq")
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Medium" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 284.0
+offset_right = 562.0
+offset_bottom = 675.0
+texture_normal = SubResource("AtlasTexture_qjkmc")
+texture_pressed = SubResource("AtlasTexture_mxyf6")
+texture_hover = SubResource("AtlasTexture_mxyf6")
+
+[node name="Text" type="Label" parent="MainMenu/Medium"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 241.0
+offset_right = 268.0
+offset_bottom = 342.0
+rotation = -0.287979
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "STŘEDNÍ"
+label_settings = SubResource("LabelSettings_7rkbg")
+
+[node name="Description" type="Label" parent="MainMenu/Medium"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -125.0
+offset_right = -4.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "Těžší kostka pro zábavu."
+label_settings = SubResource("LabelSettings_q4plq")
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Hard" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 563.0
+offset_right = 841.0
+offset_bottom = 675.0
+texture_normal = SubResource("AtlasTexture_hxien")
+texture_pressed = SubResource("AtlasTexture_k2j1e")
+texture_hover = SubResource("AtlasTexture_k2j1e")
+
+[node name="Text" type="Label" parent="MainMenu/Hard"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 229.0
+offset_right = 257.0
+offset_bottom = 354.0
+rotation = -0.287979
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "TĚŽKÁ"
+label_settings = SubResource("LabelSettings_u4tk3")
+
+[node name="Description" type="Label" parent="MainMenu/Hard"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -129.0
+offset_right = -4.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "Obtížný hlavolam na zamotání hlavy."
+label_settings = SubResource("LabelSettings_q4plq")
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Custom" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 842.0
+offset_right = 1125.0
+offset_bottom = 675.0
+texture_normal = SubResource("AtlasTexture_e1nmh")
+texture_pressed = SubResource("AtlasTexture_mejfd")
+texture_hover = SubResource("AtlasTexture_mejfd")
+
+[node name="Text" type="Label" parent="MainMenu/Custom"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 241.0
+offset_right = 268.0
+offset_bottom = 339.0
+rotation = -0.287979
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "VLASTNÍ"
+label_settings = SubResource("LabelSettings_mnhch")
+
+[node name="Description" type="Label" parent="MainMenu/Custom"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -98.0
+offset_right = -9.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_pq6w7")
+text = "Nastav si svou vlastní velikost!"
+label_settings = SubResource("LabelSettings_q4plq")
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[connection signal="pressed" from="Results/Continue" to="." method="back_to_main"]
+[connection signal="pressed" from="Results/NewRecord/Yes" to="." method="scoreboard_submit"]
+[connection signal="pressed" from="Results/NewRecord/No" to="." method="back_to_main"]
+[connection signal="enter" from="SubmitScore/Keyboard" to="." method="_on_name_enter"]
+[connection signal="pressed" from="DifficultyDetail/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="DifficultyDetail/Back" to="." method="switch_to" binds= ["MainMenu"]]
+[connection signal="pressed" from="DifficultyDetail/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="DifficultyDetail/Play" to="play_sound" method="play"]
+[connection signal="mouse_entered" from="MainMenu/Easy" to="hover_sound" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Easy" to="." method="difficulty_selected" binds= [&"easy"]]
+[connection signal="mouse_entered" from="MainMenu/Medium" to="hover_sound" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Medium" to="." method="difficulty_selected" binds= [&"medium"]]
+[connection signal="mouse_entered" from="MainMenu/Hard" to="hover_sound" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Hard" to="." method="difficulty_selected" binds= [&"hard"]]
+[connection signal="mouse_entered" from="MainMenu/Custom" to="hover_sound" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Custom" to="." method="difficulty_selected" binds= [&"custom"]]

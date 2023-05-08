@@ -1,10 +1,10 @@
 extends Node
 
-@export var scores_easy = []
-@export var scores_medium = []
-@export var scores_hard = []
+@export var easy = []
+@export var medium = []
+@export var hard = []
 
-var should_save = [&"scores_easy", &"scores_medium", &"scores_hard"]
+var should_save = [&"easy", &"medium", &"hard"]
 
 func _ready():
 	load_save()
@@ -34,5 +34,14 @@ func store_save():
 		data[variable] = get(variable)
 	file.store_string(JSON.stringify(data))
 
-func maybe_push_score(name, time):
-	pass
+func push_score(name, time, to_where: StringName):
+	var dest: Array = get(to_where)
+	dest.append({"name": name, "time": time})
+	dest.sort_custom(func(a, b): return a.time < b.time)
+	while len(dest) > 5:
+		dest.pop_back()
+	store_save()
+
+func will_highscore(time, which: StringName):
+	var dest: Array = get(which)
+	return len(dest) < 5 or (dest.back().time < time)
