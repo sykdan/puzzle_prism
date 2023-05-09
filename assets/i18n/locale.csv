@@ -1,0 +1,27 @@
+keys,cs,en
+PLAY,HRÁT,PLAY
+D_EASY,LEHKÁ,EASY
+D_MEDIUM,STŘEDNÍ,MEDIUM
+D_HARD,TĚŽKÁ,HARD
+D_CUSTOM,VLASTNÍ,CUSTOM
+D_EASY_DESC,Jednoduchá kostka na uvolnění.,An easy puzzle to relax with.
+D_MEDIUM_DESC,Těžší kostka pro zábavu.,A harder puzzle for fun.
+D_HARD_DESC,Obtížný hlavolam na zamotání hlavy.,A difficult puzzle to blow your mind.
+D_CUSTOM_DESC,Nastav si svou vlastní velikost!,Set up your own puzzle size!
+RECORDS,Rekordy,Records
+BACK,Zpátky,Back
+SUBMIT_PROMPT,Napiš své jméno:,Write your name:
+PROMPT_PLACEHOLDER,Jméno...,Name...
+SPACEBAR,Mezera,Space
+OK,OK,OK
+CONGRATS,Hotovo! Kostka vyřešena!,Done! Puzzle solved!
+TIME,Čas:,Time:
+NEW_RECORD,Nový rekord! Chceš se zapsat?,New record! Want to save it?
+NEW_RECORD_YES,"Ano, chci!","Yes, please!"
+NEW_RECORD_NO,"Ne, díky","No, thanks"
+OXR_ERROR,"Nebylo detekováno zařízení pro virtuální realitu.
+Připojte prosím Váš headset a zkuste to znovu.
+Hra bude nyní uzavřena.","A Virtual Reality device was not detected.
+Please connect your headset and try again.
+The game will now close."
+OXR_ERROR_TITLE,Nelze spustit hru,Cannot launch game
