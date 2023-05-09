@@ -165,7 +165,7 @@ offset_top = 13.0
 offset_right = 533.5
 offset_bottom = 138.0
 grow_horizontal = 2
-text = "Hotovo! Kostka je vyřešená!"
+text = "CONGRATS"
 label_settings = ExtResource("6_61q3x")
 horizontal_alignment = 1
 
@@ -179,7 +179,7 @@ offset_top = 216.0
 offset_right = 63.0
 offset_bottom = 341.0
 grow_horizontal = 2
-text = "Čas:"
+text = "TIME"
 label_settings = SubResource("LabelSettings_7tud2")
 
 [node name="Time" type="Label" parent="Results"]
@@ -225,17 +225,17 @@ theme_override_constants/separation = 20
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Nový rekord! Chceš se podepsat?"
+text = "NEW_RECORD"
 label_settings = SubResource("LabelSettings_djmiw")
 vertical_alignment = 1
 
 [node name="Yes" type="Button" parent="Results/NewRecord"]
 layout_mode = 2
-text = "Ano, chci!"
+text = "NEW_RECORD_YES"
 
 [node name="No" type="Button" parent="Results/NewRecord"]
 layout_mode = 2
-text = "Ne, díky"
+text = "NEW_RECORD_NO"
 
 [node name="SubmitScore" type="Panel" parent="."]
 visible = false
@@ -248,7 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_742ch")
 
-[node name="TimeHeader" type="Label" parent="SubmitScore"]
+[node name="PromptHeader" type="Label" parent="SubmitScore"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -258,7 +258,7 @@ offset_top = 64.0
 offset_right = 249.0
 offset_bottom = 189.0
 grow_horizontal = 2
-text = "Napiš své jméno:"
+text = "SUBMIT_PROMPT"
 label_settings = SubResource("LabelSettings_7tud2")
 
 [node name="Keyboard" parent="SubmitScore" node_paths=PackedStringArray("target") instance=ExtResource("4_640c5")]
@@ -291,7 +291,7 @@ offset_right = 300.5
 offset_bottom = -73.0
 grow_horizontal = 2
 grow_vertical = 2
-placeholder_text = "Jméno..."
+placeholder_text = "PROMPT_PLACEHOLDER"
 alignment = 1
 max_length = 20
 
@@ -320,7 +320,6 @@ text = "Těžká"
 label_settings = ExtResource("6_61q3x")
 
 [node name="Records" type="Control" parent="DifficultyDetail"]
-visible = false
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 anchors_preset = 0
@@ -333,7 +332,7 @@ offset_bottom = 538.0
 layout_mode = 2
 offset_right = 460.0
 offset_bottom = 61.0
-text = "Rekordy"
+text = "RECORDS"
 label_settings = SubResource("LabelSettings_4bx0l")
 vertical_alignment = 2
 
@@ -541,6 +540,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
 
 [node name="Config" type="VBoxContainer" parent="DifficultyDetail"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -672,7 +672,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 169.0
 offset_bottom = 80.0
-text = "Zpátky"
+text = "BACK"
 icon = ExtResource("7_628lv")
 
 [node name="Play" type="Button" parent="DifficultyDetail"]
@@ -688,7 +688,7 @@ offset_right = 80.5
 offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "HRÁT"
+text = "PLAY"
 
 [node name="MainMenu" type="Control" parent="."]
 custom_minimum_size = Vector2(1125, 675)
@@ -716,8 +716,10 @@ offset_right = 265.0
 offset_bottom = 354.0
 rotation = -0.287979
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "LEHKÁ"
+text = "D_EASY"
 label_settings = SubResource("LabelSettings_y4v2x")
+horizontal_alignment = 1
+clip_text = true
 
 [node name="Description" type="Label" parent="MainMenu/Easy"]
 layout_mode = 1
@@ -732,7 +734,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "Jednoduchá kostka na uvolnění."
+text = "D_EASY_DESC"
 label_settings = SubResource("LabelSettings_q4plq")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -755,8 +757,10 @@ offset_right = 268.0
 offset_bottom = 342.0
 rotation = -0.287979
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "STŘEDNÍ"
+text = "D_MEDIUM"
 label_settings = SubResource("LabelSettings_7rkbg")
+horizontal_alignment = 1
+clip_text = true
 
 [node name="Description" type="Label" parent="MainMenu/Medium"]
 layout_mode = 1
@@ -771,7 +775,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "Těžší kostka pro zábavu."
+text = "D_MEDIUM_DESC"
 label_settings = SubResource("LabelSettings_q4plq")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -794,8 +798,10 @@ offset_right = 257.0
 offset_bottom = 354.0
 rotation = -0.287979
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "TĚŽKÁ"
+text = "D_HARD"
 label_settings = SubResource("LabelSettings_u4tk3")
+horizontal_alignment = 1
+clip_text = true
 
 [node name="Description" type="Label" parent="MainMenu/Hard"]
 layout_mode = 1
@@ -810,7 +816,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "Obtížný hlavolam na zamotání hlavy."
+text = "D_HARD_DESC"
 label_settings = SubResource("LabelSettings_q4plq")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -833,8 +839,10 @@ offset_right = 268.0
 offset_bottom = 339.0
 rotation = -0.287979
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "VLASTNÍ"
+text = "D_CUSTOM"
 label_settings = SubResource("LabelSettings_mnhch")
+horizontal_alignment = 1
+clip_text = true
 
 [node name="Description" type="Label" parent="MainMenu/Custom"]
 layout_mode = 1
@@ -849,7 +857,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_pq6w7")
-text = "Nastav si svou vlastní velikost!"
+text = "D_CUSTOM_DESC"
 label_settings = SubResource("LabelSettings_q4plq")
 horizontal_alignment = 1
 vertical_alignment = 2

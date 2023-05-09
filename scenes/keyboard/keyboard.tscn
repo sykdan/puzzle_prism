@@ -52,7 +52,7 @@ offset_right = 95.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
-text = "Mezera"
+text = "SPACEBAR"
 
 [node name="OK" type="Button" parent="Controls"]
 layout_mode = 1

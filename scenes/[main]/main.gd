@@ -17,7 +17,7 @@ func player_ready():
 	await get_tree().create_timer(3).timeout
 
 func player_error():
-	OS.alert("Nebylo detekováno zařízení pro virtuální realitu.\nPřipojte prosím Váš headset a zkuste to znovu.\nHra bude nyní uzavřena.", "Nelze spustit hru")
+	OS.alert(tr("OXR_ERROR"), tr("OXR_ERROR_TITLE"))
 	get_tree().quit(1)
 
 func _process(delta):

@@ -26,18 +26,18 @@ func difficulty_selected(diff: StringName):
 	$DifficultyDetail/Config.hide()
 	
 	if difficulty == &"easy":
-		$DifficultyDetail/Type.text = "Lehká"
+		$DifficultyDetail/Type.text = tr("D_EASY")
 		setup_leaderboard_items(SaveFile.easy)
 	if difficulty == &"medium":
-		$DifficultyDetail/Type.text = "Střední"
+		$DifficultyDetail/Type.text = tr("D_MEDIUM")
 		setup_leaderboard_items(SaveFile.medium)
 	if difficulty == &"hard":
-		$DifficultyDetail/Type.text = "Těžká"
+		$DifficultyDetail/Type.text = tr("D_HARD")
 		setup_leaderboard_items(SaveFile.hard)
 	if difficulty == &"custom":
 		$DifficultyDetail/Records.hide()
 		$DifficultyDetail/Config.show()
-		$DifficultyDetail/Type.text = "Vlastní"
+		$DifficultyDetail/Type.text = tr("D_CUSTOM")
 	
 	switch_to(^"DifficultyDetail")
 

@@ -17,7 +17,7 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="res://assets/textures/logo.png"
 
 [autoload]
 
@@ -28,6 +28,10 @@ SaveFile="*res://scripts/save_file.gd"
 [display]
 
 window/subwindows/embed_subwindows=false
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/i18n/locale.cs.translation", "res://assets/i18n/locale.en.translation")
 
 [rendering]
 
