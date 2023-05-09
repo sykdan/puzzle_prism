@@ -1,4 +1,5 @@
 extends Node3D
+class_name Level
 
 signal finished
 
@@ -6,16 +7,16 @@ signal finished
 var CHAMBER = preload("./chamber.tscn")
 var GOAL = preload("./goal.tscn")
 
-var maze_data = []
+var maze_data: Array[MazeGen.MazeNode] = []
 var maze_goal: Vector2i
 
 var is_finished = false
 
-func assign(data, goal):
+func assign(data: Array[MazeGen.MazeNode], goal):
 	maze_data = data
 	maze_goal = goal
 
-func obstacles():
+func build_obstacles():
 	if is_in_group(&"has_obstacles"):
 		return
 	
@@ -62,7 +63,7 @@ func obstacles():
 	goal.body_entered.connect(_goal_collision)
 	add_to_group(&"has_obstacles")
 
-func floor():
+func build_floor():
 	if is_in_group(&"has_floor"):
 		return
 	
@@ -116,6 +117,7 @@ func floor():
 func _build_floor_fragment(extents, position):
 	var mesh = BoxMesh.new()
 	mesh.size = extents
+	
 	var shape = BoxShape3D.new()
 	shape.size = extents
 	

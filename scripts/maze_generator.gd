@@ -1,30 +1,38 @@
 extends Node
 
-# warning-ignore:UNUSED_SIGNAL
+## Maze Generator
+## Wilson algorithm implementation in GDScript.
+
+var t: Thread
+
+# Emitted once a maze has been generated (for use with threading)
 signal generated(maze_data, furthest_away)
 
-var thread: Thread
-
-func i2v(size: Vector2i, i: int) -> Vector2i: 
+# Convert index integer to Vector2i representation. 
+func i2v(size: Vector2i, i: int) -> Vector2i:
+	@warning_ignore("integer_division")
 	return Vector2i(i % size.x, (i % (size.x*size.y)) / size.x)
 
+# Convert Vector2i to index integer representation.
 func v2i(size: Vector2i, v: Vector2i) -> int:
 	return v.x + size.x * v.y
 
+# Helper class that helps represent the maze as a graph.
 class MazeNode:
-	var added = false
+	var added: bool = false
 	
 	var position: Vector2i = Vector2i.ZERO 
-	var next_walk: int = -1
+	var next_index: int = -1
 	
-	var x_passage = false
-	var y_passage = false
+	var x_passage: bool = false
+	var y_passage: bool = false
 	
-	var distance_from_start = null
+	var distance_from_start: int
 
-func __adjust_index_next_step(now: Vector2i, size: Vector2i, previous: Vector2i) -> Vector2i:
+# Generates a new step in the maze, ensuring we don't go out of bounds.
+func step(now: Vector2i, size: Vector2i, previous: Vector2i) -> Vector2i:
 	while true:
-		var direction := Vector2i.ZERO
+		var direction: Vector2i
 		
 		match randi_range(0,3):
 			0:
@@ -35,7 +43,7 @@ func __adjust_index_next_step(now: Vector2i, size: Vector2i, previous: Vector2i)
 				direction = Vector2i.RIGHT
 			3:
 				direction = Vector2i.DOWN
-			_:
+			_: # Needed to suppress errors, never used
 				direction = Vector2i.ZERO
 		
 		var would_be = now + direction
@@ -48,17 +56,19 @@ func __adjust_index_next_step(now: Vector2i, size: Vector2i, previous: Vector2i)
 			continue
 		
 		return would_be
-	return Vector2i.ZERO # Suppress editor errors. This will not be returned, ever.
 
-func _generate_maze(size: Vector2i, start=null):
-	if thread is Thread:
-		thread.wait_to_finish()
-	else:
-		thread = Thread.new()
-	thread.start(func(): self.__generate_maze(size, start))
+	# Needed to suppress errors, never used
+	return Vector2i.ZERO
 
-# Main generation fn
-func __generate_maze(size: Vector2i, start: Vector2i):
+func generate_maze(size: Vector2i, start: Vector2i):
+	if t is Thread:
+		t.wait_to_finish()
+	
+	t = Thread.new()
+	t.start(_generate_maze.bind(size, start))
+
+# Generation function
+func _generate_maze(size: Vector2i, start: Vector2i):
 	var N = size.x * size.y
 	
 	# Initialize the game field
@@ -76,8 +86,9 @@ func __generate_maze(size: Vector2i, start: Vector2i):
 		
 		field[i] = m
 	
-	# We mark one random node as part of the maze to kick off the algorithm
-	var start_node
+	# Mark one node as part of the maze to start the algorithm
+	var start_node: MazeNode
+	# Check if we were asked to start from a specific location
 	if start == null:
 		start_node = field[randi() % N]
 	else:
@@ -86,68 +97,83 @@ func __generate_maze(size: Vector2i, start: Vector2i):
 	start_node.added = true
 	start_node.distance_from_start = 0
 	
-	var walk = 0 # Go through all nodes
+	# The algorithm works by looping through all nodes. This is a pointer to the current one.
+	var walk = 0
+	# Previously stepped on node's position. Prevents going back to where you just came from.
 	var previous = Vector2i.ONE * -1
-	
-	var furthest_away: MazeNode = start_node
+	# The node that requires the most steps to reach is the goal. Store it here.
+	var goal: MazeNode = start_node
 	
 	while walk < N:
-		var node: MazeNode = field[walk]
+		var node: MazeNode = field[walk] # Pointer to the currently walked node
 		var distance = 0
-		if not node.added:
-			while true:
-				var next_walk = __adjust_index_next_step(node.position, size, previous)
-				var next_i = v2i(size, next_walk)
+		
+		if not node.added: # Skip over added nodes
+			while true: # Randomly walk until there's a path to an added node
+				var next_position = step(node.position, size, previous)
+				var next_index = v2i(size, next_position)
 				
+				# Perform the step, link the current node to the next.
 				previous = node.position
-				node.next_walk = next_i
-				node = field[next_i]
+				node.next_index = next_index
+				node = field[next_index]
 				distance += 1
 				
-				while node.next_walk != -1:
-					var goto_next = node.next_walk
-					node.next_walk = -1
+				# If there's a loop, trace it and erase it.
+				while node.next_index != -1:
+					var goto_next = node.next_index
+					node.next_index = -1
 					distance -= 1
 					node = field[goto_next]
 				
+				# Stop operating if we've found a node that is in the maze
 				if node.added:
 					distance += node.distance_from_start
 					break
 			
+			# Set the pointer back to the node we started on
 			node = field[walk]
 			
-			if distance > furthest_away.distance_from_start:
-				furthest_away = node
+			# If we're farther away than anything before, set the node as the goal
+			if distance > goal.distance_from_start:
+				goal = node
 			
+			# Now trace the path again and add all nodes to the maze, calculating their
+			# distance from the start and unlinking them.
 			while true:
 				var current = node.position
 				node.distance_from_start = distance
 				distance -= 1
 				
-				var next = node.next_walk
+				var next = node.next_index
 				if next == -1: break
 				
 				node.added = true
-				node.next_walk = -1
-				
-				var diff = next - v2i(size, current)
-				
-				if diff == 1:
+				node.next_index = -1
+
+				# The resulting maze is represented as a grid.
+				# There's no such thing as an `edge` in a 
+				# traditional graph sense, only the information if
+				# there's a wall towards X+ or Y+.
+
+				var diff = i2v(size, next) - current
+
+				# If the next node is to the right or bottom (X+ or Y+),
+				# we must make a wall on the current node.
+				if diff.x == 1: 
 					node.x_passage = true
-				elif diff == size.x:
+				elif diff.y == 1:
 					node.y_passage = true
 					
 				node = field[next]
 				
-				if diff == -1:
+				# If the next node is to the left or top (X- or Y-),
+				# we must make a wall on the next node in the opposite direction
+				if diff.x == -1:
 					node.x_passage = true
-				elif diff == -size.x:
+				elif diff.y == -1:
 					node.y_passage = true
 		
 		walk += 1
 	
-	emit_signal(&"generated", field, furthest_away.position)
-
-func _exit_tree():
-	if thread is Thread:
-		thread.wait_to_finish()
+	emit_signal.call_deferred(&"generated", field, goal.position)

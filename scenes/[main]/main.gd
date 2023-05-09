@@ -5,10 +5,10 @@ var maze = preload("res://scenes/maze/maze.tscn")
 var is_holding_maze = false
 var hands_can_hold = [false, false]
 
-var _do_tween_upwards = false
-
-var current_maze: Maze = null
+var current_maze: Maze
 var maze_start_time: int = 0
+
+var _slide_upwards = false
 
 func player_ready():
 	$XRPlayer.pointer_enabled = true
@@ -20,7 +20,7 @@ func player_error():
 	OS.alert(tr("OXR_ERROR"), tr("OXR_ERROR_TITLE"))
 	get_tree().quit(1)
 
-func _process(delta):
+func _process(_d):
 	if not is_holding_maze:
 		if $XRPlayer/LeftHand.is_button_pressed("grip_click") and $XRPlayer/RightHand.is_button_pressed("grip_click"):
 			if hands_can_hold[0] and hands_can_hold[1]:
@@ -32,7 +32,10 @@ func _process(delta):
 			$XRPlayer.drop_object()
 
 func _physics_process(delta):
-	if _do_tween_upwards:
+	# Godot Tweens don't support working with relative values,
+	# they must transition absolutely from one value to another.
+	# So we animate frame by frame, the good old way :P
+	if _slide_upwards:
 		$XRPlayer.translate_gripped_object(
 			global_transform.basis.y * Shared.NODE_SIZE * delta
 		)
@@ -59,9 +62,9 @@ func _hand_can_grip(area: Area3D, hand: StringName, enter: bool):
 
 func _on_maze_level_finished():
 	if is_holding_maze:
-		_do_tween_upwards = true
+		_slide_upwards = true
 		await get_tree().create_timer(1).timeout
-		_do_tween_upwards = false
+		_slide_upwards = false
 
 func _on_gui_play(difficulty, params):
 	var size: Vector2i
@@ -80,11 +83,12 @@ func _on_gui_play(difficulty, params):
 		size = Vector2i(params.x, params.y)
 		levels = params.z
 	
-	current_maze = maze.instantiate()
-	
+	current_maze = maze.instantiate() as Maze
 	current_maze.size = size
 	current_maze.levels = levels
 	current_maze.resize()
+	current_maze.hide()
+	
 	var pos = $XRPlayer/XRCamera3D.global_position
 	pos -= $XRPlayer/XRCamera3D.basis.z * 12
 	pos -= $XRPlayer/XRCamera3D.basis.z * size.length()
@@ -98,10 +102,14 @@ func _on_gui_play(difficulty, params):
 	current_maze.global_position = pos
 	current_maze.create_game()
 	
+	await current_maze.ready_to_play
+	
+	current_maze.show()
 	$MainScreen.enabled = false
 	$MainScreen.hide()
 	$XRPlayer.pointer_enabled = false
 	
+	@warning_ignore("NARROWING_CONVERSION")
 	maze_start_time = Time.get_unix_time_from_system()
 
 func game_ended():
@@ -109,14 +117,14 @@ func game_ended():
 	current_maze.queue_free()
 	current_maze = null
 	
-	var time_took: int = ceil(Time.get_unix_time_from_system() - maze_start_time)
+	var time_taken: int = ceil(Time.get_unix_time_from_system() - maze_start_time)
 	maze_start_time = 0
 	
 	$MainScreen.enabled = true
 	$MainScreen.show()
 	$XRPlayer.pointer_enabled = true
 	
-	$MainScreen/Viewport/GUI.finish_game(time_took)
+	$MainScreen/Viewport/GUI.finish_game(time_taken)
 
 func _on_gui_at_screen(screen: NodePath):
 	$Title.visible = screen == ^"MainMenu"

@@ -1,17 +1,20 @@
 extends Node3D
 class_name Maze
 
+## Maze
+## Everything pertaining to the Maze 3D object.
+
+# Generation related signals
 signal ready_to_play
-signal _built_floor
+signal built_level
 signal built_all
 
+# Game related signals
 signal level_finished
 signal game_ended
 
 var LEVEL = preload("./level.tscn")
 var FIREWORK = preload("res://scenes/firework.tscn")
-
-var cull_from = Vector3i.DOWN
 
 @export var size: Vector2i = Vector2i.ONE * 10
 @export var levels: int = 10
@@ -19,7 +22,11 @@ var cull_from = Vector3i.DOWN
 var current_level = 0
 var is_ready = false
 
-var _next_floor_start
+var _next_level_start: Vector2i
+
+func _ready():
+	MazeGen.generated.connect(_maze_generated)
+	resize()
 
 # Sizes the maze to match desired parameters.
 func resize():
@@ -59,53 +66,52 @@ func resize():
 	$"Box/X-Mesh".position.y = -Shared.WALL_SIZE
 	
 	# Move the Chambers node so that it is positioned at the top-left.
-	# 
 	# This is calculated in a way to allow Levels and Chambers to be
 	# positioned as multiples of NODE_SIZE
 	$Levels.position = box_sizes/-2 + Vector3.ONE * (Shared.WALL_SIZE + Shared.CHAMBER_SIZE/2)
 	$Levels.position.y *= -1
 
-func _ready():
-	MazeGen.generated.connect(_maze_generated)
-	resize()
-
+# Generate a brand new maze
 func create_game():
 	is_ready = false
-	_next_floor_start = Vector2i(
+	_next_level_start = Vector2i(
 		randi_range(0, size.x-1),
 		randi_range(0, size.y-1)
 	)
-	$Marble.position = $Levels.position
-	$Marble.position += Vector3(_next_floor_start.x,0,_next_floor_start.y) * Shared.NODE_SIZE
-	_add_floor()
+	$Marble.global_position = $Levels.global_position
+	$Marble.position += Vector3(_next_level_start.x,0,_next_level_start.y) * Shared.NODE_SIZE
+	generate_level()
 
-func _add_floor():
-	var current_level = $Levels.get_child_count()
-	if current_level < levels:
+func generate_level():
+	var generated_levels = $Levels.get_child_count()
+	if generated_levels < levels:
 		var l = LEVEL.instantiate()
 		l.position.y = $Levels.get_child_count() * -Shared.NODE_SIZE
-		l.finished.connect(floor_finished.bind(current_level))
+		l.finished.connect(floor_finished.bind(generated_levels))
 		$Levels.add_child(l)
-		MazeGen.__generate_maze(size, _next_floor_start)
+		MazeGen.generate_maze(size, _next_level_start)
 	else:
 		emit_signal(&"built_all")
-		reveal(levels-1)
+		reveal(levels - 1)
 
-func _maze_generated(data, end):
-	var level = $Levels.get_child(-1)
+func _maze_generated(data: Array[MazeGen.MazeNode], end: Vector2i):
+	var level = $Levels.get_child(-1) as Level
 	level.assign(data, end)
-	level.floor()
+	level.build_floor()
 	
-	_next_floor_start = end
-	emit_signal(&"_built_floor")
-	_add_floor()
+	_next_level_start = end
+	emit_signal(&"built_level")
+	generate_level()
 
+# To aid performance, the game does not draw all obstacles.
+# Instead, it only draws the first two levels 
+# (so you see what you're solving AND through the translucent goal hole)
 func reveal(level: int):
 	if level >= $Levels.get_child_count():
-		return
-	$Levels.get_child(level).obstacles()
+		return # No-op when out of bounds
+	$Levels.get_child(level).build_obstacles()
 
-func _on__built_floor():
+func _on_built_level():
 	if not is_ready and ($Levels.get_child_count() == 2 or $Levels.get_child_count() == levels):
 		is_ready = true
 		emit_signal(&"ready_to_play")
@@ -114,12 +120,14 @@ func _on__built_floor():
 
 func floor_finished(level_number):
 	if level_number == current_level:
+		current_level += 1
+		reveal(2)
+		
 		# Get the level that we've just completed
 		var level = $Levels.get_child(0)
 		level.call_deferred(&"set_process_mode", Node.PROCESS_MODE_DISABLED) # Disable physics
-		current_level += 1
-		reveal(2)
-		_create_temp_wall_outline(level)
+		temp_wall_outline(level)
+		
 		await get_tree().process_frame
 		$"Box/X+Mesh".mesh.size.y -= Shared.NODE_SIZE
 		$"Box/Z+Mesh".mesh.size.y -= Shared.NODE_SIZE
@@ -128,29 +136,25 @@ func floor_finished(level_number):
 		$"Box/Z-Mesh".position.y -= Shared.NODE_SIZE/2
 		$"Box/X-Mesh".position.y -= Shared.NODE_SIZE/2
 		$"Box/Y+".position.y -= Shared.NODE_SIZE
-		
-		
 		emit_signal(&"level_finished")
+		
 		await get_tree().process_frame
-		
 		var tw = get_tree().create_tween()
-		
 		tw.tween_property(level, "position:y", level.position.y + Shared.CHAMBER_SIZE, 0.3).set_trans(Tween.TRANS_CIRC)
 		tw.parallel().tween_property(level, "basis:x", Vector3.RIGHT * 0.005, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 		tw.parallel().tween_property(level, "basis:y", Vector3.UP * 0.005, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 		tw.parallel().tween_property(level, "basis:z", Vector3.BACK * 0.005, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-		var dest = level.to_local(global_position)
-		tw.parallel().tween_property(level, "position:x", dest.x, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-		tw.parallel().tween_property(level, "position:z", dest.z, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		var center = level.to_local(global_position)
+		tw.parallel().tween_property(level, "position:x", center.x, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		tw.parallel().tween_property(level, "position:z", center.z, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 		tw.tween_callback(level.hide)
 		
-		if current_level == levels:
+		if current_level == levels: # Finished the last level
 			$Box.hide()
 			$Marble.freeze = true
 			$Marble.hide()
 			
 			await firework().tree_exited
-			
 			emit_signal(&"game_ended")
 		
 		await tw.finished
@@ -159,11 +163,10 @@ func floor_finished(level_number):
 func firework():
 	var f = FIREWORK.instantiate()
 	get_parent().add_child(f)
-	print($Marble.global_position)
 	f.global_position = $Marble.global_position
 	return f
 
-func _create_temp_wall_outline(level):
+func temp_wall_outline(level):
 	var fake_wall_x = BoxMesh.new()
 	var fake_wall_z = BoxMesh.new()
 	

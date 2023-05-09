@@ -95,10 +95,7 @@ func click(down: bool):
 func _physics_process(delta):
 	grip_tick()
 
-func _on_start_xr_xr_ended():
-	pass
-
-func _on_start_xr_xr_started():
+func xr_started():
 	recenter()
 	
 func grip_tick():

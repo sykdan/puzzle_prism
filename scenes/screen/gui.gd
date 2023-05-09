@@ -68,16 +68,16 @@ func _on_play_pressed():
 	play.emit(difficulty, params)
 	switch_to(null)
 
-func finish_game(time_took):
+func finish_game(time_taken):
 	switch_to(^"Results")
 	$Results/NewRecord.hide()
 	$Results/Continue.hide()
-	$Results/Time.text = fmt_time(time_took)
-	if SaveFile.will_highscore(time_took, difficulty):
+	$Results/Time.text = fmt_time(time_taken)
+	if SaveFile.will_highscore(time_taken, difficulty):
 		$Results/NewRecord.show()
 	else:
 		$Results/Continue.show()
-	finish_game_time_taken = time_took
+	finish_game_time_taken = time_taken
 
 func back_to_main():
 	switch_to(^"MainMenu")

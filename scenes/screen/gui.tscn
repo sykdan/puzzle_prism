@@ -296,6 +296,7 @@ alignment = 1
 max_length = 20
 
 [node name="DifficultyDetail" type="Panel" parent="."]
+visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15
@@ -306,6 +307,7 @@ grow_vertical = 2
 theme = ExtResource("5_742ch")
 
 [node name="Type" type="Label" parent="DifficultyDetail"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -690,7 +692,6 @@ grow_vertical = 0
 text = "PLAY"
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15

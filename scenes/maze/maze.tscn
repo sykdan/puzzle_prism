@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxhbngi466nlm"]
+[gd_scene load_steps=16 format=3 uid="uid://e8ylplpd2unk"]
 
 [ext_resource type="Script" path="res://scenes/maze/maze.gd" id="1_hm3yb"]
-[ext_resource type="Script" path="res://scenes/maze/Marble.gd" id="2_bxwkj"]
+[ext_resource type="Script" path="res://scenes/maze/marble.gd" id="2_okqss"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_op8j6"]
 
@@ -107,7 +107,7 @@ physics_material_override = SubResource("PhysicsMaterial_45dme")
 gravity_scale = 4.08
 can_sleep = false
 linear_damp_mode = 1
-script = ExtResource("2_bxwkj")
+script = ExtResource("2_okqss")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Marble"]
 mesh = SubResource("SphereMesh_xbqyc")
@@ -115,5 +115,3 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Marble"]
 shape = SubResource("SphereShape3D_flyxa")
-
-[connection signal="_built_floor" from="." to="." method="_on__built_floor"]
