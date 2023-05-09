@@ -296,7 +296,6 @@ alignment = 1
 max_length = 20
 
 [node name="DifficultyDetail" type="Panel" parent="."]
-visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15
@@ -320,6 +319,7 @@ text = "Těžká"
 label_settings = ExtResource("6_61q3x")
 
 [node name="Records" type="Control" parent="DifficultyDetail"]
+visible = false
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 anchors_preset = 0
@@ -540,7 +540,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_386sp")
 label_settings = SubResource("LabelSettings_7pidh")
 
 [node name="Config" type="VBoxContainer" parent="DifficultyDetail"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -558,7 +557,7 @@ alignment = 1
 
 [node name="Maze" type="Label" parent="DifficultyDetail/Config"]
 layout_mode = 2
-text = "Bludiště"
+text = "CUST_MAZE"
 
 [node name="HSep1" type="HSeparator" parent="DifficultyDetail/Config"]
 layout_mode = 2
@@ -569,7 +568,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="DifficultyDetail/Config/Height"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Výška"
+text = "CUST_MAZE_H"
 
 [node name="-" type="Button" parent="DifficultyDetail/Config/Height"]
 texture_filter = 1
@@ -601,7 +600,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="DifficultyDetail/Config/Width"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Šířka"
+text = "CUST_MAZE_W"
 
 [node name="-" type="Button" parent="DifficultyDetail/Config/Width"]
 texture_filter = 1
@@ -632,7 +631,7 @@ layout_mode = 2
 
 [node name="Cube" type="Label" parent="DifficultyDetail/Config"]
 layout_mode = 2
-text = "Kostka"
+text = "CUST_PRISM"
 
 [node name="Levels" type="HBoxContainer" parent="DifficultyDetail/Config"]
 layout_mode = 2
@@ -640,7 +639,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="DifficultyDetail/Config/Levels"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Počet úrovní"
+text = "CUST_PRISM_L"
 
 [node name="-" type="Button" parent="DifficultyDetail/Config/Levels"]
 texture_filter = 1
@@ -691,6 +690,7 @@ grow_vertical = 0
 text = "PLAY"
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15

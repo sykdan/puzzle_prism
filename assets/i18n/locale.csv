@@ -25,3 +25,8 @@ Hra bude nyní uzavřena.","A Virtual Reality device was not detected.
 Please connect your headset and try again.
 The game will now close."
 OXR_ERROR_TITLE,Nelze spustit hru,Cannot launch game
+CUST_MAZE,Bludiště,Maze
+CUST_MAZE_H,Výška,Height
+CUST_MAZE_W,Šířka,Width
+CUST_PRISM,Kostka,Prism
+CUST_PRISM_L,Počet úrovní,Level count

@@ -1,16 +1,16 @@
 [gd_scene load_steps=10 format=3 uid="uid://c2830qnod2j82"]
 
-[ext_resource type="Texture2D" uid="uid://bwyjsl1ilc6c0" path="res://assets/textures/milkyway_2020_8k.jpg" id="1_wjqdo"]
+[ext_resource type="Texture2D" uid="uid://bwyjsl1ilc6c0" path="res://assets/textures/milkyway_2020_8k.jpg" id="1_atthk"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_158s8"]
-panorama = ExtResource("1_wjqdo")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q3vay"]
+panorama = ExtResource("1_atthk")
 
-[sub_resource type="Sky" id="Sky_43n7u"]
-sky_material = SubResource("PanoramaSkyMaterial_158s8")
+[sub_resource type="Sky" id="Sky_8ektx"]
+sky_material = SubResource("PanoramaSkyMaterial_q3vay")
 
 [sub_resource type="Environment" id="Environment_fxxhb"]
 background_mode = 2
-sky = SubResource("Sky_43n7u")
+sky = SubResource("Sky_8ektx")
 sky_rotation = Vector3(0, 4.71239, 0)
 ambient_light_source = 2
 ambient_light_color = Color(0.95, 0.92, 0.65, 1)
