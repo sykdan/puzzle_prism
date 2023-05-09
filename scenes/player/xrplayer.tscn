@@ -1,9 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bswem8qs5ajyr"]
+[gd_scene load_steps=16 format=3 uid="uid://buc0ls6xkyrd0"]
 
 [ext_resource type="Script" path="res://scenes/player/xrplayer.gd" id="1_tgpk5"]
-[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="2_1fxpe"]
-[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="3_n6phu"]
-[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_21n4l"]
+[ext_resource type="PackedScene" uid="uid://0ethkne6pb3l" path="res://scenes/player/hands/left_fullglove_low.tscn" id="2_1fxpe"]
+[ext_resource type="PackedScene" uid="uid://b2yjg0kgpurrd" path="res://scenes/player/hands/right_fullglove_low.tscn" id="3_n6phu"]
+[ext_resource type="PackedScene" uid="uid://dllr7dtg6qhjm" path="res://scenes/player/xr/start_xr.tscn" id="4_21n4l"]
 [ext_resource type="Shader" path="res://scenes/player/floor.gdshader" id="5_s38ep"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmsa8"]
@@ -151,5 +151,3 @@ skeleton = NodePath("")
 [connection signal="button_released" from="LeftHand" to="." method="_on_button_pressed" binds= [&"left", false]]
 [connection signal="button_pressed" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", true]]
 [connection signal="button_released" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", false]]
-[connection signal="xr_ended" from="XR" to="." method="_on_start_xr_xr_ended"]
-[connection signal="xr_started" from="XR" to="." method="_on_start_xr_xr_started" flags=6]

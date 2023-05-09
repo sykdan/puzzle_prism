@@ -63,7 +63,7 @@ func _on_maze_level_finished():
 		await get_tree().create_timer(1).timeout
 		_do_tween_upwards = false
 
-func _on_gui_play(difficulty, params: Vector3i):
+func _on_gui_play(difficulty, params):
 	var size: Vector2i
 	var levels: int
 	
