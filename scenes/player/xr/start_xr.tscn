@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player/xr/start_xr.gd" id="1_pxu1p"]
 
-[node name="StartXR" type="Node"]
+[node name="XRManager" type="Node"]
 script = ExtResource("1_pxu1p")
 auto_initialize = false
 

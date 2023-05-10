@@ -136,7 +136,7 @@ shape = SubResource("SphereShape3D_dfwr2")
 
 [node name="Transform" type="Node3D" parent="Grip"]
 
-[node name="XR" parent="." instance=ExtResource("4_21n4l")]
+[node name="XRManager" parent="." instance=ExtResource("4_21n4l")]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, 0, 0)
@@ -151,4 +151,4 @@ skeleton = NodePath("")
 [connection signal="button_released" from="LeftHand" to="." method="_on_button_pressed" binds= [&"left", false]]
 [connection signal="button_pressed" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", true]]
 [connection signal="button_released" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", false]]
-[connection signal="xr_started" from="XR" to="." method="xr_started" flags=6]
+[connection signal="xr_started" from="XRManager" to="." method="xr_started" flags=6]

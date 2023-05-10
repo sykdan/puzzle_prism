@@ -25,6 +25,8 @@ signal xr_started
 ## signal.
 signal xr_ended
 
+signal xr_failed(reason)
+
 ## If true, the XR interface is automatically initialized
 @export var auto_initialize : bool = true
 
@@ -69,6 +71,7 @@ func initialize() -> bool:
 	# No XR interface
 	xr_interface = null
 	print("No XR interface detected")
+	emit_signal.call_deferred(&"xr_failed", &"E_NO_INTERFACE")
 	return false
 
 
@@ -90,6 +93,7 @@ func _setup_for_openxr() -> bool:
 	if not xr_interface.is_initialized():
 		print("OpenXR: Initializing interface")
 		if not xr_interface.initialize():
+			emit_signal.call_deferred(&"xr_failed", &"E_OXR_INIT_FAILED")
 			push_error("OpenXR: Failed to initialize")
 			return false
 
@@ -212,8 +216,7 @@ func _on_webxr_session_supported(session_mode: String, supported: bool) -> void:
 			# WebXR supported - show canvas on web browser to enter WebVR
 			$EnterWebXR.visible = true
 		else:
-			OS.alert("Your web browser doesn't support VR. Sorry!")
-
+			emit_signal.call_deferred(&"xr_failed", &"E_WXR_NOT_SUPPORTED")
 
 # Called when the WebXR session has started successfully
 func _on_webxr_session_started() -> void:
@@ -258,7 +261,7 @@ func _on_enter_webxr_button_pressed() -> void:
 	# Initialize the interface. This should trigger either _on_webxr_session_started
 	# or _on_webxr_session_failed
 	if not xr_interface.initialize():
-		OS.alert("Failed to initialize WebXR")
+		emit_signal.call_deferred(&"xr_failed", &"E_WXR_INIT_FAILED")
 
 
 # Find the closest value in the array to the target

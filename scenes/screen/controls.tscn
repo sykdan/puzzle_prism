@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://cd4usodff6ad3"]
+
+[ext_resource type="Texture2D" uid="uid://cdlqotd5odtyv" path="res://assets/textures/help-custom.png" id="1_odd1c"]
+[ext_resource type="Texture2D" uid="uid://bfbov862wee2v" path="res://assets/textures/cog-custom.png" id="2_p3f60"]
+[ext_resource type="Texture2D" uid="uid://d0x7dct0hk00j" path="res://assets/textures/exit-run-custom.png" id="3_5272w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_otoiv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_judfi"]
+bg_color = Color(0.741176, 0.741176, 0.741176, 0.392157)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 16
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5spw"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 16
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npt3r"]
+bg_color = Color(0, 0, 0, 0.65098)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 16
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_2dbps"]
+Button/styles/focus = SubResource("StyleBoxEmpty_otoiv")
+Button/styles/hover = SubResource("StyleBoxFlat_judfi")
+Button/styles/normal = SubResource("StyleBoxFlat_f5spw")
+Button/styles/pressed = SubResource("StyleBoxFlat_npt3r")
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 384.0
+offset_bottom = 128.0
+theme = SubResource("Theme_2dbps")
+
+[node name="Help" type="Button" parent="."]
+texture_filter = 2
+layout_mode = 0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 126.0
+offset_bottom = 123.0
+icon = ExtResource("1_odd1c")
+icon_alignment = 1
+
+[node name="Settings" type="Button" parent="."]
+texture_filter = 2
+layout_mode = 0
+offset_left = 132.0
+offset_top = 3.0
+offset_right = 252.0
+offset_bottom = 123.0
+icon = ExtResource("2_p3f60")
+icon_alignment = 1
+
+[node name="Exit" type="Button" parent="."]
+texture_filter = 2
+layout_mode = 0
+offset_left = 258.0
+offset_top = 3.0
+offset_right = 378.0
+offset_bottom = 123.0
+icon = ExtResource("3_5272w")
+icon_alignment = 1

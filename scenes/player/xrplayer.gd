@@ -1,6 +1,6 @@
 extends XROrigin3D
 
-signal init_error
+signal init_error(reason)
 signal init_done
 
 @onready var pointer = $LeftHand/Hand/Pointer
@@ -46,16 +46,14 @@ func _ready():
 	pointer_enabled = pointer_enabled
 	laser_length = laser_length
 	
-	var xr_init: bool = $XR.initialize()
-	if not xr_init:
-		init_error.emit()
+	if not $XRManager.initialize():
 		return
 	
-	if $XR.xr_interface is OpenXRInterface:
-		var interface: OpenXRInterface = $XR.xr_interface
+	if $XRManager.xr_interface is OpenXRInterface:
+		var interface: OpenXRInterface = $XRManager.xr_interface
 		interface.pose_recentered.connect(recenter)
-	if $XR.xr_interface is WebXRInterface:
-		var interface: WebXRInterface = $XR.xr_interface
+	if $XRManager.xr_interface is WebXRInterface:
+		var interface: WebXRInterface = $XRManager.xr_interface
 		interface.reference_space_reset.connect(recenter)
 	
 	init_done.emit()

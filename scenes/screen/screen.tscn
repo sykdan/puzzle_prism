@@ -16,6 +16,7 @@ resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_133xu"]
+resource_local_to_scene = true
 size = Vector3(1, 1, 0.05)
 
 [node name="Screen" type="Node3D"]

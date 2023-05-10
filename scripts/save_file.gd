@@ -4,7 +4,13 @@ extends Node
 @export var medium = []
 @export var hard = []
 
-var should_save = [&"easy", &"medium", &"hard"]
+var first_run = true
+var locale = "cs" :
+	set(new_locale):
+		TranslationServer.set_locale(new_locale)
+		locale = new_locale
+
+var should_save = [&"easy", &"medium", &"hard", &"first_run", &"locale"]
 
 func _ready():
 	load_save()
@@ -24,8 +30,9 @@ func load_save():
 	
 	for variable in should_save:
 		if not json.has(variable):
-			continue
-		set(variable, json[variable])
+			set(variable, get(variable))
+		else:
+			set(variable, json[variable])
 
 func store_save():
 	var file = FileAccess.open("user://puzzleprism_data.dat", FileAccess.WRITE)

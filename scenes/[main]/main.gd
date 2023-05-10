@@ -16,9 +16,9 @@ func player_ready():
 	tw.tween_property($XRPlayer, "fade_modulate", 0, 2)
 	await get_tree().create_timer(3).timeout
 
-func player_error():
-	OS.alert(tr("OXR_ERROR"), tr("OXR_ERROR_TITLE"))
-	get_tree().quit(1)
+func xr_error(type: StringName):
+	OS.alert(tr(type), tr(&"XR_ERROR_TITLE"))
+	get_tree().quit()
 
 func _process(_d):
 	if not is_holding_maze:
@@ -103,10 +103,8 @@ func _on_gui_play(difficulty, params):
 	current_maze.create_game()
 	
 	await current_maze.ready_to_play
-	
+	print("was ready")
 	current_maze.show()
-	$MainScreen.enabled = false
-	$MainScreen.hide()
 	$XRPlayer.pointer_enabled = false
 	
 	@warning_ignore("NARROWING_CONVERSION")
@@ -127,4 +125,17 @@ func game_ended():
 	$MainScreen/Viewport/GUI.finish_game(time_taken)
 
 func _on_gui_at_screen(screen: NodePath):
-	$Title.visible = screen == ^"MainMenu"
+	var is_main = screen == ^"MainMenu"
+	$Title.visible = is_main
+	
+	$Controls.visible = is_main
+	$Controls.enabled = is_main
+	var mode: ProcessMode 
+	if is_main:
+		mode = PROCESS_MODE_ALWAYS
+	else:
+		mode = PROCESS_MODE_DISABLED
+	$Controls.set_process_mode.call_deferred(mode)
+
+func _on_exit_pressed():
+	get_tree().quit()

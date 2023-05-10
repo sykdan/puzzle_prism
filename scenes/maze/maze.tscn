@@ -115,3 +115,5 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Marble"]
 shape = SubResource("SphereShape3D_flyxa")
+
+[connection signal="built_level" from="." to="." method="_on_built_level"]

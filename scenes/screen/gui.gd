@@ -8,7 +8,10 @@ var finish_game_time_taken = null
 
 func _ready():
 	back_to_main()
-	
+	for lang in $Settings/Config/Languages.get_children():
+		if lang is Button:
+			lang.pressed.connect(set_lang.bind(lang.name))
+
 func fmt_time(time: int):
 	return "%02d:%02d" % [time / 60, time % 60]
 
@@ -65,8 +68,17 @@ func _on_play_pressed():
 			$DifficultyDetail/Config/Width/Value.value,
 			$DifficultyDetail/Config/Levels/Value.value
 		)
-	play.emit(difficulty, params)
+	if SaveFile.first_run:
+		switch_to("Controls")
+		$Controls/Onboarding_Confirm.show()
+		$Controls/Back.hide()
+		await $Controls/Onboarding_Confirm.pressed
+		$Controls/Onboarding_Confirm.hide()
+		$Controls/Back.show()
+		SaveFile.first_run = false
+		SaveFile.store_save()
 	switch_to(null)
+	play.emit(difficulty, params)
 
 func finish_game(time_taken):
 	switch_to(^"Results")
@@ -97,3 +109,19 @@ func scoreboard_submit():
 	
 func custom_edit_button_diff(property, delta):
 	$DifficultyDetail/Config.get_node(property).get_node("Value").value += delta
+
+
+func reset_first_run():
+	SaveFile.first_run = true
+	SaveFile.store_save()
+
+
+func reset_scores():
+	SaveFile.easy = []
+	SaveFile.medium = []
+	SaveFile.hard = []
+	SaveFile.store_save()
+
+func set_lang(lang):
+	SaveFile.locale = lang
+	SaveFile.store_save()

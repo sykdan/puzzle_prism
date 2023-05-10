@@ -19,14 +19,26 @@ TIME,Čas:,Time:
 NEW_RECORD,Nový rekord! Chceš se zapsat?,New record! Want to save it?
 NEW_RECORD_YES,"Ano, chci!","Yes, please!"
 NEW_RECORD_NO,"Ne, díky","No, thanks"
-OXR_ERROR,"Nebylo detekováno zařízení pro virtuální realitu.
-Připojte prosím Váš headset a zkuste to znovu.
-Hra bude nyní uzavřena.","A Virtual Reality device was not detected.
-Please connect your headset and try again.
-The game will now close."
-OXR_ERROR_TITLE,Nelze spustit hru,Cannot launch game
 CUST_MAZE,Bludiště,Maze
 CUST_MAZE_H,Výška,Height
 CUST_MAZE_W,Šířka,Width
 CUST_PRISM,Kostka,Prism
 CUST_PRISM_L,Počet úrovní,Level count
+XR_ERROR_TITLE,Nelze spustit hru,Cannot launch game
+E_NO_INTERFACE,Nebylo nalezeno rozhraní pro Virtuální Realitu,No Virtual Reality interface found
+E_OXR_INIT_FAILED,"Nebyl detekován Headset pro virtuální realitu.
+Připojte prosím Váš headset a zkuste to znovu.
+Hra bude nyní uzavřena.",ttttttttt
+E_WXR_INIT_FAILED,"Nebyl detekován Headset pro virtuální realitu.
+Připojte prosím Váš headset a zkuste to znovu.
+Hra bude nyní uzavřena.","A Virtual Reality Headset was not detected.
+Please connect your headset and try again.
+The game will now close."
+E_WXR_NOT_SUPPORTED,"Váš prohlížeč nepodporuje WebXR, hra nemůže být spuštěna na Vašem headsetu.","Your browser does not support WebXR, the game cannot be launched on your headset."
+OPTIONS,Možnosti,Options
+LANGUAGE,Jazyk,Language
+RESET,Resetovat,Reset
+R_RECORDS,Resetovat rekordy,Reset records
+R_FIRSTRUN,Obnovit první spuštění,Restore first-run experience
+CONTROLS,Ovládání,Controls
+HOWTO,"Obklopte kostku oběma rukama, sevřete ovladač (stiskněte postranní tlačítka) a naklánějte, dokud kulička nedorazí do cíle!","Embrace the cube with both hands, grip the controller (press the side buttons) and tilt, until the marble reaches the end!"
