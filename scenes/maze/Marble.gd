@@ -4,7 +4,7 @@ signal haptic(diff)
 
 var last_vel = 0
 
-func _physics_process(delta):
+func _physics_process(_d):
 	var vel = linear_velocity.length()
 	var diff = abs(last_vel - vel)
 	

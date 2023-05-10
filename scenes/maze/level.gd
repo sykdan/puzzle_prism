@@ -114,7 +114,7 @@ func build_floor():
 	
 	add_to_group(&"has_floor")
 
-func _build_floor_fragment(extents, position):
+func _build_floor_fragment(extents, origin):
 	var mesh = BoxMesh.new()
 	mesh.size = extents
 	
@@ -123,11 +123,11 @@ func _build_floor_fragment(extents, position):
 	
 	var mi = MeshInstance3D.new()
 	mi.mesh = mesh
-	mi.position = position
+	mi.position = origin
 	
 	var cs = CollisionShape3D.new()
 	cs.shape = shape
-	cs.position = position
+	cs.position = origin
 	
 	$Floor.add_child(mi)
 	$Floor.add_child(cs)

@@ -106,7 +106,6 @@ font_size = 164
 [connection signal="area_entered" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]
 [connection signal="area_exited" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
 [connection signal="xr_failed" from="XRPlayer/XRManager" to="." method="xr_error"]
-[connection signal="xr_started" from="XRPlayer/XRManager" to="XRPlayer" method="xr_started" flags=22]
 [connection signal="at_screen" from="MainScreen/Viewport/GUI" to="." method="_on_gui_at_screen"]
 [connection signal="play" from="MainScreen/Viewport/GUI" to="." method="_on_gui_play"]
 [connection signal="pressed" from="Controls/Viewport/Controls/Help" to="MainScreen/Viewport/GUI" method="switch_to" binds= ["Controls"]]

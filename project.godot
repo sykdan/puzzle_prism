@@ -22,8 +22,8 @@ config/icon="res://assets/textures/logo.png"
 [autoload]
 
 MazeGen="*res://scripts/maze_generator.gd"
-Shared="*res://scripts/metadata.gd"
-SaveFile="*res://scripts/save_file.gd"
+Shared="*res://scripts/shared.gd"
+SaveFile="*res://scripts/savefile.gd"
 
 [display]
 

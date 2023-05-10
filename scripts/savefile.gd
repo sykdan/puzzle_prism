@@ -41,9 +41,9 @@ func store_save():
 		data[variable] = get(variable)
 	file.store_string(JSON.stringify(data))
 
-func push_score(name, time, to_where: StringName):
+func push_score(player, time, to_where: StringName):
 	var dest: Array = get(to_where)
-	dest.append({"name": name, "time": time})
+	dest.append({"name": player, "time": time})
 	dest.sort_custom(func(a, b): return a.time < b.time)
 	while len(dest) > 5:
 		dest.pop_back()

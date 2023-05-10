@@ -58,7 +58,7 @@ func _ready():
 	
 	init_done.emit()
 
-func _process(delta):
+func _process(_d):
 	if pointer_enabled:
 		if not pointer.is_colliding() or not hover():
 			laser_length = 0.2
@@ -90,7 +90,7 @@ func click(down: bool):
 	e.pressed = down
 	screen.dispatch_event(e)
 
-func _physics_process(delta):
+func _physics_process(_d):
 	grip_tick()
 
 func xr_started():
@@ -134,7 +134,7 @@ func translate_gripped_object(by: Vector3):
 func recenter():
 	XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
-func _on_button_pressed(name: StringName, hand: StringName, pressed: bool):
+func _on_button_pressed(label: StringName, hand: StringName, pressed: bool):
 	var hand_node: XRController3D
 	match hand:
 		&"left":
@@ -144,7 +144,7 @@ func _on_button_pressed(name: StringName, hand: StringName, pressed: bool):
 		_:
 			return
 	
-	if name == &"trigger_click":
+	if label == &"trigger_click":
 		if not hand_node.is_ancestor_of(pointer) and pressed:
 			pointer.reparent(hand_node.get_node("Hand"), false)
 			pointer.position.x *= -1

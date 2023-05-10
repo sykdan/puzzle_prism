@@ -79,8 +79,8 @@ class PoseOverride:
 
 
 # Add support for is_xr_class on XRTools classes
-func is_xr_class(name : String) -> bool:
-	return name == "XRToolsHand"
+func is_xr_class(name_ : String) -> bool:
+	return name_ == "XRToolsHand"
 
 
 ## Called when the node enters the scene tree for the first time.
@@ -89,9 +89,9 @@ func _ready() -> void:
 	_transform = transform
 
 	# Find the relevant hand nodes
-	_hand_mesh = _find_child(self, "MeshInstance3D")
-	_animation_player = _find_child(self, "AnimationPlayer")
-	_animation_tree = _find_child(self, "AnimationTree")
+	_hand_mesh = XRToolsHand._find_child(self, "MeshInstance3D")
+	_animation_player = XRToolsHand._find_child(self, "AnimationPlayer")
+	_animation_tree = XRToolsHand._find_child(self, "AnimationTree")
 
 	# Apply all updates
 	_update_hand_blend_tree()
@@ -133,15 +133,15 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
 
 	# Check hand for mesh instance
-	if not _find_child(self, "MeshInstance3D"):
+	if not XRToolsHand._find_child(self, "MeshInstance3D"):
 		warnings.append("Hand does not have a MeshInstance3D")
 
 	# Check hand for animation player
-	if not _find_child(self, "AnimationPlayer"):
+	if not XRToolsHand._find_child(self, "AnimationPlayer"):
 		warnings.append("Hand does not have a AnimationPlayer")
 
 	# Check hand for animation tree
-	var tree : AnimationTree = _find_child(self, "AnimationTree")
+	var tree : AnimationTree = XRToolsHand._find_child(self, "AnimationTree")
 	if not tree:
 		warnings.append("Hand does not have a AnimationTree")
 	elif not tree.tree_root:
