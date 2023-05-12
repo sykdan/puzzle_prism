@@ -7,9 +7,9 @@ script = ExtResource("1_pxu1p")
 auto_initialize = false
 
 [node name="EnterWebXR" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="EnterVRButton" type="Button" parent="EnterWebXR"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
