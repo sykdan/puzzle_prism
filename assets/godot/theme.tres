@@ -1,12 +1,30 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://gntxn5uxxtun"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://gntxn5uxxtun"]
 
+[ext_resource type="FontFile" uid="uid://cnv0kma3c86bt" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="1_ipywh"]
 [ext_resource type="FontFile" uid="uid://gl2c4uwueqgw" path="res://assets/fonts/Jost-SemiBold.ttf" id="1_lfvwn"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooku1"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_f7fee"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jufpe"]
+color = Color(0, 0, 0, 0)
+thickness = 32
+vertical = true
 
 [resource]
 default_font = ExtResource("1_lfvwn")
 Button/font_sizes/font_size = 32
 Label/font_sizes/font_size = 48
 LineEdit/font_sizes/font_size = 48
+RichTextLabel/font_sizes/bold_font_size = 32
+RichTextLabel/font_sizes/normal_font_size = 24
+RichTextLabel/fonts/bold_font = ExtResource("1_ipywh")
+RichTextLabel/fonts/normal_font = ExtResource("1_ipywh")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_ooku1")
 SpinBox/icons/updown = SubResource("AtlasTexture_f7fee")
+VScrollBar/styles/scroll = SubResource("StyleBoxLine_jufpe")

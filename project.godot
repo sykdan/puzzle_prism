@@ -25,10 +25,6 @@ MazeGen="*res://scripts/maze_generator.gd"
 Shared="*res://scripts/shared.gd"
 SaveFile="*res://scripts/savefile.gd"
 
-[display]
-
-window/subwindows/embed_subwindows=false
-
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/i18n/locale.cs.translation", "res://assets/i18n/locale.en.translation")
