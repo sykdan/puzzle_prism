@@ -49,11 +49,12 @@ func _ready():
 	if not $XRManager.initialize():
 		return
 	
-	if $XRManager.xr_interface is OpenXRInterface:
-		var interface: OpenXRInterface = $XRManager.xr_interface
+	if $XRManager.xr_interface_name == &"OpenXR":
+		var interface = $XRManager.xr_interface
 		interface.pose_recentered.connect(recenter)
-	if $XRManager.xr_interface is WebXRInterface:
-		var interface: WebXRInterface = $XRManager.xr_interface
+	
+	if $XRManager.xr_interface_name == &"WebXR":
+		var interface = $XRManager.xr_interface
 		interface.reference_space_reset.connect(recenter)
 	
 	init_done.emit()

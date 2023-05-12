@@ -1012,7 +1012,6 @@ grow_vertical = 0
 text = "Open source licenses & Asset sources..."
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15

@@ -39,9 +39,9 @@ signal xr_failed(reason)
 ## If non-zero, specifies the target refresh rate
 @export var target_refresh_rate : float = 0
 
-
 ## Current XR interface
 var xr_interface : XRInterface
+var xr_interface_name: StringName
 
 ## XR active flag
 var xr_active : bool = false
@@ -61,11 +61,13 @@ func initialize() -> bool:
 	# Check for OpenXR interface
 	xr_interface = XRServer.find_interface('OpenXR')
 	if xr_interface:
+		xr_interface_name = &"OpenXR"
 		return _setup_for_openxr()
 
 	# Check for WebXR interface
 	xr_interface = XRServer.find_interface('WebXR')
 	if xr_interface:
+		xr_interface_name = &"WebXR"
 		return _setup_for_webxr()
 
 	# No XR interface
