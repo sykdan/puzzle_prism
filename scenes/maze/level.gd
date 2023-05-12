@@ -1,11 +1,8 @@
 extends Node3D
 class_name Level
 
-signal finished
-
 @onready var maze = get_node("../..")
 var CHAMBER = preload("./chamber.tscn")
-var GOAL = preload("./goal.tscn")
 
 var maze_data: Array[MazeGen.MazeNode] = []
 var maze_goal: Vector2i
@@ -53,14 +50,6 @@ func build_obstacles():
 		
 		add_child(c)
 	
-	var goal: Area3D = GOAL.instantiate()
-	goal.position = Vector3(
-		maze_goal.x * Shared.NODE_SIZE,
-		Shared.NODE_SIZE/-2.0,
-		maze_goal.y * Shared.NODE_SIZE
-	)
-	add_child(goal)
-	goal.body_entered.connect(_goal_collision)
 	add_to_group(&"has_obstacles")
 
 func build_floor():

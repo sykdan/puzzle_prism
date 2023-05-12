@@ -42,8 +42,12 @@ func _physics_process(delta):
 
 func _on_marble_haptic(diff):
 	var vibrate = diff / 15
-	$XRPlayer/LeftHand.trigger_haptic_pulse("haptic", 1, vibrate, 0.05, 0)
-	$XRPlayer/RightHand.trigger_haptic_pulse("haptic", 1, vibrate, 0.05, 0)
+	
+	var l = $XRPlayer/LeftHand.global_position.distance_to(current_maze.marble.global_position)
+	var r = $XRPlayer/RightHand.global_position.distance_to(current_maze.marble.global_position)
+	
+	$XRPlayer/LeftHand.trigger_haptic_pulse("haptic", 1, vibrate * (max(r / l, 1)**2), 0.05, 0)
+	$XRPlayer/RightHand.trigger_haptic_pulse("haptic", 1, vibrate * (max(l / r, 1)**2), 0.05, 0)
 
 func _hand_can_grip(area: Area3D, hand: StringName, enter: bool):
 	var hand_i: int
@@ -55,7 +59,7 @@ func _hand_can_grip(area: Area3D, hand: StringName, enter: bool):
 	else:
 		return
 	
-	if not area.get_parent() == current_maze:
+	if not area.is_in_group(&"maze"):
 		return
 	
 	hands_can_hold[hand_i] = enter
@@ -103,7 +107,6 @@ func _on_gui_play(difficulty, params):
 	current_maze.create_game()
 	
 	await current_maze.ready_to_play
-	print("was ready")
 	current_maze.show()
 	$XRPlayer.pointer_enabled = false
 	

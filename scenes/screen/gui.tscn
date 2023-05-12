@@ -694,6 +694,7 @@ grow_vertical = 0
 text = "PLAY"
 
 [node name="Controls" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -739,7 +740,6 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Onboarding_Confirm" type="Button" parent="Controls"]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -853,7 +853,6 @@ size_flags_horizontal = 3
 text = "R_FIRSTRUN"
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15
