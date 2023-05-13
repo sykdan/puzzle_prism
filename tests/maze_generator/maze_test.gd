@@ -5,7 +5,7 @@ var size
 func _ready():
 	MazeGen.generated.connect(generated)
 
-func generated(mz):
+func generated(mz, end):
 	for c in $Maze.get_children(): c.queue_free()
 	for node in mz:
 		var n = $MazeNode.duplicate()
@@ -19,4 +19,4 @@ func generated(mz):
 
 func _on_go_pressed():
 	var size = Vector2i($Control/X.value, $Control/Y.value)
-	MazeGen._generate_maze(size, $Control/Start.value)
+	MazeGen._generate_maze(size, Vector2(size.x * randf(), size.y * randf()).floor())

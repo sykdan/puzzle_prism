@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d372r333xd1jr"]
+[gd_scene load_steps=35 format=3 uid="uid://d372r333xd1jr"]
 
 [ext_resource type="Script" path="res://scenes/screen/gui.gd" id="1_loh61"]
 [ext_resource type="Texture2D" uid="uid://dmuvg10fdrgwb" path="res://assets/textures/buttons.png" id="1_xyax6"]
@@ -58,6 +58,9 @@ font_size = 28
 outline_color = Color(0, 0, 0, 0)
 shadow_size = 0
 shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jgkje"]
+font_size = 32
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6svja"]
 atlas = ExtResource("1_xyax6")
@@ -764,7 +767,6 @@ text = "BACK"
 icon = ExtResource("7_628lv")
 
 [node name="Settings" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -852,13 +854,45 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "R_FIRSTRUN"
 
-[node name="LicensesTest" type="Window" parent="Settings"]
-title = "Licenses"
-position = Vector2i(60, 52)
-size = Vector2i(1000, 600)
+[node name="Licenses" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -598.0
+offset_top = -62.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Open source licenses & Asset sources..."
+
+[node name="LicensesTest" type="ColorRect" parent="Settings"]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Close" type="Button" parent="Settings/LicensesTest"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -161.0
+offset_top = 16.0
+offset_right = -48.0
+offset_bottom = 71.0
+grow_horizontal = 0
+text = "Close"
 
 [node name="Sources" type="RichTextLabel" parent="Settings/LicensesTest"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -996,22 +1030,21 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 "
 
-[node name="Licenses" type="Button" parent="Settings"]
+[node name="FPS" type="Label" parent="Settings"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -598.0
-offset_top = -62.0
-offset_right = -7.0
-offset_bottom = -7.0
-grow_horizontal = 0
+offset_left = 7.0
+offset_top = -73.0
+offset_right = 169.0
 grow_vertical = 0
-text = "Open source licenses & Asset sources..."
+text = "1 FPS"
+label_settings = SubResource("LabelSettings_jgkje")
+vertical_alignment = 2
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(1125, 675)
 layout_mode = 1
 anchors_preset = 15
@@ -1202,6 +1235,7 @@ autowrap_mode = 2
 [connection signal="pressed" from="Settings/Config/ResetOptions/Scores" to="." method="reset_scores"]
 [connection signal="pressed" from="Settings/Config/ResetOptions/FirstRun" to="." method="reset_first_run"]
 [connection signal="pressed" from="Settings/Licenses" to="Settings/LicensesTest" method="show"]
+[connection signal="pressed" from="Settings/LicensesTest/Close" to="Settings/LicensesTest" method="hide"]
 [connection signal="mouse_entered" from="MainMenu/Easy" to="hover_sound" method="play" flags=18]
 [connection signal="pressed" from="MainMenu/Easy" to="." method="difficulty_selected" binds= [&"easy"]]
 [connection signal="mouse_entered" from="MainMenu/Medium" to="hover_sound" method="play" flags=18]

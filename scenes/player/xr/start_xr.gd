@@ -196,7 +196,7 @@ func _setup_for_webxr() -> bool:
 
 	# WebXR currently has no means of querying the refresh rate, so use
 	# something sufficiently high
-	Engine.physics_ticks_per_second = 144
+	Engine.physics_ticks_per_second = 90
 
 	# If the viewport is already in XR mode then we are done.
 	if get_viewport().use_xr:

@@ -12,6 +12,10 @@ func _ready():
 		if lang is Button:
 			lang.pressed.connect(set_lang.bind(lang.name))
 
+func _process(_d):
+	if $Settings.visible:
+		$Settings/FPS.text = str(Engine.get_frames_per_second()) + " fps"
+
 func fmt_time(time: int):
 	@warning_ignore("integer_division")
 	return "%02d:%02d" % [time / 60, time % 60]

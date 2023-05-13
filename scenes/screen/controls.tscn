@@ -65,8 +65,19 @@ offset_left = 6.0
 offset_top = 3.0
 offset_right = 126.0
 offset_bottom = 123.0
-icon = ExtResource("1_odd1c")
 icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Help"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_odd1c")
+expand_mode = 1
+stretch_mode = 3
 
 [node name="Settings" type="Button" parent="."]
 texture_filter = 2
@@ -75,8 +86,19 @@ offset_left = 132.0
 offset_top = 3.0
 offset_right = 252.0
 offset_bottom = 123.0
-icon = ExtResource("2_p3f60")
 icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_p3f60")
+expand_mode = 1
+stretch_mode = 3
 
 [node name="Exit" type="Button" parent="."]
 texture_filter = 2
@@ -85,5 +107,16 @@ offset_left = 258.0
 offset_top = 3.0
 offset_right = 378.0
 offset_bottom = 123.0
-icon = ExtResource("3_5272w")
 icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Exit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_5272w")
+expand_mode = 1
+stretch_mode = 3
