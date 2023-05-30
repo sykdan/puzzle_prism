@@ -1,0 +1,133 @@
+% Balíčky pro češtinu
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+
+% Obvyklé balíčky na obrázky, tabulky a matematiku
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx, tabularx, xcolor}
+\graphicspath{{images/}}									% Přidání složky images do složek, kde se hledají obrázky
+
+\usepackage[hidelinks]{hyperref}							% Počítačová verze umí odkazy
+\usepackage{lipsum}											% Lorem ipsum text
+\usepackage{listings}										% Balíček pro zvýraznění a formátování kódu
+\usepackage{lstautogobble}									% Doplňující balíček k listings
+
+\usepackage[automake,toc]{glossaries}						% Balíček pro zkratky
+\makeglossaries												% Aktivování zkratek
+\loadglsentries{Zkratky}									% Načtení zkratek
+
+\usepackage[style=authoryear, backend=bibtex, maxcitenames=2]{biblatex}
+															% Balíček pro citace
+\addbibresource{Bibliografie.bib}							% Import zdrojů
+
+\usepackage[a4paper,%										% Formát A4
+            left=35mm,%										% Levý okraj 35 mm
+            right=10mm,%									% Pravý okraj 10 mm
+            top=25mm,%										% Horní okraj 25 mm
+            bottom=15mm,%									% Dolní okraj 15 mm
+            includefoot,%									% Posunutí zápatí nad okraj, děkuji https://tex.stackexchange.com/a/49856
+            heightrounded%									% Vylepšení sázení stránky, děkuji https://tex.stackexchange.com/a/49856
+            ]{geometry}				
+\renewcommand{\baselinestretch}{1.5}						% Řádkování 1.5
+\setlength{\parindent}{5mm}									% Odsazení odstavcce 0.5 cm
+
+\usepackage{sectsty}										% Balíček pro změnu velikosti nadpisů
+\allsectionsfont{\raggedright}								% Zakázání dělení slov v nadpisech
+\chapternumberfont{\LARGE}									% Číslo kapitoly velikostí 20 pt 
+\chaptertitlefont{\raggedright\LARGE}						% Nadpis kapitoly velikostí 20 pt
+\sectionfont{\raggedright\Large}							% Nadpis sekce velikostí 17 pt
+\subsectionfont{\raggedright\large}							% Nadpis subsekce velikostí 14 pt
+\let\oldfootnotesize\footnotesize							% Uloží velikost písma 10 pt
+\let\oldscriptsize\scriptsize								% Uloží velikost písma 8 pt
+\renewcommand{\footnotesize}{\oldscriptsize}				% Nastaví poznámky pod čarou na 8 pt
+\renewcommand{\scriptsize}{\oldfootnotesize}				% Nastaví poznámky u obrázků na 10 pt
+\usepackage[font=scriptsize]{caption}
+
+\usepackage{titlesec}										% Balíček pro změnu velikosti nadpisů
+\titleformat{\chapter}{\normalfont\bfseries\LARGE}{\thechapter}{1em}{}
+															% Odstranění „Kapitola“ z názvu kapitoly, děkuji Ambrymu
+
+\newcommand{\vedouci}[1]{\renewcommand{\vedouci}{#1}}		% Definování příkazu \vedouci tak, aby se do něj uložil název vedoucího
+\newcommand{\place}[1]{\renewcommand{\place}{#1}}			% Definování příkazu \place tak, aby se do něj uložilo místo
+\newcommand{\skolnirok}[1]{\renewcommand{\skolnirok}{#1}}	% Definování příkazu \skolnirok tak, aby se do něj uložil školní rok
+\newcommand{\logo}[1]{\renewcommand{\logo}{#1}}				% Definování příkazu \logo tak, aby se do něj uložilo logo
+
+\newcommand{\mytitlepage}{									% Definování vlastní titulní strany
+
+	\begin{titlepage}										% Odebrání čísla strany atd
+
+		\bfseries											% Zapnutí tučného písma
+		
+			\logo											% Logo
+			
+			\vspace{1cm}									% Mezera s pevnou šířkou
+			
+			{\Huge MATURITNÍ PRÁCE}
+
+			\vspace{4cm}
+			
+			{\Huge\@title\par}								% Autor
+			{\Huge\@author\par}								% Název
+			{\Large vedoucí práce: \vedouci}				% Vedoucí práce
+			
+			\vfill											% Mezera roztahující se jak nejvíc může
+			
+			\large \place\ \@date\hfill\skolnirok			% Místo, datum a školní rok
+ 
+	\end{titlepage}
+	
+	\addtocounter{page}{1}									% Posunutí countru stránek
+}
+
+\newcommand{\prohlaseni}[1]{								% Definování prohlášení
+	\chapter*{Prohlášení}
+		\vfill												% Mezera roztahující se jak nejvíc může
+		#1													% Parametr (text prohlášení)
+		\vfill												% Mezera roztahující se jak nejvíc může
+		\place\ dne	\leaders\hbox{.\,}\hskip 10em\ podpis \dotfill		% Podpis
+		\begin{flushright}\@author\end{flushright}
+		\vfill												% Mezera roztahující se jak nejvíc může
+	\newpage												% Nová strana
+}
+
+\newcommand{\abstrakt}[2]{									% Definování abstraktu
+	\chapter*{Abstrakt}
+		#1													% Parametr (text abstraktu)
+		\section*{Klíčová slova}
+		#2													% 2. parametr (klíčová slova)
+	\newpage												% Nová strana
+}
+
+\newcommand{\podekovani}[1]{								% Definování poděkování
+	\chapter*{Poděkování}
+		#1													% Parametr (text poděkování)
+	\newpage												% Nová strana
+}
+
+\newcommand{\pitem}[1]{\addcontentsline{toc}{section}{#1} \item #1}
+\newcommand{\eitem}[1]{\addtocontents{toc}{\ #1 \leaders\hbox{.\ \,}\hfill CD\par} \item #1}
+\newenvironment{prilohy}{									% Definování příloh
+	\chapter*{Přílohy}
+	\let\olditem\item
+	\addcontentsline{toc}{chapter}{Přílohy}
+	\begin{enumerate}										% Začátek číslovaného seznamu
+}{
+	\end{enumerate}											% Konec číslovaného seznamu
+}
+
+\newlength{\height}
+\newcommand{\odkaz}[1]{\href{#1}{#1}}
+\newcommand{\icon}[1]{\settoheight{\height}{A}\includegraphics[height=\height]{#1}}
+\newcommand{\bigicon}[1]{\settoheight{\height}{A}\includegraphics[height=2\height]{#1}}
+\newcommand{\underlineicon}[1]{\settoheight{\height}{A}\raisebox{-0.25\height}{\includegraphics[height=1.25\height]{#1}}}
+\newcommand{\bigunderlineicon}[1]{\settoheight{\height}{A}\raisebox{-0.12\height}{\includegraphics[height=1.49\height]{#1}}}
+
+\definecolor{codegray}{gray}{0.9}
+\newcommand{\code}[1]{\colorbox{codegray}{\texttt{#1}}}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{codegray},
+	numbers=left, 
+	tabsize=2
+}
+\lstset{style=mystyle}
