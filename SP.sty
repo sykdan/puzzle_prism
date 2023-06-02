@@ -17,17 +17,17 @@
 \loadglsentries{Zkratky}									% Načtení zkratek
 
 \usepackage[style=authoryear, backend=bibtex, maxcitenames=2]{biblatex}
-															% Balíček pro citace
+% Balíček pro citace
 \addbibresource{Bibliografie.bib}							% Import zdrojů
 
 \usepackage[a4paper,%										% Formát A4
-            left=35mm,%										% Levý okraj 35 mm
-            right=10mm,%									% Pravý okraj 10 mm
-            top=25mm,%										% Horní okraj 25 mm
-            bottom=15mm,%									% Dolní okraj 15 mm
-            includefoot,%									% Posunutí zápatí nad okraj, děkuji https://tex.stackexchange.com/a/49856
-            heightrounded%									% Vylepšení sázení stránky, děkuji https://tex.stackexchange.com/a/49856
-            ]{geometry}				
+	left=35mm,%										% Levý okraj 35 mm
+	right=10mm,%									% Pravý okraj 10 mm
+	top=25mm,%										% Horní okraj 25 mm
+	bottom=15mm,%									% Dolní okraj 15 mm
+	includefoot,%									% Posunutí zápatí nad okraj, děkuji https://tex.stackexchange.com/a/49856
+	heightrounded%									% Vylepšení sázení stránky, děkuji https://tex.stackexchange.com/a/49856
+]{geometry}
 \renewcommand{\baselinestretch}{1.5}						% Řádkování 1.5
 \setlength{\parindent}{5mm}									% Odsazení odstavcce 0.5 cm
 
@@ -45,7 +45,7 @@
 
 \usepackage{titlesec}										% Balíček pro změnu velikosti nadpisů
 \titleformat{\chapter}{\normalfont\bfseries\LARGE}{\thechapter}{1em}{}
-															% Odstranění „Kapitola“ z názvu kapitoly, děkuji Ambrymu
+% Odstranění „Kapitola“ z názvu kapitoly, děkuji Ambrymu
 
 \newcommand{\vedouci}[1]{\renewcommand{\vedouci}{#1}}		% Definování příkazu \vedouci tak, aby se do něj uložil název vedoucího
 \newcommand{\place}[1]{\renewcommand{\place}{#1}}			% Definování příkazu \place tak, aby se do něj uložilo místo
@@ -57,50 +57,50 @@
 	\begin{titlepage}										% Odebrání čísla strany atd
 
 		\bfseries											% Zapnutí tučného písma
-		
-			\logo											% Logo
-			
-			\vspace{1cm}									% Mezera s pevnou šířkou
-			
-			{\Huge MATURITNÍ PRÁCE}
 
-			\vspace{4cm}
-			
-			{\Huge\@title\par}								% Autor
-			{\Huge\@author\par}								% Název
-			{\Large vedoucí práce: \vedouci}				% Vedoucí práce
-			
-			\vfill											% Mezera roztahující se jak nejvíc může
-			
-			\large \place\ \@date\hfill\skolnirok			% Místo, datum a školní rok
- 
+		\logo											% Logo
+
+		\vspace{1cm}									% Mezera s pevnou šířkou
+
+		{\Huge MATURITNÍ PRÁCE}
+
+		\vspace{4cm}
+
+		{\Huge\@title\par}								% Autor
+		{\Huge\@author\par}								% Název
+		{\Large vedoucí práce: \vedouci}				% Vedoucí práce
+
+		\vfill											% Mezera roztahující se jak nejvíc může
+
+		\large \place\ \@date\hfill\skolnirok			% Místo, datum a školní rok
+
 	\end{titlepage}
-	
+
 	\addtocounter{page}{1}									% Posunutí countru stránek
 }
 
 \newcommand{\prohlaseni}[1]{								% Definování prohlášení
 	\chapter*{Prohlášení}
-		\vfill												% Mezera roztahující se jak nejvíc může
-		#1													% Parametr (text prohlášení)
-		\vfill												% Mezera roztahující se jak nejvíc může
-		\place\ dne	\leaders\hbox{.\,}\hskip 10em\ podpis \dotfill		% Podpis
-		\begin{flushright}\@author\end{flushright}
-		\vfill												% Mezera roztahující se jak nejvíc může
+	\vfill												% Mezera roztahující se jak nejvíc může
+	#1													% Parametr (text prohlášení)
+	\vfill												% Mezera roztahující se jak nejvíc může
+	\place\ dne	\leaders\hbox{.\,}\hskip 10em\ podpis \dotfill		% Podpis
+	\begin{flushright}\@author\end{flushright}
+	\vfill												% Mezera roztahující se jak nejvíc může
 	\newpage												% Nová strana
 }
 
 \newcommand{\abstrakt}[2]{									% Definování abstraktu
 	\chapter*{Abstrakt}
-		#1													% Parametr (text abstraktu)
-		\section*{Klíčová slova}
-		#2													% 2. parametr (klíčová slova)
+	#1													% Parametr (text abstraktu)
+	\section*{Klíčová slova}
+	#2													% 2. parametr (klíčová slova)
 	\newpage												% Nová strana
 }
 
 \newcommand{\podekovani}[1]{								% Definování poděkování
 	\chapter*{Poděkování}
-		#1													% Parametr (text poděkování)
+	#1													% Parametr (text poděkování)
 	\newpage												% Nová strana
 }
 
@@ -111,7 +111,7 @@
 	\let\olditem\item
 	\addcontentsline{toc}{chapter}{Přílohy}
 	\begin{enumerate}										% Začátek číslovaného seznamu
-}{
+		}{
 	\end{enumerate}											% Konec číslovaného seznamu
 }
 
@@ -127,7 +127,7 @@
 
 \lstdefinestyle{mystyle}{
 	backgroundcolor=\color{codegray},
-	numbers=left, 
+	numbers=left,
 	tabsize=2
 }
 \lstset{style=mystyle}
