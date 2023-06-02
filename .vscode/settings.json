@@ -7,7 +7,7 @@
             "args": [
                 "-xelatex",
                 "-outdir=out",
-                "VzorSP.tex"
+                "SykdanMaturitniPrace.tex"
             ]
         }
     ],

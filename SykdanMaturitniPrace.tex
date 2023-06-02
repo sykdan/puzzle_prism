@@ -1,34 +1,36 @@
-\documentclass[12pt]{report}			% Začátek dokumentu
-\usepackage{SP}							% Import stylu
+\documentclass[12pt]{report}			
+\usepackage{MP}							
 
-\author{Jonáš Havelka}
-\title{Neuronová síť}
-\date{19. února 2020}
+\author{Daniel Sýkora}
+\title{Rozšířená realita (XR)}
+\date{14. února 2024}
 \vedouci{Dr.rer.nat. Michal Kočer}
 \place{V Českých Budějovicích}
-\skolnirok{2019/2020}
-\logo{\includegraphics[scale=0.75]{logo_gymji.jpg}}
+\skolnirok{2023/2020}
+\logo{
+	\includegraphics[scale=0.75]{logo.png}
+}
 
 \begin{document}
 
-\mytitlepage						% Vygenerování titulní strany
+\mytitlepage
 
 \prohlaseni{
 	Prohlašuji, že jsem tuto práci vypracoval samostatně s vyznačením všech použitých pramenů.
 }
 
 \abstrakt{
-	\lipsum[1]						% Abstrakt
+	\lipsum[1]
 }{
-	\lipsum[1]						% Klíčová slova
+	\lipsum[1]
 }
 
 \podekovani{
-	\lipsum[2]						% Poděkování
+	\lipsum[2]
 }
 
 \tableofcontents
-\newpage			% Obsah
+\newpage
 
 
 
@@ -43,11 +45,12 @@
 \chapter{Asymptotická notace}
 
 \section{O-notace}
-Odkaz v závorkách: \parencite[see][page 900]{einstein}\\
+Odkaz v závorekách: \cite[see][page 900]{einstein}\\
 Odkaz: \cite{knuthwebsite}\\
 A odkaz pod čarou: \footcite[see][s. 42]{latexcompanion}\\
 Dobrý den, ahoj, \gls{atd}\\
 Praha, \gls{tj} hlavní město ČR
+$\xi = 3.14 = \pi$
 
 \section{Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda }
 \begin{figure}
@@ -81,11 +84,11 @@ Tabulka \ref{tab:test2} ukazuje hádejte, co.
 \lipsum[1]
 
 \nocite{*}
-\printbibliography					% Vytvoří seznam literatury
+\printbibliography
 \addcontentsline{toc}{chapter}{Bibliografie}
-\printglossary[title={Zkratky}]		% Vytvoří seznam zkratek
-\listoffigures						% Vytvoří seznam obrázků
-\listoftables						% Vytvoří seznam tabulek
+\printglossary[title={Zkratky}]
+\listoffigures
+\listoftables
 
 \begin{prilohy}
 	\pitem{Fotky z pokusů}
