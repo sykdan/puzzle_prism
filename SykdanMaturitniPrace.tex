@@ -1,79 +1,49 @@
-\documentclass[12pt]{report}			
-\usepackage{MP}				
+\documentclass[12pt]{report}
+\usepackage{Styl}			
 
+% Úvvodní strana
 \author{Daniel Sýkora}
 \title{Rozšířená realita}
 \date{14. února 2024}
 \vedouci{Dr.rer.nat. Michal Kočer}
-\place{V Českých Budějovicích}
+\place{v Českých Budějovicích}
 \skolnirok{2023/2024}
-\logo{
-	\includegraphics[]{GJ8_logotyp.pdf}
-}
+\logo{\includegraphics{GJ8_logotyp.pdf}}
 
 \begin{document}
 
 \mytitlepage
-
-\prohlaseni{
+\prohlaseni
+{
 	Prohlašuji, že jsem tuto práci vypracoval samostatně s vyznačením všech použitých pramenů.
 }
-
-\abstrakt{
-	\lipsum[1]
-}{
+\abstrakt
+{ % Abstrakt
 	\lipsum[1]
 }
-
-\podekovani{
+{ % Klíčová slova
+	\lipsum[1]
+}
+\podekovani
+{
 	\lipsum[2]
 }
-
 \tableofcontents
 \newpage
-
-
 
 
 \chapter*{Úvod}
 
 \lipsum[1]
 
+Nechť $x \in \mathbb{R}$ je kladné. Pak platí:
+\begin{equation}
+	x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+	\label{quad_eq}
+\end{equation}
 
-\part{Teoretická část}
-
-\chapter{Asymptotická notace}
-
-\section{O-notace}
-Odkaz v závorekách: \cite[see][page 900]{einstein}\\
-Odkaz: \cite{knuthwebsite}\\
-A odkaz pod čarou: \footcite[see][s. 42]{latexcompanion}\\
-Dobrý den, ahoj, \gls{xr}\\
-$\xi = 3.14 = \pi$
-
-\section{Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda Abeceda }
-\begin{figure}
-	\includegraphics[width=\linewidth]{test.jpg}
-	\caption{Testovací}
-	\label{fig:test}
-\end{figure}
-\begin{table}
-	\caption{Testovací}
-	\label{tab:test2}
-	\begin{tabular}{ccccc}
-		1 & 1 & 1  & 1  & 1  \\
-		1 & 2 & 3  & 4  & 5  \\
-		1 & 3 & 6  & 10 & 15 \\
-		1 & 4 & 10 & 30 & 45
-	\end{tabular}
-\end{table}
-
-Obrázek \ref{fig:test} ukazuje Shangai z Pixabay.\\
-Tabulka \ref{tab:test2} ukazuje hádejte, co.
-
-\part{Praktická část}
-
-
+\include{doc/1_TeoretickaCast.tex}
+\include{doc/2_PraktickaCast.tex}
 
 \appendix
 \addcontentsline{toc}{part}{Apendix}
@@ -86,16 +56,10 @@ Tabulka \ref{tab:test2} ukazuje hádejte, co.
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliografie}
 
-\setglossarystyle{list} 
+\setglossarystyle{list}
 \printglossary[title={Zkratky}]
 
 \listoffigures
 \listoftables
 
-\begin{prilohy}
-	\pitem{Fotky z pokusů}
-	\eitem{Vlastní program}
-	\eitem{Dokumentace}
-	\eitem{Testovací data}
-\end{prilohy}
 \end{document}
