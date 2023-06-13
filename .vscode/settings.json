@@ -7,8 +7,9 @@
             "args": [
                 "-xelatex",
                 "-outdir=out",
+                "-interaction=nonstopmode",
                 "SykdanMaturitniPrace.tex"
-            ]
+            ],
         }
     ],
     "latex-workshop.latex.recipes": [
