@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvroouobw2lcv"]
+[gd_scene load_steps=18 format=3 uid="uid://bvroouobw2lcv"]
 
 [ext_resource type="Script" path="res://scenes/[main]/main.gd" id="1_8lrat"]
 [ext_resource type="PackedScene" uid="uid://buc0ls6xkyrd0" path="res://scenes/player/xrplayer.tscn" id="2_j0igu"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://d372r333xd1jr" path="res://scenes/screen/gui.tscn" id="5_6qy2y"]
 [ext_resource type="FontFile" uid="uid://cu65u1ihfhxkg" path="res://assets/fonts/Jost-Thin.ttf" id="6_4phfg"]
 [ext_resource type="PackedScene" uid="uid://cd4usodff6ad3" path="res://scenes/screen/controls.tscn" id="6_dk24k"]
+[ext_resource type="AudioStream" uid="uid://bv4s7yyt5r145" path="res://assets/audio/8bitbossa.ogg" id="8_sofvo"]
+[ext_resource type="AudioStream" uid="uid://i8vdrlwl1tc2" path="res://assets/audio/finished.ogg" id="9_pdn1w"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_48al0"]
 viewport_path = NodePath("MainScreen/Viewport")
@@ -100,6 +102,16 @@ text = "the"
 font = ExtResource("6_4phfg")
 font_size = 164
 
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_sofvo")
+volume_db = -10.0
+bus = &"BGM"
+
+[node name="finished" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_pdn1w")
+volume_db = -10.0
+bus = &"BGM"
+
 [connection signal="init_done" from="XRPlayer" to="." method="player_ready"]
 [connection signal="init_error" from="XRPlayer" to="." method="player_error"]
 [connection signal="area_entered" from="XRPlayer/LeftHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"left", true]]
@@ -107,7 +119,6 @@ font_size = 164
 [connection signal="area_entered" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", true]]
 [connection signal="area_exited" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
 [connection signal="xr_failed" from="XRPlayer/XRManager" to="." method="xr_error"]
-[connection signal="xr_started" from="XRPlayer/XRManager" to="XRPlayer" method="xr_started" flags=22]
 [connection signal="at_screen" from="MainScreen/Viewport/GUI" to="." method="_on_gui_at_screen"]
 [connection signal="play" from="MainScreen/Viewport/GUI" to="." method="_on_gui_play"]
 [connection signal="pressed" from="Controls/Viewport/Controls/Help" to="MainScreen/Viewport/GUI" method="switch_to" binds= ["Controls"]]

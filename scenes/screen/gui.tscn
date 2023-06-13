@@ -1,17 +1,18 @@
-[gd_scene load_steps=35 format=3 uid="uid://d372r333xd1jr"]
+[gd_scene load_steps=36 format=3 uid="uid://d372r333xd1jr"]
 
 [ext_resource type="Script" path="res://scenes/screen/gui.gd" id="1_loh61"]
 [ext_resource type="Texture2D" uid="uid://dmuvg10fdrgwb" path="res://assets/textures/buttons.png" id="1_xyax6"]
 [ext_resource type="Texture2D" uid="uid://cm70ewdu2yx6" path="res://assets/textures/buttons-hover.png" id="2_w525u"]
 [ext_resource type="FontFile" uid="uid://gl2c4uwueqgw" path="res://assets/fonts/Jost-SemiBold.ttf" id="3_pq6w7"]
+[ext_resource type="AudioStream" uid="uid://djggblqeij1jh" path="res://assets/audio/menu_click.ogg" id="3_uydwx"]
 [ext_resource type="PackedScene" uid="uid://d22qcs5yxerbl" path="res://scenes/keyboard/keyboard.tscn" id="4_640c5"]
-[ext_resource type="AudioStream" uid="uid://dsjmit8r4bu6x" path="res://assets/audio/hover.wav" id="4_xf24v"]
+[ext_resource type="AudioStream" uid="uid://b1mgttpypp5xx" path="res://assets/audio/menu_hover.ogg" id="4_cvvtn"]
 [ext_resource type="Theme" uid="uid://gntxn5uxxtun" path="res://assets/godot/theme.tres" id="5_742ch"]
+[ext_resource type="AudioStream" uid="uid://dqgnmsnvej81e" path="res://assets/audio/start.wav" id="5_hd1r6"]
 [ext_resource type="LabelSettings" uid="uid://btasn3a2kk8vq" path="res://assets/godot/title_label.tres" id="6_61q3x"]
 [ext_resource type="Texture2D" uid="uid://b2jl8tubu2wsn" path="res://assets/textures/arrow-left-circle-custom.png" id="7_628lv"]
 [ext_resource type="Texture2D" uid="uid://cfnbo67l1d4ve" path="res://assets/textures/minus-custom.png" id="7_e3tev"]
 [ext_resource type="Texture2D" uid="uid://dvvbdj4vcqwwf" path="res://assets/textures/plus-custom.png" id="8_8b2ar"]
-[ext_resource type="AudioStream" uid="uid://6s5alo8upy5s" path="res://assets/audio/select.wav" id="8_t6vti"]
 [ext_resource type="Texture2D" uid="uid://kyh5l77q0ebr" path="res://assets/textures/grip_button.png" id="13_dtqjc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7tud2"]
@@ -142,12 +143,17 @@ offset_bottom = 40.0
 theme = ExtResource("5_742ch")
 script = ExtResource("1_loh61")
 
-[node name="hover_sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_xf24v")
-volume_db = -12.0
+[node name="menu_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uydwx")
+volume_db = -8.0
+pitch_scale = 0.9
 
-[node name="play_sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_t6vti")
+[node name="menu_hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cvvtn")
+volume_db = -8.0
+
+[node name="start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hd1r6")
 
 [node name="Results" type="Panel" parent="."]
 visible = false
@@ -743,6 +749,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Onboarding_Confirm" type="Button" parent="Controls"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -869,6 +876,19 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Open source licenses & Asset sources..."
 
+[node name="FPS" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -73.0
+offset_right = 169.0
+grow_vertical = 0
+text = "1 FPS"
+label_settings = SubResource("LabelSettings_jgkje")
+vertical_alignment = 2
+
 [node name="LicensesTest" type="ColorRect" parent="Settings"]
 visible = false
 layout_mode = 1
@@ -877,19 +897,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="Close" type="Button" parent="Settings/LicensesTest"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -161.0
-offset_top = 16.0
-offset_right = -48.0
-offset_bottom = 71.0
-grow_horizontal = 0
-text = "Close"
 
 [node name="Sources" type="RichTextLabel" parent="Settings/LicensesTest"]
 layout_mode = 1
@@ -926,6 +935,7 @@ Portions of this software are copyright © 2022 The FreeType Project (www.freety
 
 [b][u]Audio assets[/u][/b]
 https://freesound.org/people/Eponn/sounds/619835 (CC0)
+https://opengameart.org/content/bossa-nova (CC0)
 https://kenney.nl/assets/ui-audio (CC0)
 
 [b][u]Texture assets[/u][/b]
@@ -1030,18 +1040,17 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 "
 
-[node name="FPS" type="Label" parent="Settings"]
+[node name="Close" type="Button" parent="Settings/LicensesTest"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = -73.0
-offset_right = 169.0
-grow_vertical = 0
-text = "1 FPS"
-label_settings = SubResource("LabelSettings_jgkje")
-vertical_alignment = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -161.0
+offset_top = 16.0
+offset_right = -48.0
+offset_bottom = 71.0
+grow_horizontal = 0
+text = "Close"
 
 [node name="MainMenu" type="Control" parent="."]
 visible = false
@@ -1227,20 +1236,27 @@ autowrap_mode = 2
 [connection signal="pressed" from="DifficultyDetail/Config/Width/+" to="." method="custom_edit_button_diff" binds= ["Width", 1]]
 [connection signal="pressed" from="DifficultyDetail/Config/Levels/-" to="." method="custom_edit_button_diff" binds= ["Levels", -1]]
 [connection signal="pressed" from="DifficultyDetail/Config/Levels/+" to="." method="custom_edit_button_diff" binds= ["Levels", 1]]
+[connection signal="mouse_entered" from="DifficultyDetail/Back" to="menu_hover" method="play"]
 [connection signal="pressed" from="DifficultyDetail/Back" to="." method="back_to_main"]
+[connection signal="pressed" from="DifficultyDetail/Back" to="menu_click" method="play"]
+[connection signal="mouse_entered" from="DifficultyDetail/Play" to="menu_hover" method="play"]
 [connection signal="pressed" from="DifficultyDetail/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="DifficultyDetail/Play" to="play_sound" method="play"]
+[connection signal="pressed" from="DifficultyDetail/Play" to="start" method="play"]
 [connection signal="pressed" from="Controls/Back" to="." method="back_to_main"]
 [connection signal="pressed" from="Settings/Back" to="." method="back_to_main"]
 [connection signal="pressed" from="Settings/Config/ResetOptions/Scores" to="." method="reset_scores"]
 [connection signal="pressed" from="Settings/Config/ResetOptions/FirstRun" to="." method="reset_first_run"]
 [connection signal="pressed" from="Settings/Licenses" to="Settings/LicensesTest" method="show"]
 [connection signal="pressed" from="Settings/LicensesTest/Close" to="Settings/LicensesTest" method="hide"]
-[connection signal="mouse_entered" from="MainMenu/Easy" to="hover_sound" method="play" flags=18]
+[connection signal="mouse_entered" from="MainMenu/Easy" to="menu_hover" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Easy" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Easy" to="." method="difficulty_selected" binds= [&"easy"]]
-[connection signal="mouse_entered" from="MainMenu/Medium" to="hover_sound" method="play" flags=18]
+[connection signal="mouse_entered" from="MainMenu/Medium" to="menu_hover" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Medium" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Medium" to="." method="difficulty_selected" binds= [&"medium"]]
-[connection signal="mouse_entered" from="MainMenu/Hard" to="hover_sound" method="play" flags=18]
+[connection signal="mouse_entered" from="MainMenu/Hard" to="menu_hover" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Hard" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Hard" to="." method="difficulty_selected" binds= [&"hard"]]
-[connection signal="mouse_entered" from="MainMenu/Custom" to="hover_sound" method="play" flags=18]
+[connection signal="mouse_entered" from="MainMenu/Custom" to="menu_hover" method="play" flags=18]
+[connection signal="pressed" from="MainMenu/Custom" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Custom" to="." method="difficulty_selected" binds= [&"custom"]]

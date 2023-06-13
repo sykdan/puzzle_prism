@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://e8ylplpd2unk"]
+[gd_scene load_steps=18 format=3 uid="uid://e8ylplpd2unk"]
 
 [ext_resource type="Script" path="res://scenes/maze/maze.gd" id="1_hm3yb"]
 [ext_resource type="Script" path="res://scenes/maze/marble.gd" id="2_okqss"]
 [ext_resource type="PackedScene" uid="uid://b6o16das8tist" path="res://scenes/maze/goal.tscn" id="3_wmd4v"]
+[ext_resource type="AudioStream" uid="uid://do7dukpbetx6b" path="res://assets/audio/floor_solved.ogg" id="4_ivx3d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_op8j6"]
 
@@ -119,6 +120,10 @@ shape = SubResource("SphereShape3D_flyxa")
 
 [node name="Goal" parent="." instance=ExtResource("3_wmd4v")]
 visible = false
+
+[node name="floor_solved" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ivx3d")
+volume_db = -7.0
 
 [connection signal="built_level" from="." to="." method="_on_built_level"]
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

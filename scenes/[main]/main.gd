@@ -87,6 +87,8 @@ func _on_gui_play(difficulty, params):
 		size = Vector2i(params.x, params.y)
 		levels = params.z
 	
+	$BGM.play(0.0)
+	
 	current_maze = maze.instantiate() as Maze
 	current_maze.size = size
 	current_maze.levels = levels
@@ -117,6 +119,8 @@ func game_ended():
 	$XRPlayer.drop_object()
 	current_maze.queue_free()
 	current_maze = null
+	$finished.play()
+	$BGM.stop()
 	
 	var time_taken: int = ceil(Time.get_unix_time_from_system() - maze_start_time)
 	maze_start_time = 0
