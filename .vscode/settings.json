@@ -10,13 +10,21 @@
                 "-interaction=nonstopmode",
                 "SykdanMaturitniPrace.tex"
             ],
+        },
+        {
+            "name": "notify_on_build",
+            "command": "notify-send",
+            "args": [
+                "Build finished"
+            ]
         }
     ],
     "latex-workshop.latex.recipes": [
         {
             "name": "latexmk (xelatex)",
             "tools": [
-                "xelatexmk"
+                "xelatexmk",
+                "notify_on_build"
             ]
         }
     ]
