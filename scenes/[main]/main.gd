@@ -14,7 +14,6 @@ func player_ready():
 	$XRPlayer.pointer_enabled = true
 	var tw = create_tween()
 	tw.tween_property($XRPlayer, "fade_modulate", 0, 2)
-	await get_tree().create_timer(3).timeout
 
 func xr_error(type: StringName):
 	OS.alert(tr(type), tr(&"XR_ERROR_TITLE"))

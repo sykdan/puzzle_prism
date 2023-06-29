@@ -56,8 +56,6 @@ func _ready():
 	if $XRManager.xr_interface_name == &"WebXR":
 		var interface = $XRManager.xr_interface
 		interface.reference_space_reset.connect(recenter)
-	
-	init_done.emit()
 
 func _process(_d):
 	if pointer_enabled:
@@ -95,8 +93,10 @@ func _physics_process(_d):
 	grip_tick()
 
 func xr_started():
+	await get_tree().create_timer(0.5).timeout
 	recenter()
-	
+	init_done.emit()
+
 func grip_tick():
 	var midpoint = (
 		$RightHand/GripOrigin.global_position +

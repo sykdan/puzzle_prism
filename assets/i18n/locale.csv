@@ -28,7 +28,9 @@ XR_ERROR_TITLE,Nelze spustit hru,Cannot launch game
 E_NO_INTERFACE,Nebylo nalezeno rozhraní pro Virtuální Realitu,No Virtual Reality interface found
 E_OXR_INIT_FAILED,"Nebyl detekován Headset pro virtuální realitu.
 Připojte prosím Váš headset a zkuste to znovu.
-Hra bude nyní uzavřena.",ttttttttt
+Hra bude nyní uzavřena.","A Virtual Reality Headset was not detected.
+Please connect your headset and try again.
+The game will now close."
 E_WXR_INIT_FAILED,"Nebyl detekován Headset pro virtuální realitu.
 Připojte prosím Váš headset a zkuste to znovu.
 Hra bude nyní uzavřena.","A Virtual Reality Headset was not detected.

@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d22qcs5yxerbl"]
+[gd_scene load_steps=6 format=3 uid="uid://d22qcs5yxerbl"]
 
 [ext_resource type="FontFile" uid="uid://cnv0kma3c86bt" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="1_7cgvv"]
 [ext_resource type="Script" path="res://scenes/keyboard/keyboard.gd" id="2_epiff"]
+[ext_resource type="Texture2D" uid="uid://sd2k3saed7k5" path="res://assets/textures/backspace.png" id="3_7tjpr"]
+[ext_resource type="Texture2D" uid="uid://8sanai14s07x" path="res://assets/textures/confirm.png" id="4_tv301"]
 
 [sub_resource type="Theme" id="Theme_40rx8"]
 default_font = ExtResource("1_7cgvv")
-default_font_size = 20
+default_font_size = 42
 
 [node name="Background" type="ColorRect"]
-texture_filter = 1
-offset_right = 436.0
-offset_bottom = 137.0
+offset_right = 892.0
+offset_bottom = 294.0
 theme = SubResource("Theme_40rx8")
 color = Color(0.12549, 0.12549, 0.12549, 0.752941)
 script = ExtResource("2_epiff")
@@ -21,7 +22,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
+offset_left = 10.0
+offset_top = -75.0
+offset_right = -10.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -32,12 +36,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -53.0
-offset_top = -31.0
+offset_left = -107.0
+offset_top = -62.0
+offset_right = -1.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-text = "<"
+icon = ExtResource("3_7tjpr")
+icon_alignment = 1
 
 [node name="Space" type="Button" parent="Controls"]
 layout_mode = 1
@@ -46,9 +52,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -95.0
-offset_top = -31.0
-offset_right = 95.0
+offset_left = -190.0
+offset_top = -62.0
+offset_right = 190.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
@@ -59,240 +65,246 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 47.0
+offset_left = 1.0
+offset_top = -62.0
+offset_right = 132.0
 grow_vertical = 0
 focus_mode = 0
+theme_override_colors/font_color = Color(0.231373, 1, 0.368627, 1)
 text = "OK"
+icon = ExtResource("4_tv301")
 
 [node name="Letters" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -70.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Q" type="Button" parent="Letters"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 31.0
+offset_right = 80.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "Q"
 
 [node name="W" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 44.0
-offset_right = 84.0
-offset_bottom = 31.0
+offset_left = 88.0
+offset_right = 168.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "W"
 
 [node name="E" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 88.0
-offset_right = 128.0
-offset_bottom = 31.0
+offset_left = 176.0
+offset_right = 256.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "E"
 
 [node name="R" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 132.0
-offset_right = 172.0
-offset_bottom = 31.0
+offset_left = 264.0
+offset_right = 344.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "R"
 
 [node name="T" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 176.0
-offset_right = 216.0
-offset_bottom = 31.0
+offset_left = 352.0
+offset_right = 432.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "T"
 
 [node name="Y" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 220.0
-offset_right = 260.0
-offset_bottom = 31.0
+offset_left = 440.0
+offset_right = 520.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "Y"
 
 [node name="U" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 304.0
-offset_bottom = 31.0
+offset_left = 528.0
+offset_right = 608.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "U"
 
 [node name="I" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 308.0
-offset_right = 348.0
-offset_bottom = 31.0
+offset_left = 616.0
+offset_right = 696.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "I"
 
 [node name="O" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 352.0
-offset_right = 392.0
-offset_bottom = 31.0
+offset_left = 704.0
+offset_right = 784.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "O"
 
 [node name="P" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 396.0
-offset_right = 436.0
-offset_bottom = 31.0
+offset_left = 792.0
+offset_right = 872.0
+offset_bottom = 62.0
 focus_mode = 0
 text = "P"
 
 [node name="A" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 35.0
-offset_right = 62.0
-offset_bottom = 66.0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 124.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "A"
 
 [node name="S" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 66.0
-offset_top = 35.0
-offset_right = 106.0
-offset_bottom = 66.0
+offset_left = 132.0
+offset_top = 70.0
+offset_right = 212.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "S"
 
 [node name="D" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 110.0
-offset_top = 35.0
-offset_right = 150.0
-offset_bottom = 66.0
+offset_left = 220.0
+offset_top = 70.0
+offset_right = 300.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "D"
 
 [node name="F" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 154.0
-offset_top = 35.0
-offset_right = 194.0
-offset_bottom = 66.0
+offset_left = 308.0
+offset_top = 70.0
+offset_right = 388.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "F"
 
 [node name="G" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 198.0
-offset_top = 35.0
-offset_right = 238.0
-offset_bottom = 66.0
+offset_left = 396.0
+offset_top = 70.0
+offset_right = 476.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "G"
 
 [node name="H" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 242.0
-offset_top = 35.0
-offset_right = 282.0
-offset_bottom = 66.0
+offset_left = 484.0
+offset_top = 70.0
+offset_right = 564.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "H"
 
 [node name="J" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 286.0
-offset_top = 35.0
-offset_right = 326.0
-offset_bottom = 66.0
+offset_left = 572.0
+offset_top = 70.0
+offset_right = 652.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "J"
 
 [node name="K" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 35.0
-offset_right = 370.0
-offset_bottom = 66.0
+offset_left = 660.0
+offset_top = 70.0
+offset_right = 740.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "K"
 
 [node name="L" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 374.0
-offset_top = 35.0
-offset_right = 414.0
-offset_bottom = 66.0
+offset_left = 748.0
+offset_top = 70.0
+offset_right = 828.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "L"
 
 [node name="Z" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 71.0
-offset_top = 71.0
-offset_right = 111.0
-offset_bottom = 102.0
+offset_left = 142.0
+offset_top = 142.0
+offset_right = 222.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "Z"
 
 [node name="X" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 71.0
-offset_right = 155.0
-offset_bottom = 102.0
+offset_left = 230.0
+offset_top = 142.0
+offset_right = 310.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "X"
 
 [node name="C" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 159.0
-offset_top = 71.0
-offset_right = 199.0
-offset_bottom = 102.0
+offset_left = 318.0
+offset_top = 142.0
+offset_right = 398.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "C"
 
 [node name="V" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 203.0
-offset_top = 71.0
-offset_right = 243.0
-offset_bottom = 102.0
+offset_left = 406.0
+offset_top = 142.0
+offset_right = 486.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "V"
 
 [node name="B" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 247.0
-offset_top = 71.0
-offset_right = 287.0
-offset_bottom = 102.0
+offset_left = 494.0
+offset_top = 142.0
+offset_right = 574.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "B"
 
 [node name="N" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 291.0
-offset_top = 71.0
-offset_right = 331.0
-offset_bottom = 102.0
+offset_left = 582.0
+offset_top = 142.0
+offset_right = 662.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "N"
 
 [node name="M" type="Button" parent="Letters"]
 layout_mode = 0
-offset_left = 335.0
-offset_top = 71.0
-offset_right = 375.0
-offset_bottom = 102.0
+offset_left = 670.0
+offset_top = 142.0
+offset_right = 750.0
+offset_bottom = 204.0
 focus_mode = 0
 text = "M"

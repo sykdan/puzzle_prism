@@ -279,13 +279,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -218.0
-offset_top = 27.5
-offset_right = 218.0
-offset_bottom = 164.5
+offset_left = -446.0
+offset_top = -27.0
+offset_right = 446.0
+offset_bottom = 267.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 pivot_offset = Vector2(218, 68)
 target = NodePath("../NameEnter")
 
@@ -774,6 +773,7 @@ text = "BACK"
 icon = ExtResource("7_628lv")
 
 [node name="Settings" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
