@@ -773,7 +773,6 @@ text = "BACK"
 icon = ExtResource("7_628lv")
 
 [node name="Settings" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -936,6 +935,8 @@ Portions of this software are copyright © 2022 The FreeType Project (www.freety
 [b][u]Audio assets[/u][/b]
 https://freesound.org/people/Eponn/sounds/619835 (CC0)
 https://opengameart.org/content/bossa-nova (CC0)
+https://opengameart.org/content/up-3x (CC0)
+https://opengameart.org/content/win-sound-effect (CC0)
 https://kenney.nl/assets/ui-audio (CC0)
 
 [b][u]Texture assets[/u][/b]
