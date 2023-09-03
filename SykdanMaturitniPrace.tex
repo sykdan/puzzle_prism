@@ -22,37 +22,42 @@
 	\lipsum[1]
 }
 { % Klíčová slova
-	\lipsum[1]
+	\begin{itemize}
+		\item Headset -- Označuje nejčastěji zařízení, které si uživatel nasadí na hlavu pro vstup do \gls{xr}.
+				Nejčastěji se skládá z dvou displejů pro stereoskopické zobrazení, senzorů pro sledování pohybu,
+				reproduktorů, mikrofonu atd.
+
+		\item Virtuální realita (\gls{vr}) -- Označuje typ rozšířené reality, ve kterém je uživatel pomocí headsetu
+				kompletně přenesen do virtuálního světa, prvky z fyzického světa vůbec nevidí a neinteraguje s nimi.
+
+		\item Upravená (či augmentovaná) realita (\gls{ar}) -- Označuje typ rozšířené reality, ve kterém uživatel interaguje
+				s virtuálními prvky v kontextu fyzického světa (např. zobrazení virtuálního předmětu na stole v životní velikosti).
+				Uživatel však nemá nasazený headset a virtuální prvky vidí jen zčásti (např. na obrazovce mobilního telefonu).
+
+		\item Smíšená realita (\gls{mr}) -- Označuje typ rozšířené reality, ve kterém uživatel interaguje s virtuálními předměty
+				v kontextu fyzického světa, přičemž má nasazený headset a virtuální prvky vyplňují celé zorné pole.
+
+		\item Rozšířená realita (\gls{xr}) -- Tento pojem zastřešuje \gls{vr}, \gls{ar} a \gls{mr}.
+	\end{itemize}
 }
 \podekovani
 {
-	\lipsum[2]
+	Děkuji panu Michalu Kočerovi za vedení mé práce a všem mým přátelům, kteří otestovali moji hru a poskytli mi zpětnou vazbu.
 }
+
 \tableofcontents
 \newpage
 
-
-\chapter*{Úvod}
-
-\lipsum[1]
-
-Nechť $x \in \mathbb{R}$ je kladné. Pak platí:
-\begin{equation}
-	x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-	\label{quad_eq}
-\end{equation}
-
+\include{doc/0_Uvod.tex}
 \include{doc/1_TeoretickaCast.tex}
 \include{doc/2_PraktickaCast.tex}
+\include{doc/Zaver.tex}
+
+\nocite{*}
 
 \appendix
 \addcontentsline{toc}{part}{Apendix}
 
-\chapter*{Závěr}
-
-\lipsum[1]
-
-\nocite{*}
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliografie}
 
@@ -60,6 +65,6 @@ Nechť $x \in \mathbb{R}$ je kladné. Pak platí:
 \printglossary[title={Zkratky}]
 
 \listoffigures
-\listoftables
+\addcontentsline{toc}{chapter}{\listfigurename}
 
 \end{document}
