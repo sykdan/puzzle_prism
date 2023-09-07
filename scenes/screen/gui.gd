@@ -2,6 +2,7 @@ extends Node
 
 signal play(difficulty, params)
 signal at_screen(screen)
+signal giveup
 
 var difficulty = null
 var finish_game_time_taken = null
@@ -16,7 +17,7 @@ func _process(_d):
 	if $Settings.visible:
 		$Settings/FPS.text = str(Engine.get_frames_per_second()) + " FPS"
 	if !$InGame/GiveUp/Timer.is_stopped():
-		$InGame/GiveUp/TimerText.text = ceil($InGame/GiveUp/Timer.time_left)
+		$InGame/GiveUp/TimerText.text = str(int(ceil($InGame/GiveUp/Timer.time_left)))
 
 func fmt_time(time: int):
 	@warning_ignore("integer_division")

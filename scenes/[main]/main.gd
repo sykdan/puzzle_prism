@@ -9,6 +9,7 @@ var current_maze: Maze
 var maze_start_time: int = 0
 
 var _slide_upwards = false
+var _giveup = false
 
 func player_ready():
 	$XRPlayer.pointer_enabled = true
@@ -29,6 +30,18 @@ func _process(_d):
 		if not ($XRPlayer/LeftHand.is_button_pressed("grip_click") and $XRPlayer/RightHand.is_button_pressed("grip_click")):
 			is_holding_maze = false
 			$XRPlayer.drop_object()
+	
+	if not is_holding_maze and current_maze:
+		var giveup = (
+			$XRPlayer/LeftHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y and 
+			$XRPlayer/RightHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y
+		)
+		if giveup != _giveup && not _giveup:
+			$MainScreen/Viewport/GUI.start_giveup()
+			_giveup = true
+		elif giveup != _giveup && _giveup:
+			$MainScreen/Viewport/GUI.end_giveup()
+			_giveup = false
 
 func _physics_process(delta):
 	# Godot Tweens don't support working with relative values,
@@ -127,8 +140,6 @@ func game_ended():
 	var time_taken: int = ceil(Time.get_unix_time_from_system() - maze_start_time)
 	maze_start_time = 0
 	
-	$MainScreen.enabled = true
-	$MainScreen.show()
 	$XRPlayer.pointer_enabled = true
 	
 	$MainScreen/Viewport/GUI.finish_game(time_taken)
@@ -148,3 +159,15 @@ func _on_gui_at_screen(screen: NodePath):
 
 func _on_exit_pressed():
 	get_tree().quit()
+
+func _on_gui_giveup():
+	$XRPlayer.drop_object()
+	current_maze.queue_free()
+	current_maze = null
+	$BGM.stop()
+	
+	maze_start_time = 0
+	
+	$XRPlayer.pointer_enabled = true
+	
+	$MainScreen/Viewport/GUI.back_to_main()

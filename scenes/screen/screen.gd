@@ -11,6 +11,7 @@ class_name Screen
 func _ready():
 	$Screen/ScreenArea/Shape.shape.size.x = $Screen.mesh.size.x
 	$Screen/ScreenArea/Shape.shape.size.y = $Screen.mesh.size.y
+	$Screen.material_override.albedo_texture = $Viewport.get_texture()
 
 func get_screen_position(global: Vector3):
 	var local = $Screen.to_local(global) / $Screen/ScreenArea/Shape.shape.size

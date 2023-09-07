@@ -44,3 +44,5 @@ R_RECORDS,Resetovat rekordy,Reset records
 R_FIRSTRUN,Obnovit první spuštění,Restore first-run experience
 CONTROLS,Ovládání,Controls
 HOWTO,"Obklopte kostku oběma rukama, sevřete ovladač (stiskněte postranní tlačítka) a naklánějte, dokud kulička nedorazí do cíle!","Embrace the cube with both hands, grip the controller (press the side buttons) and tilt, until the marble reaches the end!"
+GIVEUP_NOTICE,"Pokud se chcete vzdát a vrátit se na hlavní obrazovku, pusťte kostku a zvedněte obě ruce nad hlavu.","If you wish to give up and return to the main screen, release the cube and raise your hands above your head."
+GIVEUP_ACTION,Návrat za:,Returning in:

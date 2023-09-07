@@ -1,15 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddh2rol6pafi2"]
+[gd_scene load_steps=5 format=3 uid="uid://ddh2rol6pafi2"]
 
 [ext_resource type="Script" path="res://scenes/screen/screen.gd" id="1_vy1sl"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_crqn2"]
-viewport_path = NodePath("Viewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qha2s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dts6c"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_crqn2")
 
 [sub_resource type="QuadMesh" id="QuadMesh_nfjwq"]
 resource_local_to_scene = true
@@ -24,9 +20,10 @@ script = ExtResource("1_vy1sl")
 
 [node name="Viewport" type="SubViewport" parent="."]
 transparent_bg = true
+render_target_update_mode = 4
 
 [node name="Screen" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_qha2s")
+material_override = SubResource("StandardMaterial3D_dts6c")
 mesh = SubResource("QuadMesh_nfjwq")
 
 [node name="ScreenArea" type="Area3D" parent="Screen" groups=["screen"]]

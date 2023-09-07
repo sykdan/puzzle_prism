@@ -1262,13 +1262,14 @@ offset_right = 161.0
 offset_bottom = 146.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-text = "Returning in"
+text = "GIVEUP_ACTION"
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
 
 [node name="Timer" type="Timer" parent="InGame/GiveUp"]
 wait_time = 3.0
+one_shot = true
 
 [node name="TimerText" type="Label" parent="InGame/GiveUp"]
 layout_mode = 1
@@ -1311,7 +1312,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "If you wish to give up and return to the main screen, release the cube and raise your hands above your head."
+text = "GIVEUP_NOTICE"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -1350,3 +1351,4 @@ autowrap_mode = 2
 [connection signal="mouse_entered" from="MainMenu/Custom" to="menu_hover" method="play" flags=18]
 [connection signal="pressed" from="MainMenu/Custom" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Custom" to="." method="difficulty_selected" binds= [&"custom"]]
+[connection signal="timeout" from="InGame/GiveUp/Timer" to="." method="emit_signal" binds= [&"giveup"]]

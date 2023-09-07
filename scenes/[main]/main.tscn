@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvroouobw2lcv"]
+[gd_scene load_steps=16 format=3 uid="uid://bvroouobw2lcv"]
 
 [ext_resource type="Script" path="res://scenes/[main]/main.gd" id="1_8lrat"]
 [ext_resource type="PackedScene" uid="uid://buc0ls6xkyrd0" path="res://scenes/player/xrplayer.tscn" id="2_j0igu"]
@@ -10,14 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://bv4s7yyt5r145" path="res://assets/audio/8bitbossa.ogg" id="8_sofvo"]
 [ext_resource type="AudioStream" uid="uid://i8vdrlwl1tc2" path="res://assets/audio/finished.ogg" id="9_pdn1w"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_48al0"]
-viewport_path = NodePath("MainScreen/Viewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc5dv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7k7q"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_48al0")
 
 [sub_resource type="QuadMesh" id="QuadMesh_hwwxo"]
 resource_local_to_scene = true
@@ -28,14 +24,10 @@ size = Vector2(140, 84)
 resource_local_to_scene = true
 size = Vector3(1, 1, 0.05)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_23oms"]
-viewport_path = NodePath("Controls/Viewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wcvbp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igb8k"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_23oms")
 
 [sub_resource type="QuadMesh" id="QuadMesh_u0h6p"]
 resource_local_to_scene = true
@@ -58,13 +50,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, -94)
 
 [node name="Viewport" parent="MainScreen" index="0"]
 size = Vector2i(1125, 675)
-render_target_update_mode = 4
 
 [node name="GUI" parent="MainScreen/Viewport" index="0" instance=ExtResource("5_6qy2y")]
 
 [node name="Screen" parent="MainScreen" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
-material_override = SubResource("StandardMaterial3D_pc5dv")
+material_override = SubResource("StandardMaterial3D_v7k7q")
 mesh = SubResource("QuadMesh_hwwxo")
 
 [node name="Shape" parent="MainScreen/Screen/ScreenArea" index="0"]
@@ -75,12 +66,11 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 54, 0, -91
 
 [node name="Viewport" parent="Controls" index="0"]
 size = Vector2i(384, 128)
-render_target_update_mode = 4
 
 [node name="Controls" parent="Controls/Viewport" index="0" instance=ExtResource("6_dk24k")]
 
 [node name="Screen" parent="Controls" index="1"]
-material_override = SubResource("StandardMaterial3D_wcvbp")
+material_override = SubResource("StandardMaterial3D_igb8k")
 mesh = SubResource("QuadMesh_u0h6p")
 
 [node name="Shape" parent="Controls/Screen/ScreenArea" index="0"]
@@ -120,6 +110,7 @@ bus = &"BGM"
 [connection signal="area_exited" from="XRPlayer/RightHand/Hand/Grip" to="." method="_hand_can_grip" binds= [&"right", false]]
 [connection signal="xr_failed" from="XRPlayer/XRManager" to="." method="xr_error"]
 [connection signal="at_screen" from="MainScreen/Viewport/GUI" to="." method="_on_gui_at_screen"]
+[connection signal="giveup" from="MainScreen/Viewport/GUI" to="." method="_on_gui_giveup"]
 [connection signal="play" from="MainScreen/Viewport/GUI" to="." method="_on_gui_play"]
 [connection signal="pressed" from="Controls/Viewport/Controls/Help" to="MainScreen/Viewport/GUI" method="switch_to" binds= ["Controls"]]
 [connection signal="pressed" from="Controls/Viewport/Controls/Settings" to="MainScreen/Viewport/GUI" method="switch_to" binds= ["Settings"]]
