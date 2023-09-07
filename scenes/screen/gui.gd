@@ -14,7 +14,9 @@ func _ready():
 
 func _process(_d):
 	if $Settings.visible:
-		$Settings/FPS.text = str(Engine.get_frames_per_second()) + " fps"
+		$Settings/FPS.text = str(Engine.get_frames_per_second()) + " FPS"
+	if !$InGame/GiveUp/Timer.is_stopped():
+		$InGame/GiveUp/TimerText.text = ceil($InGame/GiveUp/Timer.time_left)
 
 func fmt_time(time: int):
 	@warning_ignore("integer_division")
@@ -82,8 +84,15 @@ func _on_play_pressed():
 		$Controls/Back.show()
 		SaveFile.first_run = false
 		SaveFile.store_save()
-	switch_to(null)
+	switch_to(^"InGame")
 	play.emit(difficulty, params)
+	var tw = create_tween()
+	$InGame/GiveupHint.modulate.a = 0
+	tw.tween_callback($InGame/GiveupHint.show)
+	tw.tween_property($InGame/GiveupHint, "modulate:a", 1.0, 1)
+	tw.tween_interval(8.0)
+	tw.tween_property($InGame/GiveupHint, "modulate:a", 0.0, 1)
+	tw.tween_callback($InGame/GiveupHint.hide)
 
 func finish_game(time_taken):
 	switch_to(^"Results")
@@ -130,3 +139,11 @@ func reset_scores():
 func set_lang(lang):
 	SaveFile.locale = lang
 	SaveFile.store_save()
+
+func start_giveup():
+	$InGame/GiveUp/Timer.start(3)
+	$InGame/GiveUp.show()
+
+func end_giveup():
+	$InGame/GiveUp/Timer.stop()
+	$InGame/GiveUp.hide()

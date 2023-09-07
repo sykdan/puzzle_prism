@@ -40,6 +40,9 @@ func _physics_process(delta):
 		)
 
 func _on_marble_haptic(diff):
+	if not is_holding_maze:
+		return
+	
 	var vibrate = diff / 15
 	
 	var l = $XRPlayer/LeftHand.global_position.distance_to(current_maze.marble.global_position)

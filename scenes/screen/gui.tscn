@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d372r333xd1jr"]
+[gd_scene load_steps=37 format=3 uid="uid://d372r333xd1jr"]
 
 [ext_resource type="Script" path="res://scenes/screen/gui.gd" id="1_loh61"]
 [ext_resource type="Texture2D" uid="uid://dmuvg10fdrgwb" path="res://assets/textures/buttons.png" id="1_xyax6"]
@@ -133,6 +133,11 @@ outline_color = Color(0, 0, 0, 0)
 shadow_size = 0
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ti6kl"]
+line_spacing = 5.0
+font_size = 120
+font_color = Color(1, 0, 0, 1)
 
 [node name="GUI" type="Control"]
 custom_minimum_size = Vector2(1125, 675)
@@ -773,6 +778,7 @@ text = "BACK"
 icon = ExtResource("7_628lv")
 
 [node name="Settings" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1225,6 +1231,89 @@ text = "D_CUSTOM_DESC"
 label_settings = SubResource("LabelSettings_q4plq")
 horizontal_alignment = 1
 vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="InGame" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1125.0
+offset_bottom = 675.0
+
+[node name="GiveUp" type="Control" parent="InGame"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -354.0
+offset_top = -284.0
+offset_right = 354.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="InGame/GiveUp"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -161.0
+offset_right = 161.0
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Returning in"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="InGame/GiveUp"]
+wait_time = 3.0
+
+[node name="TimerText" type="Label" parent="InGame/GiveUp"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.5
+offset_top = -179.0
+offset_right = 144.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "3"
+label_settings = SubResource("LabelSettings_ti6kl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="GiveupHint" type="Panel" parent="InGame"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -533.0
+offset_top = -215.0
+offset_right = 533.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="InGame/GiveupHint"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "If you wish to give up and return to the main screen, release the cube and raise your hands above your head."
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 
 [connection signal="pressed" from="Results/Continue" to="." method="back_to_main"]
