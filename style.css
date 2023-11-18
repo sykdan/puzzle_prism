@@ -64,6 +64,7 @@ a:hover {
 .intro img {
     position: absolute;
     opacity: 0.5;
+    height: 90%;
 }
 
 main {
@@ -145,5 +146,9 @@ a.gallerylink {
 @media screen and (max-width: 600px) {
     .grid {
         grid-template-columns: 1fr;
+    }
+
+    .intro:not(.small) {
+        height: 28rem;
     }
 }
