@@ -4,17 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>Galerie | Puzzle Prism</title>
 </head>
 
 <body>
-    <a href="index.html">zpět na hlavní stránku</a>
-    <h1>Galerie</h1>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/nisxDYHa_sc?si=jWzT2IoFbUbpCs3F"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-    </iframe>
+    <div class="topbar">
+        <a href="index.html" class="home">
+            <img src="./images/home.svg" style="height:2.5rem;"> Hlavní stránka
+        </a>
+    </div>
+    <div class="intro small">
+        Galerie
+    </div>
+    <div class="grid" style="height: 200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/nisxDYHa_sc?si=jWzT2IoFbUbpCs3F"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+        <a class="gallerylink" href="https://github.com/sykdan/puzzle_prism/releases/download/paper_v0_1_0/mprace-v0.1.pdf">
+            Maturitní práce (.pdf)
+        </a>
+    </div>
     <p>více již brzy!</p>
 
 </body>

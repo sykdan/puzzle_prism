@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    margin: 0;
+    background-color: #313131;
+}
+
+* {
+    font-family: Jost, Roboto, Arial, sans-serif;
+    color: #ffffff;
+}
+
+a {
+    transition: all 0.3s;
+}
+
+a:hover {
+    text-shadow: 0 0 1rem gold;
+    color: gold;
+}
+
+.topbar {
+    height: 4rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.topbar a {
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+.intro {
+    z-index: -1;
+    font-weight: 200;
+    font-size: 8rem;
+    color: white;
+    text-align: center;
+    line-height: 90%;
+    text-shadow: 0 0 1rem white;
+    width: 100%;
+    height: 36rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(./images/bg1.png) no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    border-left: none;
+    border-right: none;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    margin-bottom: 1.5rem;
+}
+
+.intro.small {
+    height: 12rem;
+    font-size: 6rem;
+}
+
+.intro img {
+    position: absolute;
+    opacity: 0.5;
+}
+
+main {
+    font-size: 1.2rem;
+}
+
+main p {
+    text-align: center;
+}
+
+main .platforms {
+    padding: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+}
+
+main .platforms li {
+    padding: 1rem;
+    background-color: #1f1f1f;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+main .platforms li img {
+    height: 32px;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    left: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.person {
+    padding: 1rem;
+    background-color: #1f1f1f;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.person .name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.person li {
+    font-size: 1.2rem;
+}
+
+.person ul {
+    padding: 0;
+}
+
+a.gallerylink {
+    font-size: 2rem;
+    padding: 1rem;
+    background-color: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
