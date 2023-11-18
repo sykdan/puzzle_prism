@@ -53,6 +53,7 @@ a:hover {
     border-right: none;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     margin-bottom: 1.5rem;
+    overflow: hidden;
 }
 
 .intro.small {
@@ -79,6 +80,7 @@ main .platforms {
     width: 100%;
     justify-content: center;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 main .platforms li {
@@ -138,4 +140,10 @@ a.gallerylink {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
