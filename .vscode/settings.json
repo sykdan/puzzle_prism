@@ -27,5 +27,6 @@
                 "notify_on_build"
             ]
         }
-    ]
+    ],
+    "editor.wordWrap": "on"
 }
