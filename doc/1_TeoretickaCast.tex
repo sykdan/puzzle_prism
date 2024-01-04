@@ -42,10 +42,10 @@ Herní společnosti na sebe také nenechaly dlouho čekat a začaly s vývojem V
 Do světa VR herních konzolí vstoupily i dnes známé japonské společnosti SEGA a Nintendo se svými SEGA VR a Virtual Boy. Obě tato zařízení však byla komerčními selháními. SEGA byla nucena kvůli technickým problémům vydání několikrát posunout a krátce po vydání skončila jeho výrobu. Nintendo sice své zařízení vydalo, ale rok po uvedení na trh jej stáhlo. Kvůli vysoké ceně a špatným grafickým schopnostem (konzole uměla zobrazit pouze červenou a černou barvu) si zálibu u hráčů nenašlo.\cite{otechnice_2}
 
 \begin{figure}[H]
-        \centering
-        \includegraphics[height=120pt]{vboy.png}
-        \caption{Červeno-černé zobrazení zařízení Virtual Boy \cite{vboy}}
-        \label{vboy_red_display}
+    \centering
+    \includegraphics[height=120pt]{vboy.png}
+    \caption{Červeno-černé zobrazení zařízení Virtual Boy \cite{vboy}}
+    \label{vboy_red_display}
 \end{figure}
 
 \section{XR dnes}
@@ -59,13 +59,31 @@ Díky technologickým pokrokům a zmenšování hardwaru se také začala objevo
 Velmi dostupné byly naopak aplikace používající augmentovanou realitu. AR byla integrována do již existujících zařízení, především jako technická dema. Běžnou metodou sledování pohybu bylo, pro svou nenáročnost, sledování speciálních předmětů či kartiček, které zařízení rozpoznalo, určilo jejich otočení a naklonění a následně zobrazilo obsah. Zlom nastal, když Google vydal ARCore, \gls{SDK} pro AR, který umožnil vývojářům sledovat pohyb mobilního telefonu pouze pomocí pohledu z kamery. Vývojáři se tím pádem mohli zaměřit pouze na vývoj jejich aplikací a her, protože nemuseli investovat čas a peníze do technologie sledování pohybu. Právě v této době vznikla většina aplikací a her, které známe. Za zmínku stojí například Pokémon GO. \cite{enwiki:1182789097}
 
 \chapter{Hardware}
-lorem ipsum
-
-něco o trackování, výrobcích, atd. zmínit trackovací systém bez věží od Meta/FB
 
 \section{Degrees of freedom}
 
-Degrees of freedom (DoF), česky \em{stupně volnosti}, označuje směry v prostoru ve kterých je sledován pohyb. V oblasti XR rozlišujeme pojem 3DoF a 6DoF. Systém, který sleduje pohyb ve 3DoF sleduje pouze náklon zařízení. Umožňuje tím např. rozhlížet se; dívat se jinými směry. Systém, který sleduje pohyb v 6DoF je dále schopný sledovat pohyb dopředu/dozadu, doleva/doprava a nahorů/dolů. Umožňuje tak se pohybovat ve virtuálním prostoru. 
+Hlavním tématem, kterým se XR liší od tradičních výpočetních zařízení, je sledování pohybu. S tímto je také spojen pojem Degrees of freedom (DoF), česky volně přeloženo jako \textit{stupně volnosti}. Ten označuje počet směrů, kterým se předmět může pohybovat -- buď po ose, nebo kolem ní. V našem třídimenzionálním světě se můžeme pohybovat v 6 směrech. \cite{mechatech_3dof_6dof}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=150pt]{rotations.jpg}
+    \caption{Diagram zobrazující 6 možných pohybů v 3D prostoru \cite{nasa_aircraft}}
+    \label{rotations_nasa_fig}
+\end{figure}
+
+V XR rozlišujeme 3DoF (3 stupně volnosti) a 6DoF (6 stupňů volnosti). Zařízení, které sleduje uživatelův pohyb ve 3DoF, umí rozpoznat pouze náklon či otočení. Umožňuje tak se otáčet a rozhlížet ve virtuálním prostoru. Avšak zařízení, které sleduje pohyb v 6DoF, je kromě toho schopné sledovat také pohyb dopředu/dozadu, doleva/doprava a nahorů/dolů. Umožňuje tak se ve virtuálním prostoru \textit{pohybovat}, tedy nebýt jen pozorovatelem. \cite{mechatech_3dof_6dof}
+
+Pro sledování náklonu a pohybu se používají odlišná řešení, která popisuji v následujících částech.
+
+\section{Gyroskop}
+
+Gyroskop je elektronické zařízení, které umožňuje vypočítat 
+
+\section{Sledování pohybu}
+
+něco o trackování, výrobcích, atd. zmínit trackovací systém bez věží od Meta/FB
+
+
 
 \chapter{Software}
 lorem ipsum
