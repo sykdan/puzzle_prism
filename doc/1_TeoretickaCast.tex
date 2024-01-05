@@ -73,17 +73,20 @@ Hlavním tématem, kterým se XR liší od tradičních výpočetních zařízen
 
 V XR rozlišujeme 3DoF (3 stupně volnosti) a 6DoF (6 stupňů volnosti). Zařízení, které sleduje uživatelův pohyb ve 3DoF, umí rozpoznat pouze náklon či otočení. Umožňuje tak se otáčet a rozhlížet ve virtuálním prostoru. Avšak zařízení, které sleduje pohyb v 6DoF, je kromě toho schopné sledovat také pohyb dopředu/dozadu, doleva/doprava a nahorů/dolů. Umožňuje tak se ve virtuálním prostoru \textit{pohybovat}, tedy nebýt jen pozorovatelem. \cite{mechatech_3dof_6dof}
 
-Pro sledování náklonu a pohybu se používají odlišná řešení, která popisuji v následujících částech.
+Pro sledování náklonu a pohybu se používají odlišné technologie, která popisuji v následujících částech.
 
 \section{Gyroskop}
 
-Gyroskop je elektronické zařízení, které umožňuje vypočítat 
+Gyroskop je elektronické zařízení, které umožňuje vypočítat úhlové zrychlení. Jejich zpracování jsou různá, v spotřebitelské elektronice převažují \textit{vibrační gyroskopy}, díky jejich velikosti, ceně a dostatečné přesnosti. V součástce je rozkmitáno malé těleso, na které je vlivem otáčení vyvinuta tzv. Coriolisova síla, která působí kolmo na osu otáčení. Tato síla je úměrná rychlosti otáčení a jejím změřením můžeme určit rotaci zařízení. \cite{Electricity_Magnetism} \cite{techmania_coriolis}
 
 \section{Sledování pohybu}
 
-něco o trackování, výrobcích, atd. zmínit trackovací systém bez věží od Meta/FB
+Sledování pohybu v prostoru je řešeno různými způsoby. Podle postavení zařízení je možné je seskupit do dvou kategorií: vnější sledování (outside-in) a vnitřní sledování (inside-out).
 
+Vnější sledování využívá speciální zařízení ("věže") rozmístěná v prostředí, ve kterém je sledován pohyb. Taková zařízení mohou být např. emitery infračerveného světla, které headset zaznamená a vypočítá svoji pozici v prostoru. Protože pro sledování jsou použita tato genercká zařízení, těší se tento způsob sledování vysoké kompatibilitě -- při změně headsetu není potřeba pořizovat jiné věže (za předpokladu, že nový headset také využívá vnějšího sledování). Nevýhodou je naopak obtížná přenosnost takového systému. \cite{vr_tracking_suvi}
 
+Vnitřní sledování je v dnešní době stále častěji zmiňovaný pojem. Narozdíl od vnějšího sledování nevyužívá žádných externích zařízení a je úplně samostatný. První takový systém představil Google se svým ARCore, zmíněný v předchozí kapitole. Ten umožnil sledování umístění pouze pomocí pohledu z kamery. \cite{enwiki:1182789097} Protože je ale navržen pro spuštění na většině mobilních zařízení, výsledky jsou poněkud nekonzistentní (kvůli lišícím se kvalitám kamer).
+Revoluci v tomto odvětví způsobila společnost Meta se svým inovativním řešením. Používá sadu čtyř kamer, které průběžně sledují a analyzují prostor kolem uživatele. V tomto prostoru si poté vytvoří záchytné body, jejichž pozici analyzuje použitím AI algoritmů. Tímto je takový systém velice přenosný a pro běžného uživatele neuvěřitelně přesný. V nevhodném prostředí tento systém ale přestává fungovat (např. v špatných světelných podmínkách).
 
 \chapter{Software}
 lorem ipsum
