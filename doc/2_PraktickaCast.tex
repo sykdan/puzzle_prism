@@ -22,7 +22,13 @@ Godot je bezplatný herní engine. Hlavní důvod, proč jsem si ho vybral namí
 
 \section{Struktura Godot projektu}
 
-Pro úpravu Godot projektů používáme oficiální editor. Objekty v projektu jsou reprezentovány jako strom uzlů, podobně jako jsou webové stránky reprezentovány stromem značek. Uzly samy o sobě nemají velkou hodnotu, ale jejich kombinováním můžeme dosáhnout komplexnější logiky. Části stromů můžeme dále uložit jako \textit{scénu} (textový soubor .tscn), kterou můžeme poté instancovat.
+Pro úpravu Godot projektů používáme oficiální editor. Základními stavebními bloky enginu jsou uzly, které jsou uspořádány do stromu, podobně jako jsou webové stránky reprezentovány stromem značek. Tyto uzly samy o sobě nemají mnoho funkcí, jejich kombinací ale můžeme dosáhnout komplexnějšího chování. Jednotlivé uzly se dají přirovnat k třídám v objektově orientovaném programování, které se navzájem rozšiřují.
+
+Například uzel Node3D disponuje atributem \texttt{position} (pozice), ale uzel Camera3D, který rozšiřuje Node3D, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. Camera3D dceřinný uzel Node3D, pak se Camera3D pohybuje společně s Node3D (sdílí atribut \texttt{position}) a \texttt{position} na Camera3D je relativní posun od pozice Node3D)
+
+Uzlům můžeme přiřadit \textit{skript}, který upravuje jejich chování. Tento skript se chová jako třída v OOP, která rozšiřuje daný uzel. Pokud rozšiřujeme uzel pro 2D grafiku, můžeme metodou získat pozici jako 2D vektor. Pokud rozšiřujeme uzel pro 3D grafiku, stejnou metodou můžeme získat pozici jako 3D vektor. Stejně tak můžeme přepisovat virtuální funkce. Projekty v Godotu používají dedikovaný jazyk zvaný GDScript, existuje ale oficiální podpora jazyka C\# a komunitně vytvořená rozšíření pro Rust.
+
+Uzel a jeho dceřinné uzly společně s přiřazenými skripty můžeme dále uložit jako izolovanou \textit{scénu} (textový soubor .tscn), kterou můžeme poté instancovat. Scéna se pak chová jako samostatný uzel. Jedna scéna je vždy hlavní scénou a je otevřena při spuštění projektu.
 
 \begin{figure}[H]
   \centering
@@ -31,7 +37,17 @@ Pro úpravu Godot projektů používáme oficiální editor. Objekty v projektu 
   \label{godot_editor_maze_tscn}
 \end{figure}
 
+!!! Dopsat strukturu !!!
+
 \section{Jazyk \textit{GDScript}}
+
+GDScript je jazyk, ve kterém se vyvíjí většina Godot projektů. Můj projekt je taktéž psán v GDScriptu a z tohoto důvodu jej zde popisuji pro snadnější pochopení kódu.
+
+GDScript je vysokoúrovňový, objektově orientovaný, imperativní a hybridně (staticky i dynamicky) typovaný jazyk. Vzhledově nápadně připomíná jazyk Python a podobně jako Python používá indentaci pro vyjádření řídící struktury. Nabízí širokou škálu vestavěných tříd pro manipulaci s hodnotami typickými pro hry, matematiku a fyziku (textury, vektory, matice) a obecné typy (celé číslo, desetinné číslo, textový řetězec atd.). Proměnné programátor může anotovat typem. Podporuje koprogramy (coroutines) a událostmi řízené programování pomocí "signálů". Pro svou hlubokou integraci se samotným enginem je vhodný pro jednoduché projekty, kvůli své dynamičnosti ovšem nenabízí stejnou rychlost jako kompilované jazyky. \cite{gdscript_reference}
+
+Níže je příklad kódu v GDScriptu.
+
+\lstinputlisting{code/sample_gdscript.gd}
 
 \chapter{Algoritmy}
 

@@ -12,7 +12,7 @@
 
 \usepackage[hidelinks]{hyperref}							% Počítačová verze umí odkazy
 \usepackage{lipsum}											% Lorem ipsum text
-\usepackage{listings}										% Balíček pro zvýraznění a formátování kódu
+\usepackage{listingsutf8}										% Balíček pro zvýraznění a formátování kódu
 \usepackage{lstautogobble}									% Doplňující balíček k listings
 
 \usepackage[automake,toc]{glossaries}						% Balíček pro zkratky
@@ -130,6 +130,8 @@
 
 \lstdefinestyle{mystyle}{
 	backgroundcolor=\color{codegray},
+	basicstyle=\ttfamily,
+	breaklines=true,
 	numbers=left,
 	tabsize=2
 }
@@ -142,3 +144,6 @@
 	ItalicFont={RobotoSerif-Italic},
 	BoldItalicFont={RobotoSerif-BoldItalic}
 ]{RobotoSerif-Regular}
+\setmonofont[
+	Path=./fnt/,
+]{RobotoMono-Regular}
