@@ -5,12 +5,12 @@
 V praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jsem si následující kritéria:
 
 \begin{itemize}
-	\item \textbf{Nenáročnost}. Chtěl jsem, aby má hra nebyla obtížná na pochopení. Většina VR her vyžaduje zvýšenou fyzickou aktivitu nebo hlubší porozumění VR konceptů. Ideálně jsem chtěl vytvořit hru, kterou bych mohl komukoliv půjčit, aniž bych musel dlouze vysvětlovat její princip.
+  \item \textbf{Nenáročnost}. Chtěl jsem, aby má hra nebyla obtížná na pochopení. Většina VR her vyžaduje zvýšenou fyzickou aktivitu nebo hlubší porozumění VR konceptů. Ideálně jsem chtěl vytvořit hru, kterou bych mohl komukoliv půjčit, aniž bych musel dlouze vysvětlovat její princip.
   \item \textbf{Grafická jednoduchost}. Nepovažuji se za umělce a umím vytvářet pouze základní modely a textury. Bylo pro mě tedy klíčové přijít s takovým konceptem, který by byl vzhledově nenáročný.
   \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které VR platformy poskytují. Tedy ovládání pohybem, jednoduchá fyzika atp.
 \end{itemize}
 
-Dospěl jsem k následujícímu návrhu: Hra sestává z kostky tvořené úrovněmi nakládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
+Dospěl jsem k následujícímu návrhu: Hra sestává z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
 
 To splňuje moje kritéria - hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
 
@@ -18,13 +18,11 @@ Již od samého začátku jsem svou hru chtěl napsat v herním enginu. Herních
 
 \chapter{Herní engine Godot}
 
-Godot je bezplatný herní engine. Hlavní důvod, proč jsem si ho vybral namísto známějšího Unity, je jeho licence. Godot je šířen pod svobodnou licencí MIT, která vývojářům dovoluje kód používat komerčně i naopak, a to pod jedinou podmínkou: text licence je ve výsledné práci zachován. Unity Engine je naopak distribuován pod nesvobodnou licencí a za některé funkce musí vývojáři platit. Godot se v poslední době stává více a více populárním a obdržel investice od velkých společností. Mezi ně patří např. grant od Epic Games pro vývoj grafiky a grant od Mety pro vývoj XR funkcí. \cite{godot_epicgames} \cite{godot_meta}
-
-\section{Struktura Godot projektu}
+Godot je bezplatný herní engine. Hlavní důvod, proč jsem si jej vybral namísto známějšího Unity, je jeho licence. Godot je šířen pod svobodnou licencí MIT, která vývojářům dovoluje kód používat komerčně i naopak, a to pod jedinou podmínkou: text licence je ve výsledné práci zachován. Unity Engine je naopak distribuován pod nesvobodnou licencí a za některé funkce musí vývojáři platit. Godot se v poslední době stává více a více populárním a obdržel investice od velkých společností. Mezi ně patří např. grant od Epic Games pro vývoj grafiky a grant od Mety pro vývoj XR funkcí. \cite{godot_epicgames} \cite{godot_meta}
 
 Pro úpravu Godot projektů používáme oficiální editor. Základními stavebními bloky enginu jsou uzly, které jsou uspořádány do stromu, podobně jako jsou webové stránky reprezentovány stromem značek. Tyto uzly samy o sobě nemají mnoho funkcí, jejich kombinací ale můžeme dosáhnout komplexnějšího chování. Jednotlivé uzly se dají přirovnat k třídám v objektově orientovaném programování, které se navzájem rozšiřují.
 
-Například uzel Node3D disponuje atributem \texttt{position} (pozice), ale uzel Camera3D, který rozšiřuje Node3D, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. Camera3D dceřinný uzel Node3D, pak se Camera3D pohybuje společně s Node3D (sdílí atribut \texttt{position}) a \texttt{position} na Camera3D je relativní posun od pozice Node3D)
+Například uzel Node3D disponuje atributem \texttt{position} (pozice) a uzel Camera3D, který rozšiřuje Node3D, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. Camera3D dceřinný uzel Node3D, pak se Camera3D pohybuje společně s Node3D (sdílí atribut \texttt{position}) a \texttt{position} na Camera3D je relativní posun od Node3D)
 
 Uzlům můžeme přiřadit \textit{skript}, který upravuje jejich chování. Tento skript se chová jako třída v OOP, která rozšiřuje daný uzel. Pokud rozšiřujeme uzel pro 2D grafiku, můžeme metodou získat pozici jako 2D vektor. Pokud rozšiřujeme uzel pro 3D grafiku, stejnou metodou můžeme získat pozici jako 3D vektor. Stejně tak můžeme přepisovat virtuální funkce. Projekty v Godotu používají dedikovaný jazyk zvaný GDScript, existuje ale oficiální podpora jazyka C\# a komunitně vytvořená rozšíření pro Rust.
 
@@ -37,8 +35,6 @@ Uzel a jeho dceřinné uzly společně s přiřazenými skripty můžeme dále u
   \label{godot_editor_maze_tscn}
 \end{figure}
 
-!!! Dopsat strukturu !!!
-
 \section{Jazyk \textit{GDScript}}
 
 GDScript je jazyk, ve kterém se vyvíjí většina Godot projektů. Můj projekt je taktéž psán v GDScriptu a z tohoto důvodu jej zde popisuji pro snadnější pochopení kódu.
@@ -49,12 +45,42 @@ Níže je příklad kódu v GDScriptu.
 
 \lstinputlisting{code/sample_gdscript.gd}
 
+\chapter{Struktura projektu}
+
+\begin{samepage}
+  Můj projekt jsem rozdělil do jednotlivých, jednoduše spravovatelných scén. Tímto jsem mohl na mnohých funkcích pracovat odděleně a mohl bych je, teoreticky, použít i v budoucích projektech. Zde je zjednodušený diagram těchto scén:
+
+  \vspace{0.3cm}
+  \renewcommand\DTstyle{\rmfamily}
+  \dirtree{%
+    .1 Hlavní scéna (spojuje a ovládá zbylé scény) .
+    .2 Prostředí (skybox) .
+    .2 Hráč .
+    .3 Trackované ovladače, kamera synchronizovaná s headsetem .
+    .2 Obrazovka .
+    .3 Výběr obtížnosti, žebříček nejlepších, nastavení hry .
+    .2 Kostka s bludištěm .
+    .3 Kostka o určité velikosti .
+    .4 Úroveň (bludiště, ze kterých se kostka skládá) .
+    .5 Komnata (buňky, ze kterých se skládá bludiště) .
+    .3 Kulička (volně se pohybující předmět s vlastní fyzikou) .
+  }
+
+  Každá scéna reprezentuje odlišnou sadu problémů a výzev, které jsem musel při tvorbě projektu řešit.
+\end{samepage}
+
+\section{Hráč, interakce s headsetem a ovladači}
+
+
+
+\section{Manipulace s bludištěm}
+
+\section{Uživatelské rozhraní}
+
 \chapter{Algoritmy}
 
 \section{Generování bludiště}
 
 \chapter{Interaktivita}
 
-\section{Manipulace s bludištěm}
 
-\section{Uživatelské rozhraní}
