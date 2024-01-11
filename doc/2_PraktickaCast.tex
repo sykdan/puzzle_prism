@@ -79,18 +79,67 @@ Kvůli prevenci závratí jsem do této scény přidal platformu umístěnou pod
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
-Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření obou ovladačů hra vytvoří neviditelný uzel, jehož změny v transformaci uchopený předmět sleduje. Tento uzel je manuálně umístěn do středu mezi levým a pravým ovladačem (=průměru jejich pozic; pokud je považujeme za vektory) a je otočen tak, že vektor Z tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Osa Y míří vzhůru.} míří od levého ovladače k pravému ovladači a vektor Y míří stejným směrem jako palce uživatele. Tímto jsem dosáhl poněkud přesvědčivého efektu.
+Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření obou ovladačů hra vytvoří neviditelný uzel, jehož změny v transformaci uchopený předmět sleduje. Tento uzel je manuálně umístěn do středu mezi levým a pravým ovladačem (=průměru jejich pozic; pokud je považujeme za vektory) a je otočen tak, že vektor Z tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Vektor Y míří vzhůru.} míří od levého ovladače k pravému ovladači a vektor Y míří stejným směrem jako palce uživatele. Tímto jsem dosáhl poněkud přesvědčivého efektu.
 
 TODO: Přidat foto s ilustrací co to dovysvětlí.
 
-\section{Kostka}
+\section{Kostka, bludiště}
 
-- rozdělení kostky na úrovně a komnaty
-- wilsonův algoritmus pro generování bludiště
+Kostka (a bludiště v ní) je hlavním prvkem hry. Skládá se ze čtyř zdí, úrovní (bludišť) a komnat. Každé bludiště je v podstatě mřížka čtvercových buněk, které jsou odděleny zdmi. Jedna buňka je označena jako začátek a jedna jako cíl.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=180pt]{maze_example.png}
+  \caption{Ukázka vygenerovaného bludiště (v 2D podobě) z testovací scény}
+  \label{maze_example}
+\end{figure}
+
+Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, narozdíl od jiných algoritmů pro generování bludiště. Postup je následující:
+
+\begin{enumerate}
+  \setcounter{enumi}{0}
+  \item Mějme graf buněk, kde má každá buňka několik sousedních buněk (např. pro mřížku mají buňky 4 sousední buňky, vyjma těch na krajích a v rozích). Nechť je mezi všemi sousedícími buňkami spojení, které lze označit jako průchod nebo zeď.
+  \item Označme všechny spojení jako zdi a jednu náhodně zvolenou buňku označme jako zahrnutou v bludišti.
+  \item Libovolným způsobem zvolme buňku. Pokud je tato buňka zahrnuta v bludišti, zvolme jinou buňku. \label{pick}
+  \item Označme buňku jako zahrnutou v současné iteraci.
+  \item Přejděme na náhodnou sousedící buňku a v předchozí buňce uložíme ukazatel k následující buňce. Poté: \label{lerw}
+        \begin{itemize}
+          \item Pokud tato buňka není zahrnuta ani v iteraci, ani v bludišti, označme ji jako zahrnutou v iteraci a přejděme na krok \ref{lerw}.
+          \item Pokud je tato buňka zahrnuta v iteraci, vznikla smyčka. Pomocí ukazatelů uložených v buňkách projděme tuto smyčku, odstraňme buňky ze současné iterace a odeberme ukazatele.
+          \item Pokud je tato buňka zahrnuta v bludišti, všechny buňky v iteraci označme jako buňky v bludišti. Spoje mezi buňkami v této iteraci označme jako průchody.
+        \end{itemize}
+  \item Pokud stále existují buňky, které nejsou zahrnuty v bludišti, přejděme zpět ke kroku \ref{pick}.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[height=100pt]{maze_gen_step_1.png}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[height=100pt]{maze_gen_step_2.png}
+  \end{minipage}
+
+  \caption{Příklad dvou iterací kroků \ref{pick} až \ref{lerw}. Žlutě jsou buňky v bludišti, modře buňky v iteraci.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=120pt]{maze_gen_step_3.png}
+  \caption{Stav po těchto dvou iteracích}
+\end{figure}
+
+todo:
+- sestavení vygenerovaného bludiště v godot enginu
+- kód algoritmu v GDScriptu
 - následná úprava pro určení nejvzdálenějšího bodu
 
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-- Obrazovk
+todo:
+- Obrazovky
 - použití raycastu pro zjištění kolize s laserovým ukazovátkem
