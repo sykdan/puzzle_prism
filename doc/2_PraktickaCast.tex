@@ -99,7 +99,7 @@ Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fak
 \begin{enumerate}
   \setcounter{enumi}{0}
   \item Mějme graf buněk, kde má každá buňka několik sousedních buněk (např. pro mřížku mají buňky 4 sousední buňky, vyjma těch na krajích a v rozích). Nechť je mezi všemi sousedícími buňkami spojení, které lze označit jako průchod nebo zeď.
-  \item Označme všechny spojení jako zdi a jednu náhodně zvolenou buňku označme jako zahrnutou v bludišti.
+  \item Označme všechny spojení jako zdi a jednu náhodně zvolenou buňku označme jako zahrnutou v bludišti. \label{init}
   \item Libovolným způsobem zvolme buňku. Pokud je tato buňka zahrnuta v bludišti, zvolme jinou buňku. \label{pick}
   \item Označme buňku jako zahrnutou v současné iteraci.
   \item Přejděme na náhodnou sousedící buňku a v předchozí buňce uložíme ukazatel k následující buňce. Poté: \label{lerw}
@@ -131,6 +131,28 @@ Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fak
   \includegraphics[height=120pt]{maze_gen_step_3.png}
   \caption{Stav po těchto dvou iteracích}
 \end{figure}
+
+Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z náhodně propletených buněk. V prvních verzích hry byl konec náhodně zvolený, docházelo ale k situacím, kdy byl konec velmi blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a nejvzdálenější buňku jako konec.
+
+\begin{figure}[H]
+  \centering
+
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[height=100pt]{maze_gen_count_1.png}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[height=100pt]{maze_gen_count_2.png}
+  \end{minipage}
+
+  \caption{Počítání vzdálenosti paralelně s generováním}
+\end{figure}
+
+Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní, naplní ji komnatami a v jednotlivých komnatách nastaví zdi. 
+
+TODO: přidat sem obrázek jedné úrovně, až budu doma
+
 
 todo:
 - sestavení vygenerovaného bludiště v godot enginu
