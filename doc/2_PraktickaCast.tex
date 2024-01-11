@@ -75,19 +75,22 @@ Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sest�
 
 K tomuto jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod CC0\footnote{CC0 je licence používána pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv.}.
 
-Kvůli prevenci závratí jsem do této scény přidal platformu umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy.
+Kvůli prevenci závratí jsem do této scény přidal platformu umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Hráč poté nemá pocit, že se "vznáší v prázdnotě".
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
-Implementovat uchopení předmětu jednou rukou je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení oběma rukama, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musíme přistoupit k nějakému kompromisu.
+Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření obou ovladačů hra vytvoří neviditelný bod, jehož změny v transformaci uchopený předmět sleduje. Tento bod je umístěn ve středu mezi levým a pravým ovladačem (=průměru jejich pozic; pokud je považujeme za vektory) a je otočen tak, že vektor Z tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Osa Y míří vzhůru.} míří od levého ovladače k pravému ovladači a vektor Y míří stejným směrem jako palce uživatele. Tímto jsem dosáhl poněkud přesvědčivého efektu.
 
-!! dopsat !!
+TODO: Přidat foto s ilustrací co to dovysvětlí.
 
 \section{Kostka}
 
+- rozdělení kostky na úrovně a komnaty
+- wilsonův algoritmus pro generování bludiště
+- následná úprava pro určení nejvzdálenějšího bodu
 
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-
-
+- Obrazovk
+- použití raycastu pro zjištění kolize s laserovým ukazovátkem
