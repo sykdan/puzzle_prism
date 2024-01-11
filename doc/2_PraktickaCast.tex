@@ -22,7 +22,7 @@ Godot je bezplatný herní engine. Hlavní důvod, proč jsem si jej vybral nam�
 
 Pro úpravu Godot projektů používáme oficiální editor. Základními stavebními bloky enginu jsou uzly, které jsou uspořádány do stromu, podobně jako jsou webové stránky reprezentovány stromem značek. Tyto uzly samy o sobě nemají mnoho funkcí, jejich kombinací ale můžeme dosáhnout komplexnějšího chování. Jednotlivé uzly se dají přirovnat k třídám v objektově orientovaném programování, které se navzájem rozšiřují.
 
-Například uzel Node3D disponuje atributem \texttt{position} (pozice) a uzel Camera3D, který rozšiřuje Node3D, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. Camera3D dceřinný uzel Node3D, pak se Camera3D pohybuje společně s Node3D (sdílí atribut \texttt{position}) a \texttt{position} na Camera3D je relativní posun od Node3D)
+Například uzel \texttt{Node3D} disponuje atributem \texttt{position} (pozice) a uzel \texttt{Camera3D}, který rozšiřuje \texttt{Node3D}, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. \texttt{Camera3D} dceřinný uzel \texttt{Node3D}, pak se \texttt{Camera3D} pohybuje společně s \texttt{Node3D} (sdílí atribut \texttt{position}) a \texttt{position} na \texttt{Camera3D} je relativní posun od \texttt{Node3D})
 
 Uzlům můžeme přiřadit \textit{skript}, který upravuje jejich chování. Tento skript se chová jako třída v OOP, která rozšiřuje daný uzel. Pokud rozšiřujeme uzel pro 2D grafiku, můžeme metodou získat pozici jako 2D vektor. Pokud rozšiřujeme uzel pro 3D grafiku, stejnou metodou můžeme získat pozici jako 3D vektor. Stejně tak můžeme přepisovat virtuální funkce. Projekty v Godotu používají dedikovaný jazyk zvaný GDScript, existuje ale oficiální podpora jazyka C\# a komunitně vytvořená rozšíření pro Rust.
 
@@ -69,18 +69,25 @@ Níže je příklad kódu v GDScriptu.
   Každá scéna reprezentuje odlišnou sadu problémů a výzev, které jsem musel při tvorbě projektu řešit.
 \end{samepage}
 
-\section{Hráč, interakce s headsetem a ovladači}
+\section{Hráč, interakce se zařízením}
+
+Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sestává z uzlů \texttt{XRCamera3D}, pohledu do 3D prostředí synchronizovaným s umístěním headsetu, a dvou uzlů \texttt{XRController3D}, které jsou synchronizované s umístěním levého a pravého ovladače.
+
+K tomuto jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod CC0\footnote{CC0 je licence používána pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv.}.
+
+Kvůli prevenci závratí jsem do této scény přidal platformu umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy.
+
+Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
+
+Implementovat uchopení předmětu jednou rukou je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení oběma rukama, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musíme přistoupit k nějakému kompromisu.
+
+!! dopsat !!
+
+\section{Kostka}
 
 
-
-\section{Manipulace s bludištěm}
-
+\label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-\chapter{Algoritmy}
-
-\section{Generování bludiště}
-
-\chapter{Interaktivita}
 
 
