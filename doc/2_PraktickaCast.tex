@@ -10,9 +10,7 @@ V praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jse
   \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které VR platformy poskytují. Tedy ovládání pohybem, jednoduchá fyzika atp.
 \end{itemize}
 
-Dospěl jsem k následujícímu návrhu: Hra sestává z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
-
-To splňuje moje kritéria - hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
+Dospěl jsem k následujícímu návrhu: Hra sestává z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň. To splňuje moje kritéria - hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště. V průběhu vývoje jsem často hru testoval na přátelích, kteří mi poskytli důležitou zpětnou vazbu a návrhy na vylepšení.
 
 Již od samého začátku jsem svou hru chtěl napsat v herním enginu. Herních enginů zdarma, které zároveň podporují XR, není mnoho. Zvolil jsem si svobodný Godot Engine.
 
@@ -75,7 +73,7 @@ Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sest�
 
 K tomuto jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod CC0\footnote{CC0 je licence používána pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv.}.
 
-Kvůli prevenci závratí jsem do této scény přidal platformu umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Hráč poté nemá pocit, že se "vznáší v prázdnotě".
+Při testování hry jsem často slýchal stížnosti, že hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Mí testeři tuto myšlenku potvrdili.
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
@@ -149,19 +147,17 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
   \caption{Počítání vzdálenosti paralelně s generováním}
 \end{figure}
 
-Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní, naplní ji komnatami a v jednotlivých komnatách nastaví zdi. 
+Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi. 
 
 TODO: přidat sem obrázek jedné úrovně, až budu doma
-
-
-todo:
-- sestavení vygenerovaného bludiště v godot enginu
-- kód algoritmu v GDScriptu
-- následná úprava pro určení nejvzdálenějšího bodu
 
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-todo:
-- Obrazovky
-- použití raycastu pro zjištění kolize s laserovým ukazovátkem
+Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z tradičních rozhraní. Většina programů používá pro své rozhraní virtuální "obrazovky", plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální "laserové ukazovátko", kterým na tyto obrazovky ukazuje a stisknutím tlačítka interaguje.
+
+TODO: Obrázek z headsetu, který tyhle obrazovky demonstruje
+
+Pro vykreslení orbazovky jsem použil uzel \texttt{SubViewport}, který umožňuje vytvořit virtuální plátno a libovolně ho v rámci enginu zobrazit. Tomuto uzlu můžu přiřadit libovolné dceřinné uzly, které jsou poté renderovány do tohoto plátna. Samo o sobě není vidět, ale může být přiřazeno jako textura k jinému uzlu. Pro můj účel jsem použil uzel \texttt{MeshInstance} (instance 3D objektu) a jako objekt použil jednoduchý obdélník.
+
+Interakce s obrazovkou využívá postup zvaný "raycasting", česky vysílání paprsků. Z ruky hráče vyšleme paprsek směrem, kterým ukazuje, a při kolizi s nějakým objektem (v tomto případě obrazovkou) vypočítáme pozici, kde ke kolizi došlo. Godot Engine má podporu pro ray casting v rámci uzlu \texttt{RayCast3D}, který jsem přidal do scény s hráčem. Pokud tento uzel zaznamená kolizi se scénou Obrazovka, zobrazí paprsek mířící od prstu hráče k obrazovce a začne v jejím \texttt{SubViewport}u simulovat vstup myší. Simulování vstupu mi umožňuje využít nespočet vestavěných uzlů pro tvorbu rozhraní.
