@@ -6,3 +6,13 @@
 script = ExtResource("1_tk5t6")
 
 [node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="Number" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+pixel_size = 0.009
+shaded = true
+double_sided = false
+text = "1"
+font_size = 112
+outline_size = 32
+justification_flags = 0

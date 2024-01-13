@@ -1,32 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyjtehvx034qy"]
+[gd_scene load_steps=3 format=3 uid="uid://dyjtehvx034qy"]
 
 [ext_resource type="Script" path="res://tests/aaaaaa.gd" id="1_moj27"]
-
-[sub_resource type="TorusMesh" id="TorusMesh_v8ufh"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4ggp0"]
-
-[sub_resource type="Sky" id="Sky_d66v6"]
-sky_material = SubResource("ProceduralSkyMaterial_4ggp0")
-
-[sub_resource type="Environment" id="Environment_3okas"]
-background_mode = 2
-sky = SubResource("Sky_d66v6")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_cww1d"]
-size = Vector3(6, 1, 1)
+[ext_resource type="PackedScene" uid="uid://e8ylplpd2unk" path="res://scenes/maze/maze.tscn" id="2_mqbre"]
 
 [node name="aaaaaa" type="Node3D"]
 script = ExtResource("1_moj27")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-mesh = SubResource("TorusMesh_v8ufh")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_3okas")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_cww1d")
+[node name="Maze" parent="." instance=ExtResource("2_mqbre")]

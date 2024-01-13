@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://0ethkne6pb3l"]
 
-[ext_resource type="PackedScene" path="res://scenes/player/hands/animations/left/AnimationPlayer.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bkonh4f1ei6y" path="res://scenes/player/hands/animations/left/AnimationPlayer.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/player/hands/hand.gd" id="1_py0yn"]
 [ext_resource type="PackedScene" uid="uid://16colgxrw27d" path="res://scenes/player/hands/model/Hand_low_L.gltf" id="2"]
 [ext_resource type="Resource" path="res://scenes/player/hands/poses/pose_default_left.tres" id="3_a3m55"]
@@ -36,7 +36,7 @@ nodes/OpenHand/node = SubResource("AnimationNodeAnimation_doqmw")
 nodes/OpenHand/position = Vector2(-600, 100)
 nodes/Trigger/node = SubResource("AnimationNodeBlend2_8jcf7")
 nodes/Trigger/position = Vector2(-360, 20)
-node_connections = [&"output", 0, &"Grip", &"Grip", 0, &"Trigger", &"Grip", 1, &"ClosedHand2", &"Trigger", 0, &"OpenHand", &"Trigger", 1, &"ClosedHand1"]
+node_connections = [&"Grip", 0, &"Trigger", &"Grip", 1, &"ClosedHand2", &"Trigger", 0, &"OpenHand", &"Trigger", 1, &"ClosedHand1", &"output", 0, &"Grip"]
 
 [node name="LeftHand" type="Node3D"]
 script = ExtResource("1_py0yn")

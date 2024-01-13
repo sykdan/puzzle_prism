@@ -9,9 +9,16 @@ var maze_goal: Vector2i
 
 var is_finished = false
 
-func assign(data: Array[MazeGen.MazeNode], goal):
+func _ready():
+	$Number.position.z = (maze.size.y * Shared.NODE_SIZE) - Shared.WALL_SIZE
+	$Number.position.x = $Number.position.z/2 - Shared.WALL_SIZE
+	$Number.position.y = Shared.WALL_SIZE/-2
+	$Number.position.z += 0.001
+
+func assign(data: Array[MazeGen.MazeNode], goal, level):
 	maze_data = data
 	maze_goal = goal
+	$Number.text = str(level)
 
 func build_obstacles():
 	if is_in_group(&"has_obstacles"):
@@ -24,11 +31,14 @@ func build_obstacles():
 		c.position.x = node.position.x * Shared.NODE_SIZE
 		c.position.z = node.position.y * Shared.NODE_SIZE
 		
+		var i = 2
+		
 		if node.x_passage:
 			c.get_node("X").hide()
 			c.get_node("X_Shape").disabled = true
 			c.get_node("X").queue_free()
 			c.get_node("X_Shape").queue_free()
+			i -= 1
 		elif node.position.y == size.y - 1:
 			c.get_node("X").scale.z = 1.5
 			c.get_node("X").position.z = -0.25
@@ -41,6 +51,7 @@ func build_obstacles():
 			c.get_node("Z_Shape").disabled = true
 			c.get_node("Z").queue_free()
 			c.get_node("Z_Shape").queue_free()
+			i -= 1
 		elif node.position.x == size.x - 1:
 			c.get_node("Z").scale.z = 1.5
 			c.get_node("Z").position.x = -0.25
@@ -48,7 +59,8 @@ func build_obstacles():
 			c.get_node("Z").scale.z = 1.5
 			c.get_node("Z").position.x = 0.25
 		
-		add_child(c)
+		if i != 0:
+			add_child(c)
 	
 	add_to_group(&"has_obstacles")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3]
+[gd_scene load_steps=37 format=3 uid="uid://bkonh4f1ei6y"]
 
 [ext_resource type="Animation" uid="uid://dgfeikrugfewi" path="res://scenes/player/hands/animations/left/Cup.res" id="1_7svyl"]
 [ext_resource type="Animation" uid="uid://dlxa6f6hwurka" path="res://scenes/player/hands/animations/left/Default pose.res" id="2_ykhfd"]

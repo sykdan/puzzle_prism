@@ -98,7 +98,7 @@ func generate_level():
 
 func _maze_generated(data: Array[MazeGen.MazeNode], end: Vector2i):
 	var level = $Levels.get_child(-1) as Level
-	level.assign(data, end)
+	level.assign(data, end, levels - $Levels.get_child_count() + 1)
 	level.build_floor()
 	
 	_next_level_start = end
