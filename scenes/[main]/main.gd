@@ -1,6 +1,6 @@
 extends Node3D
 
-const MAZE: PackedScene = preload("res://scenes/MAZE/MAZE.tscn")
+const MAZE: PackedScene = preload("res://scenes/maze/maze.tscn")
 
 var current_maze: Maze
 var maze_start_time: int = 0

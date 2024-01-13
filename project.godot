@@ -25,6 +25,10 @@ MazeGen="*res://scripts/maze_generator.gd"
 Shared="*res://scripts/shared.gd"
 SaveFile="*res://scripts/savefile.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godotopenxrvendors/plugin.cfg")
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/i18n/locale.cs.translation", "res://assets/i18n/locale.en.translation")
