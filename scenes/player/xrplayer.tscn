@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://buc0ls6xkyrd0"]
+[gd_scene load_steps=17 format=3 uid="uid://buc0ls6xkyrd0"]
 
 [ext_resource type="Script" path="res://scenes/player/xrplayer.gd" id="1_tgpk5"]
 [ext_resource type="PackedScene" uid="uid://0ethkne6pb3l" path="res://scenes/player/hands/left_fullglove_low.tscn" id="2_1fxpe"]
+[ext_resource type="Script" path="res://scenes/player/controller.gd" id="2_ekk8n"]
 [ext_resource type="PackedScene" uid="uid://b2yjg0kgpurrd" path="res://scenes/player/hands/right_fullglove_low.tscn" id="3_n6phu"]
 [ext_resource type="PackedScene" uid="uid://dllr7dtg6qhjm" path="res://scenes/player/xr/start_xr.tscn" id="4_21n4l"]
 [ext_resource type="Shader" path="res://scenes/player/floor.gdshader" id="5_s38ep"]
@@ -75,7 +76,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xsatl")
 
 [node name="XRPlayer" type="XROrigin3D"]
-world_scale = 40.0
 script = ExtResource("1_tgpk5")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
@@ -93,6 +93,7 @@ mesh = SubResource("SphereMesh_slryp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 tracker = &"left_hand"
 pose = &"aim"
+script = ExtResource("2_ekk8n")
 
 [node name="Hand" parent="LeftHand" instance=ExtResource("2_1fxpe")]
 hand_material_override = SubResource("StandardMaterial3D_ul1b7")
@@ -122,6 +123,7 @@ mesh = SubResource("CylinderMesh_00g2n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 tracker = &"right_hand"
 pose = &"aim"
+script = ExtResource("2_ekk8n")
 
 [node name="Hand" parent="RightHand" instance=ExtResource("3_n6phu")]
 hand_material_override = SubResource("StandardMaterial3D_ul1b7")
@@ -153,4 +155,4 @@ skeleton = NodePath("")
 [connection signal="button_released" from="LeftHand" to="." method="_on_button_pressed" binds= [&"left", false]]
 [connection signal="button_pressed" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", true]]
 [connection signal="button_released" from="RightHand" to="." method="_on_button_pressed" binds= [&"right", false]]
-[connection signal="xr_started" from="XRManager" to="." method="xr_started" flags=6]
+[connection signal="xr_started" from="XRManager" to="." method="_on_xr_started" flags=6]

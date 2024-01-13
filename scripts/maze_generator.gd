@@ -5,19 +5,19 @@ extends Node
 
 var t: Thread
 
-# Emitted once a maze has been generated (for use with threading)
+## Emitted once a maze has been generated (for use with threading)
 signal generated(maze_data, furthest_away)
 
-# Convert index integer to Vector2i representation. 
+## Convert index integer to Vector2i representation. 
 func i2v(size: Vector2i, i: int) -> Vector2i:
 	@warning_ignore("integer_division")
 	return Vector2i(i % size.x, (i % (size.x*size.y)) / size.x)
 
-# Convert Vector2i to index integer representation.
+## Convert Vector2i to index integer representation.
 func v2i(size: Vector2i, v: Vector2i) -> int:
 	return v.x + size.x * v.y
 
-# Helper class that helps represent the maze as a graph.
+## Helper class that helps represent the maze as a graph.
 class MazeNode:
 	var added: bool = false
 	
@@ -29,7 +29,7 @@ class MazeNode:
 	
 	var distance_from_start: int
 
-# Generates a new step in the maze, ensuring we don't go out of bounds.
+## Generates a new step in the maze, ensuring we don't go out of bounds.
 func step(now: Vector2i, size: Vector2i, previous: Vector2i) -> Vector2i:
 	while true:
 		var direction: Vector2i
@@ -67,7 +67,7 @@ func generate_maze(size: Vector2i, start: Vector2i):
 	t = Thread.new()
 	t.start(_generate_maze.bind(size, start))
 
-# Generation function
+## Generate a maze and emit an event once finished.
 func _generate_maze(size: Vector2i, start: Vector2i):
 	var N = size.x * size.y
 	
