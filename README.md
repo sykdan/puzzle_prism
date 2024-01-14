@@ -1,3 +1,5 @@
+For the English version of this README, [click here](https://github.com/sykdan/puzzle_prism/blob/main/README.en.md)
+
 # Puzzle Prism
 je VR hra vytvořená v herním enginu Godot (verze 4.2).
 Tento projekt je předmětem praktické části mé maturitní práce. Samotnou maturitní práci naleznete ve větvi `latex`.
@@ -9,4 +11,3 @@ Hra byla testována a funguje na:
 - Androidem poháněných headsetech (např. Quest)
 - Některých Chromium prohlížečích přes WebXR
 Pro sestavení pro Android potřebujete Android SDK a Javu 17. Pro jejich nastavení vizte dokumentaci Godotu.
-
