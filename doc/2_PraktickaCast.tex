@@ -7,41 +7,14 @@ V praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jse
 \begin{itemize}
   \item \textbf{Nenáročnost}. Chtěl jsem, aby má hra nebyla obtížná na pochopení. Většina VR her vyžaduje zvýšenou fyzickou aktivitu nebo hlubší porozumění VR konceptů. Ideálně jsem chtěl vytvořit hru, kterou bych mohl komukoliv půjčit, aniž bych musel dlouze vysvětlovat její princip.
   \item \textbf{Grafická jednoduchost}. Nepovažuji se za umělce a umím vytvářet pouze základní modely a textury. Bylo pro mě tedy klíčové přijít s takovým konceptem, který by byl vzhledově nenáročný.
-  \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které VR platformy poskytují. Tedy ovládání pohybem, jednoduchá fyzika atp.
+  \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které VR platformy poskytují. Tedy ovládání pohybem, vliv fyzikálních zákonů atp.
 \end{itemize}
 
-Dospěl jsem k následujícímu návrhu: Hra sestává z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň. To splňuje moje kritéria - hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště. V průběhu vývoje jsem často hru testoval na přátelích, kteří mi poskytli důležitou zpětnou vazbu a návrhy na vylepšení.
+Dospěl jsem k následujícímu nápadu: Logická hra sestávající z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
 
-Již od samého začátku jsem svou hru chtěl napsat v herním enginu. Herních enginů zdarma, které zároveň podporují XR, není mnoho. Zvolil jsem si svobodný Godot Engine.
+Toto splňuje moje kritéria -- hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
 
-\chapter{Herní engine Godot}
-
-Godot je bezplatný herní engine. Hlavní důvod, proč jsem si jej vybral namísto známějšího Unity, je jeho licence. Godot je šířen pod svobodnou licencí MIT, která vývojářům dovoluje kód používat komerčně i naopak, a to pod jedinou podmínkou: text licence je ve výsledné práci zachován. Unity Engine je naopak distribuován pod nesvobodnou licencí a za některé funkce musí vývojáři platit. Godot se v poslední době stává více a více populárním a obdržel investice od velkých společností. Mezi ně patří např. grant od Epic Games pro vývoj grafiky a grant od Mety pro vývoj XR funkcí. \cite{godot_epicgames} \cite{godot_meta}
-
-Pro úpravu Godot projektů používáme oficiální editor. Základními stavebními bloky enginu jsou uzly, které jsou uspořádány do stromu, podobně jako jsou webové stránky reprezentovány stromem značek. Tyto uzly samy o sobě nemají mnoho funkcí, jejich kombinací ale můžeme dosáhnout komplexnějšího chování. Jednotlivé uzly se dají přirovnat k třídám v objektově orientovaném programování, které se navzájem rozšiřují.
-
-Například uzel \texttt{Node3D} disponuje atributem \texttt{position} (pozice) a uzel \texttt{Camera3D}, který rozšiřuje \texttt{Node3D}, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. \texttt{Camera3D} dceřinný uzel \texttt{Node3D}, pak se \texttt{Camera3D} pohybuje společně s \texttt{Node3D} (sdílí atribut \texttt{position}) a \texttt{position} na \texttt{Camera3D} je relativní posun od \texttt{Node3D})
-
-Uzlům můžeme přiřadit \textit{skript}, který upravuje jejich chování. Tento skript se chová jako třída v OOP, která rozšiřuje daný uzel. Pokud rozšiřujeme uzel pro 2D grafiku, můžeme metodou získat pozici jako 2D vektor. Pokud rozšiřujeme uzel pro 3D grafiku, stejnou metodou můžeme získat pozici jako 3D vektor. Stejně tak můžeme přepisovat virtuální funkce. Projekty v Godotu používají dedikovaný jazyk zvaný GDScript, existuje ale oficiální podpora jazyka C\# a komunitně vytvořená rozšíření pro Rust.
-
-Uzel a jeho dceřinné uzly společně s přiřazenými skripty můžeme dále uložit jako izolovanou \textit{scénu} (textový soubor .tscn), kterou můžeme poté instancovat. Scéna se pak chová jako samostatný uzel. Jedna scéna je vždy hlavní scénou a je otevřena při spuštění projektu.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[height=180pt]{godot_editor.png}
-  \caption{Editor Godot Engine a otevřená scéna Maze.tscn}
-  \label{godot_editor_maze_tscn}
-\end{figure}
-
-\section{Jazyk \textit{GDScript}}
-
-GDScript je jazyk, ve kterém se vyvíjí většina Godot projektů. Můj projekt je taktéž psán v GDScriptu a z tohoto důvodu jej zde popisuji pro snadnější pochopení kódu.
-
-GDScript je vysokoúrovňový, objektově orientovaný, imperativní a hybridně (staticky i dynamicky) typovaný jazyk. Vzhledově nápadně připomíná jazyk Python a podobně jako Python používá indentaci pro vyjádření řídící struktury. Nabízí širokou škálu vestavěných tříd pro manipulaci s hodnotami typickými pro hry, matematiku a fyziku (textury, vektory, matice) a obecné typy (celé číslo, desetinné číslo, textový řetězec atd.). Proměnné programátor může anotovat typem. Podporuje koprogramy (coroutines) a událostmi řízené programování pomocí "signálů". Pro svou hlubokou integraci se samotným enginem je vhodný pro jednoduché projekty, kvůli své dynamičnosti ovšem nenabízí stejnou rychlost jako kompilované jazyky. \cite{gdscript_reference}
-
-Níže je příklad kódu v GDScriptu.
-
-\lstinputlisting{code/sample_gdscript.gd}
+Výsledný projekt je složen z mnoha souborů, mnoho z nichž nejsou kód a není vhodné je do textu práce zahrnout. Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/sykdan/puzzle_prism/tree/mprace}. 
 
 \chapter{Struktura projektu}
 
@@ -71,7 +44,7 @@ Níže je příklad kódu v GDScriptu.
 
 Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sestává z uzlů \texttt{XRCamera3D}, pohledu do 3D prostředí synchronizovaným s umístěním headsetu, a dvou uzlů \texttt{XRController3D}, které jsou synchronizované s umístěním levého a pravého ovladače.
 
-K tomuto jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod CC0\footnote{CC0 je licence používána pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv.}.
+V této scéně jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod Creative Commons 0\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
 
 Při testování hry jsem často slýchal stížnosti, že hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Mí testeři tuto myšlenku potvrdili.
 

@@ -37,20 +37,22 @@
 \include{doc/0_Uvod.tex}
 \include{doc/1_TeoretickaCast.tex}
 \include{doc/2_PraktickaCast.tex}
-\include{doc/Zaver.tex}
+\include{doc/3_Zaver.tex}
 
 \nocite{*}
 
-\appendix
-\addcontentsline{toc}{part}{Apendix}
-
-\printbibliography
+\addcontentsline{toc}{part}{Přílohy}
 \addcontentsline{toc}{chapter}{Bibliografie}
+\printbibliography
 
 \setglossarystyle{list}
 \printglossary[title={Zkratky}]
 
 \listoffigures
 \addcontentsline{toc}{chapter}{\listfigurename}
+
+\appendix
+\chapter{Záklandí ukázka GDScript kódu}\label{apx_gscript_sample}
+\lstinputlisting{code/sample_gdscript.gd}
 
 \end{document}

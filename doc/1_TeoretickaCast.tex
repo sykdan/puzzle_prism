@@ -100,10 +100,45 @@ Revoluci v tomto odvětví způsobila společnost Meta se svým inovativním ře
 
 \chapter{Software}
 
-V dnešní době, díky standardizovaným rozhraním, je vývoj pro XR mnohem jednodušší, než kdysi. S vydáním prvních komerčních VR zařízení se začínaly formovat první \gls{SDK} pro virtuální realitu. Například Oculus se svým zařízením Oculus Rift příšel se svým vlastním řešenim, Oculus SDK, jehož použití je bezplatné a je integrováno do většiny herních enginů. Aplikace, které cílí na jednu platformu, je ale obtížné spustit na jiných zařízeních. \cite{enwiki:1193283032}
+V dnešní době, díky standardizovaným rozhraním, je vývoj pro XR mnohem jednodušší než kdysi. S vydáním prvních komerčních VR zařízení se začínaly formovat první \gls{SDK} pro virtuální realitu. Například Oculus se svým zařízením Oculus Rift příšel se svým vlastním řešenim, Oculus SDK, jehož použití je bezplatné a je integrováno do většiny herních enginů. Aplikace, které cílí na jednu platformu, je ale obtížné spustit na jiných zařízeních. \cite{enwiki:1193283032}
 
 Této fragmentaci mezi VR zařízeními se snažila zabránit americká společnost Valve, provozovatel známé herní platformy Steam. Ve spolupráci s výrobci vytvořila otevřený standard OpenVR, který vývoj VR aplikací značně usnadnil. Vývojáři nyní mohli cílit na více zařízení a zároveň vyvíjet pro jeden standard. OpenVR se stalo výchozím rozhraním pro headset Vive od společnosti HTC. \cite{enwiki:1192992480}
 
 Dnes nejpoužívanějším standardem, který sjednocuje vývoj AR a VR aplikací, je OpenXR. OpenXR je, jako OpenVR, otevřeným standardem, který vyvíjí konsorcium Khronos Group, které je taktéž známé pro standardy OpenGL a Vulkan. Toto rozhraní implementuje většina dnešních headsetů a VR platform, včetně mobilních headsetů založených na OS Android. OpenXR tímto vyřešilo fragmentaci v XR systémech. \cite{enwiki:1186405367}
 
 XR se, v omezené podobě, dostalo i do dnešních internetových prohlížečů. Prohlížeče založené na Chromium těží ze standardu WebXR, který přináší XR do JavaScriptu. Vývojáři tak můžou do svých webových stránek přidat např. virtuální prohlídky. \cite{webxr_mdn}
+
+\section{Herní engine}
+
+Jako herní engine označujeme software, který umožňuje vývoj her. Zpravidla obsahuje mnohé předem vytvořené nástroje pro snadnější práci s grafikou, zvukem, fyzikou a dalšími koncepty. Vývojáři tyto funkce pak nemusí sami implementovat ve svých hrách. Jednou z oblastí, kterou může herní engine usnadňovat, je právě podpora platformy OpenXR. Nejznámější enginy, například Unity a Unreal Engine, podporu pro XR nabízejí už několik let. \cite{enwiki:1186405367}
+
+Svůj vlastní orojekt, který detailně popisuji v praktické části, jsem chtěl také napsat v herním enginu. Zvolil jsem si svobodný Godot Engine.
+
+\section{Godot Engine}
+
+Godot je svobodný (open-source) herní engine, který je nabízen zdarma. Hlavní důvod, proč jsem si jej vybral namísto známějších Unity nebo Unreal Engine, je jeho licence. Godot je šířen pod svobodnou licencí MIT, která vývojářům dovoluje kód používat komerčně i naopak, a to pod jedinou podmínkou: text licence je ve výsledné práci zachován. Jiné enginy jsou naopak distribuovány pod nesvobodnou licencí a za některé jejich funkce musí vývojáři platit.
+
+Godot se v poslední době stává více a více populárním a obdržel investice od velkých společností. Mezi ně patří např. grant od Epic Games pro vývoj grafiky a grant od Meta pro vývoj XR nástrojů. \cite{godot_epicgames} \cite{godot_meta}
+
+Pro úpravu Godot projektů používáme oficiální editor. Základními stavebními bloky enginu jsou uzly, které jsou uspořádány do stromu, podobně jako jsou webové stránky reprezentovány stromem značek. Tyto uzly samy o sobě nemají mnoho funkcí, jejich kombinací ale můžeme dosáhnout komplexnějšího chování. Jednotlivé uzly se dají přirovnat k třídám v objektově orientovaném programování, které se navzájem rozšiřují.
+
+Například uzel \texttt{Node3D} disponuje atributem \texttt{position} (pozice) a uzel \texttt{Camera3D}, který rozšiřuje \texttt{Node3D}, disponuje atributy \texttt{position} a \texttt{fov} (field of view; zorný úhel). Dceřinné uzly zároveň dědí atributy rodičovských uzlů, pokud oba rozšiřují společný uzel (pokud je např. \texttt{Camera3D} dceřinný uzel \texttt{Node3D}, pak se \texttt{Camera3D} pohybuje společně s \texttt{Node3D} (sdílí atribut \texttt{position}) a \texttt{position} na \texttt{Camera3D} je relativní posun od \texttt{Node3D})
+
+Uzlům můžeme přiřadit \textit{skript}, který upravuje jejich chování. Tento skript se chová jako třída v OOP, která rozšiřuje daný uzel. Pokud rozšiřujeme uzel pro 2D grafiku, můžeme metodou získat pozici jako 2D vektor. Pokud rozšiřujeme uzel pro 3D grafiku, stejnou metodou můžeme získat pozici jako 3D vektor. Stejně tak můžeme přepisovat virtuální funkce. Projekty v Godotu používají dedikovaný jazyk zvaný GDScript, existuje ale oficiální podpora jazyka C\# a komunitně vytvořená rozšíření pro Rust.
+
+Uzel a jeho dceřinné uzly společně s přiřazenými skripty můžeme dále uložit jako izolovanou \textit{scénu} (soubor .tscn), kterou můžeme poté instancovat. Scéna se pak chová jako samostatný uzel. Jedna scéna je vždy hlavní scénou a je otevřena při spuštění projektu.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=180pt]{godot_editor.png}
+  \caption{Editor Godot Engine a otevřená scéna Maze.tscn}
+  \label{godot_editor_maze_tscn}
+\end{figure}
+
+\subsection{Jazyk \textit{GDScript}}
+
+GDScript je jazyk, ve kterém se vyvíjí většina Godot projektů. Můj projekt je taktéž psán v GDScriptu a z tohoto důvodu jej zde popisuji pro snadnější pochopení kódu.
+
+GDScript je vysokoúrovňový, objektově orientovaný, imperativní a hybridně (staticky i dynamicky) typovaný jazyk. Vzhledově nápadně připomíná jazyk Python a podobně jako Python používá indentaci pro vyjádření řídící struktury. Nabízí širokou škálu vestavěných tříd pro manipulaci dat typických pro hry, matematiku a fyziku (textury, vektory, matice) a samozřejmě obecné typy (celé číslo, desetinné číslo, textový řetězec atd.). Proměnné programátor může anotovat typem. Podporuje koprogramy (coroutines) a událostmi řízené programování pomocí "signálů". Pro svou hlubokou integraci se samotným enginem je vhodný pro jednoduché projekty, kvůli své dynamičnosti ovšem nenabízí stejnou rychlost jako kompilované jazyky. \cite{gdscript_reference}
+
+Pro příklad kódu v GDScriptu vizte přílohu \ref{apx_gscript_sample}.
