@@ -3,5 +3,4 @@
 android/
 export/*
 !export/.gdignore
-export_presets.cfg
 assets/i18n/*.translation
