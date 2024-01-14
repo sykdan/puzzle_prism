@@ -12,15 +12,12 @@ func player_ready():
 	$XRPlayer.pointer_enabled = true
 	create_tween().tween_property($XRPlayer, "black_fade_ratio", 0, 2)
 
-func _is_holding_maze() -> bool:
-	return current_maze and $XRPlayer.gripped_object == current_maze
-
 ## Called when an OpenXR error has occurred.
 func xr_error(type: StringName):
 	OS.alert(tr(type), tr(&"XR_ERROR_TITLE"))
 	get_tree().quit()
 
-func _process(_delta):	
+func _process(_delta):
 	if not _is_holding_maze():
 		var giveup: bool = (
 			$XRPlayer/LeftHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y and 
@@ -41,6 +38,9 @@ func _physics_process(delta):
 		$XRPlayer.translate_gripped_object(
 			global_transform.basis.y * Shared.NODE_SIZE * delta
 		)
+
+func _is_holding_maze() -> bool:
+	return current_maze and $XRPlayer.gripped_object == current_maze
 
 func _on_marble_haptic(diff):
 	if not _is_holding_maze():

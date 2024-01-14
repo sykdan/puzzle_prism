@@ -53,6 +53,9 @@ func _on_xr_started():
 	recenter()
 	init_done.emit()
 
+func _on_xr_failed(reason):
+	init_error.emit(reason)
+
 ## Attach an object to the controllers
 func _grip_object(object: Node3D):
 	gripped_object = object

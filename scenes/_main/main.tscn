@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bvroouobw2lcv"]
 
-[ext_resource type="Script" path="res://scenes/[main]/main.gd" id="1_8lrat"]
+[ext_resource type="Script" path="res://scenes/_main/main.gd" id="1_8lrat"]
 [ext_resource type="PackedScene" uid="uid://buc0ls6xkyrd0" path="res://scenes/player/xrplayer.tscn" id="2_j0igu"]
 [ext_resource type="PackedScene" uid="uid://c2830qnod2j82" path="res://scenes/environment.tscn" id="3_lj3b8"]
 [ext_resource type="PackedScene" uid="uid://ddh2rol6pafi2" path="res://scenes/screen/screen.tscn" id="4_irsm0"]
@@ -103,8 +103,7 @@ volume_db = -10.0
 bus = &"BGM"
 
 [connection signal="init_done" from="XRPlayer" to="." method="player_ready"]
-[connection signal="init_error" from="XRPlayer" to="." method="player_error"]
-[connection signal="xr_failed" from="XRPlayer/XRManager" to="." method="xr_error"]
+[connection signal="init_error" from="XRPlayer" to="." method="xr_error"]
 [connection signal="at_screen" from="MainScreen/Viewport/GUI" to="." method="_on_gui_at_screen"]
 [connection signal="giveup" from="MainScreen/Viewport/GUI" to="." method="_on_gui_giveup"]
 [connection signal="play" from="MainScreen/Viewport/GUI" to="." method="_on_gui_play"]
@@ -112,7 +111,6 @@ bus = &"BGM"
 [connection signal="pressed" from="Controls/Viewport/Controls/Settings" to="MainScreen/Viewport/GUI" method="switch_to" binds= ["Settings"]]
 [connection signal="pressed" from="Controls/Viewport/Controls/Exit" to="." method="_on_exit_pressed"]
 
-[editable path="XRPlayer"]
 [editable path="MainScreen"]
 [editable path="Controls"]
 [editable path="Controls/Viewport/Controls"]
