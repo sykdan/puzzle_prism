@@ -1,6 +1,7 @@
-# the Puzzle Prism
-... is a VR Puzzle game made with Godot 4 (4.2).  
-This project is part of my [exam of Maturity](https://en.wikipedia.org/wiki/Matura). See the `latex` branch for the accompanying thesis (in Czech).
+# Puzzle Prism
+je VR hra vytvořená v herním enginu Godot (verze 4.2).
+Tento projekt je předmětem praktické části mé maturitní práce. Samotnou maturitní práci naleznete ve větvi `latex`.
 
-## Building
-Use the Godot Editor to build the game. Only Windows, Android-based VR headsets and WebXR are known to work at this time. The Android version requires that the corresponding XR plugins be installed, for which you'll also need Gradle.
+## Sestavování
+Pro sestavení hry použijte výhradně editor Godot Enginu.  
+Hra byla testována a funguje na:
