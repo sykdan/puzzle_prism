@@ -19,6 +19,7 @@ func load_save():
 	var file = FileAccess.open("user://puzzleprism_data.dat", FileAccess.READ)
 	var e: Error = FileAccess.get_open_error()
 	if e != OK:
+		locale = "cs" if OS.get_locale() == "cs" else "en"
 		store_save()
 		return
 	
