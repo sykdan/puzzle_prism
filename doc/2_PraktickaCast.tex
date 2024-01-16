@@ -46,7 +46,7 @@ Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sest�
 
 V této scéně jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod Creative Commons 0\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
 
-Při testování hry jsem často slýchal stížnosti, že hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Mí testeři tuto myšlenku potvrdili.
+Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Testující tuto myšlenku následně potvrdili.
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
@@ -56,7 +56,9 @@ TODO: Přidat foto s ilustrací co to dovysvětlí.
 
 \section{Kostka, bludiště}
 
-Kostka (a bludiště v ní) je hlavním prvkem hry. Skládá se ze čtyř zdí, úrovní (bludišť) a komnat. Každé bludiště je v podstatě mřížka čtvercových buněk, které jsou odděleny zdmi. Jedna buňka je označena jako začátek a jedna jako cíl.
+Kostka je hlavním prvkem hry. Jedná se o dutou kostku s průhledným víkem, ve které je několik úrovní (bludišť) a kukička. Každé bludiště je v podstatě mřížka čtvercových buněk, které jsou odděleny zdmi. Cílem je manipulováním s kostkou dostat kuličku k vlajce, načež kulička propadne o úroveň níž a kostka se zmenší.
+
+Hlavní výzvou v této scéně je vygenerování náhodného bludiště, aby bylo možné hru hrát donekonečna.
 
 \begin{figure}[H]
   \centering
@@ -65,7 +67,7 @@ Kostka (a bludiště v ní) je hlavním prvkem hry. Skládá se ze čtyř zdí, 
   \label{maze_example}
 \end{figure}
 
-Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, narozdíl od jiných algoritmů pro generování bludiště. Postup je následující: \cite{enwiki:1193338583}
+Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, narozdíl od jiných algoritmů. Postup je následující: \cite{enwiki:1193338583}
 
 \begin{enumerate}
   \setcounter{enumi}{0}
@@ -103,7 +105,7 @@ Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fak
   \caption{Stav po těchto dvou iteracích}
 \end{figure}
 
-Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z náhodně propletených buněk. V prvních verzích hry byl konec náhodně zvolený, docházelo ale k situacím, kdy byl konec velmi blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a nejvzdálenější buňku jako konec.
+Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z náhodně propletených buněk. V prvních verzích hry byl konec náhodně zvolený, docházelo ale k situacím, kdy byl konec velmi blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a nejvzdálenější buňku jako konec. Vizte přílohu \ref{apx_mazegen} pro celou implementaci.
 
 \begin{figure}[H]
   \centering
@@ -120,9 +122,11 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
   \caption{Počítání vzdálenosti paralelně s generováním}
 \end{figure}
 
-Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi. 
+Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi.
 
 TODO: přidat sem obrázek jedné úrovně, až budu doma
+
+Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simulaci fyziky, kterého jsem využil. Kuličku tvoří uzel \texttt{RigidBody3D} (tuhé těleso) a stěny uzel \texttt{StaticBody3D} (nehybné těleso). Fyzika je následně procesována automaticky. Přidal jsem však haptickou odezvu při srážce kuličky se stěnou bludiště -- při prudké změně v rychlosti kulička vyšle signál se sílou vibrace, který hlavní scéna zaznamená a ve scéně s hráčem vyvolá slabou vibraci v ovladačích.
 
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
@@ -134,5 +138,3 @@ TODO: Obrázek z headsetu, který tyhle obrazovky demonstruje
 Pro vykreslení orbazovky jsem použil uzel \texttt{SubViewport}, který umožňuje vytvořit virtuální plátno a libovolně ho v rámci enginu zobrazit. Tomuto uzlu můžu přiřadit libovolné dceřinné uzly, které jsou poté renderovány do tohoto plátna. Samo o sobě není vidět, ale může být přiřazeno jako textura k jinému uzlu. Pro můj účel jsem použil uzel \texttt{MeshInstance} (instance 3D objektu) a jako objekt použil jednoduchý obdélník.
 
 Interakce s obrazovkou využívá postup zvaný "raycasting", česky vysílání paprsků. Z ruky hráče vyšleme paprsek směrem, kterým ukazuje, a při kolizi s nějakým objektem (v tomto případě obrazovkou) vypočítáme pozici, kde ke kolizi došlo. Godot Engine má podporu pro ray casting v rámci uzlu \texttt{RayCast3D}, který jsem přidal do scény s hráčem. Pokud tento uzel zaznamená kolizi se scénou Obrazovka, zobrazí paprsek mířící od prstu hráče k obrazovce a začne v jejím \texttt{SubViewport}u simulovat vstup myší. Simulování vstupu mi umožňuje využít nespočet vestavěných uzlů pro tvorbu rozhraní.
-
-\chapter{Testování}

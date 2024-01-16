@@ -52,13 +52,18 @@
 \addcontentsline{toc}{chapter}{\listfigurename}
 
 \appendix
+
 \chapter{Záklandí ukázka GDScript kódu}\label{apx_gscript_sample}
 \lstinputlisting{code/sample_gdscript.gd}
+
 \chapter{Ovládání pohybem obou rukou}\label{apx_gripped_object_transformation}
 Tento kód z velké části využívá toho faktu, že uzly v Godotu dědí své transformace. Toto chování je ovšem ignorováno v instrukcích, které mění hodnoty atributu \texttt{global\_*}.
 
 Většina pohybem ovládaných uzlů má jeden dceřinný uzel, který je při uchopení přemístěn pomocí \texttt{global\_transform} tak, aby splýval s uchyceným předmětem (v přiloženém kódu toto není obsaženo). Tento pomocný uzel se poté hýbe společně se sledovaným uzlem, a transformace předmětu je synchronizována s tímto pomocným uzlem. Není tak potřeba počítat rozdíl (delta) transformace.
 
 \lstinputlisting{code/gripped_object_transformation.gd}
+
+\chapter{Wilsonův algoritmus v GDScript}\label{apx_mazegen}
+\lstinputlisting{code/mazegen.gd}
 
 \end{document}
