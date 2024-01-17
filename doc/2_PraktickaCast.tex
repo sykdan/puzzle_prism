@@ -124,9 +124,14 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
 
 Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi.
 
-TODO: přidat sem obrázek jedné úrovně, až budu doma
-
 Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simulaci fyziky, kterého jsem využil. Kuličku tvoří uzel \texttt{RigidBody3D} (tuhé těleso) a stěny uzel \texttt{StaticBody3D} (nehybné těleso). Fyzika je následně procesována automaticky. Přidal jsem však haptickou odezvu při srážce kuličky se stěnou bludiště -- při prudké změně v rychlosti kulička vyšle signál se sílou vibrace, který hlavní scéna zaznamená a ve scéně s hráčem vyvolá slabou vibraci v ovladačích.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=180pt]{maze.png}
+  \caption{Celá kostka}
+  \label{maze_fig}
+\end{figure}
 
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}

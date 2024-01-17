@@ -127,17 +127,24 @@
 \newcommand{\bigunderlineicon}[1]{\settoheight{\height}{A}\raisebox{-0.12\height}{\includegraphics[height=1.49\height]{#1}}}
 
 \definecolor{codegray}{gray}{0.9}
+\definecolor{forestgreen}{rgb}{0.1098, 0.6784, 0.0196}
 \newcommand{\code}[1]{\colorbox{codegray}{\texttt{#1}}}
 
-\lstdefinestyle{mystyle}{
+\lstdefinestyle{gdscript}{
+	language=Python,
 	backgroundcolor=\color{codegray},
 	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	commentstyle=\color{gray},
 	breaklines=true,
 	numbers=left,
-	tabsize=2
+	tabsize=2,
+	showspaces=false,
+	moredelim=[is][\color{forestgreen}]{|}{|},
+	morekeywords={extends,func,var,null,true,false}
 }
 
-\lstset{style=mystyle}
+\lstset{style=gdscript}
 \usepackage{fontspec}
 \setmainfont[
 	Path=./fnt/,
