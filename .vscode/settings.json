@@ -23,8 +23,7 @@
         {
             "name": "latexmk (xelatex)",
             "tools": [
-                "xelatexmk",
-                "notify_on_build"
+                "xelatexmk"
             ]
         }
     ],
