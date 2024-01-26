@@ -19,7 +19,7 @@ Výsledný projekt je složen z mnoha souborů, mnoho z nichž nejsou kód a nen
 \chapter{Struktura projektu}
 
 \begin{samepage}
-  Můj projekt jsem rozdělil do jednotlivých, jednoduše spravovatelných scén. Tímto jsem mohl na mnohých funkcích pracovat odděleně a mohl bych je, teoreticky, použít i v budoucích projektech. Zde je zjednodušený diagram těchto scén:
+  Můj projekt jsem rozdělil do jednotlivých, jednoduše spravovatelných scén. Tímto jsem mohl na mnohých funkcích pracovat odděleně a mohl bych je teoreticky použít i v budoucích projektech. Zde je zjednodušený diagram těchto scén:
 
   \vspace{0.3cm}
   \renewcommand\DTstyle{\rmfamily}
@@ -46,7 +46,7 @@ Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sest�
 
 V této scéně jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod Creative Commons 0\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
 
-Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Testující tuto myšlenku následně potvrdili.
+Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že jim hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Testující na změnu reagovali pozitivně. 
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
@@ -122,7 +122,7 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
   \caption{Počítání vzdálenosti paralelně s generováním}
 \end{figure}
 
-Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi.
+Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi. Aby se zabránilo dlouhým načítacím dobám, lze hru hrát po vygenerování dvou úrovní. Zbytek je generován na pozadí.
 
 Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simulaci fyziky, kterého jsem využil. Kuličku tvoří uzel \texttt{RigidBody3D} (tuhé těleso) a stěny uzel \texttt{StaticBody3D} (nehybné těleso). Fyzika je následně procesována automaticky. Přidal jsem však haptickou odezvu při srážce kuličky se stěnou bludiště -- při prudké změně v rychlosti kulička vyšle signál se sílou vibrace, který hlavní scéna zaznamená a ve scéně s hráčem vyvolá slabou vibraci v ovladačích.
 
@@ -136,7 +136,7 @@ Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simu
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z tradičních rozhraní. Většina programů používá pro své rozhraní virtuální "obrazovky", plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální "laserové ukazovátko", kterým na tyto obrazovky ukazuje a stisknutím tlačítka interaguje.
+Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z tradičních rozhraní. Většina programů používá pro své rozhraní virtuální "obrazovky", plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální "laserové ukazovátko", kterým na tyto obrazovky ukazuje a stisknutím tlačítka s nimi interaguje.
 
 TODO: Obrázek z headsetu, který tyhle obrazovky demonstruje
 
