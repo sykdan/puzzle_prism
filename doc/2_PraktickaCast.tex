@@ -50,9 +50,7 @@ Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že jim hr
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
-Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření obou ovladačů hra vytvoří neviditelný uzel, jehož změny v transformaci uchopený předmět sleduje. Tento uzel je manuálně umístěn do středu mezi levým a pravým ovladačem (=průměru jejich pozic; pokud je považujeme za vektory) a je otočen tak, že vektor Z tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Vektor Y míří vzhůru.} míří od levého ovladače k pravému ovladači a vektor Y míří stejným směrem jako palce uživatele. Tímto jsem dosáhl poněkud přesvědčivého efektu.
-
-TODO: Přidat foto s ilustrací co to dovysvětlí.
+Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stačí, aby tento objekt sledoval změny v transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření tlačítek na obou ovladačích hra vytvoří třetí, neviditelný ovladač. Tento ovladač působí ze středu mezi levým a pravým ovladačem a je rotován tak, aby vektor Z tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Vektor Y míří vzhůru.} mířil od levého ovladače k pravému ovladači a vektor Y mířil stejným směrem jako palce uživatele. Hra se poté odkazuje na tento virutální ovladač. Výsledný efekt je velmi přesvědčivý. Celá implementace této logiky je vložena v příloze \ref{apx_gripped_object_transformation}.
 
 \section{Kostka, bludiště}
 
@@ -138,7 +136,12 @@ Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simu
 
 Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z tradičních rozhraní. Většina programů používá pro své rozhraní virtuální "obrazovky", plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální "laserové ukazovátko", kterým na tyto obrazovky ukazuje a stisknutím tlačítka s nimi interaguje.
 
-TODO: Obrázek z headsetu, který tyhle obrazovky demonstruje
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=220pt]{game_gui_screenshot.png}
+  \caption{Ukázka rozhraní hry. Uživatelova pravá ruka je vybavena ukazovátkem, kterým může vybírat možnosti na obrazovce.}
+  \label{game_gui_screenshot}
+\end{figure}
 
 Pro vykreslení orbazovky jsem použil uzel \texttt{SubViewport}, který umožňuje vytvořit virtuální plátno a libovolně ho v rámci enginu zobrazit. Tomuto uzlu můžu přiřadit libovolné dceřinné uzly, které jsou poté renderovány do tohoto plátna. Samo o sobě není vidět, ale může být přiřazeno jako textura k jinému uzlu. Pro můj účel jsem použil uzel \texttt{MeshInstance} (instance 3D objektu) a jako objekt použil jednoduchý obdélník.
 
