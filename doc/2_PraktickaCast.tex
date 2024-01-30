@@ -54,7 +54,7 @@ Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stač
 
 \section{Kostka, bludiště}
 
-Kostka je hlavním prvkem hry. Jedná se o dutou kostku s průhledným víkem, ve které je několik úrovní (bludišť) a kukička. Každé bludiště je v podstatě mřížka čtvercových buněk, které jsou odděleny zdmi. Cílem je manipulováním s kostkou dostat kuličku k vlajce, načež kulička propadne o úroveň níž a kostka se zmenší.
+Kostka je hlavním prvkem hry. Jedná se o dutou kostku s průhledným víkem, ve které je několik úrovní (bludišť) a kulička. Každé bludiště je v podstatě mřížka čtvercových buněk, které jsou odděleny zdmi. Cílem je manipulováním s kostkou dostat kuličku k vlajce, načež kulička propadne o úroveň níž a kostka se zmenší.
 
 Hlavní výzvou v této scéně je vygenerování náhodného bludiště, aby bylo možné hru hrát donekonečna.
 
@@ -65,7 +65,7 @@ Hlavní výzvou v této scéně je vygenerování náhodného bludiště, aby by
   \label{maze_example}
 \end{figure}
 
-Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, narozdíl od jiných algoritmů. Postup je následující: \cite{enwiki:1193338583}
+Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, na rozdíl od jiných algoritmů. Postup je následující: \cite{enwiki:1193338583}
 
 \begin{enumerate}
   \setcounter{enumi}{0}
