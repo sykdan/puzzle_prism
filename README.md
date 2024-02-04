@@ -10,4 +10,5 @@ Hra byla testována a funguje na:
 - Windows za použití Oculus (Rift a Quest) nebo SteamVR (všechny ostatní)
 - Androidem poháněných headsetech (např. Quest)
 - Některých Chromium prohlížečích přes WebXR
+
 Pro sestavení pro Android potřebujete Android SDK a Javu 17. Pro jejich nastavení vizte dokumentaci Godotu.

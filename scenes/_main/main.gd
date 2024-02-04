@@ -144,5 +144,3 @@ func _on_gui_giveup():
 	maze_start_time = 0
 	
 	$XRPlayer.pointer_enabled = true
-	
-	$MainScreen/Viewport/GUI.back_to_main()

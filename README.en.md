@@ -9,4 +9,5 @@ Hra byla testována a funguje na:
 - Windows using Oculus (Rift and Quest) or SteamVR (all others)
 - Android-based headsets (e.g. Quest)
 - Some Chromium browsers using WebXR
-To build for android you'll need tbe Android SDK and Java 17. Consult Godot documentation for setup instructions.
+
+To build for android you'll need the Android SDK and Java 17. Consult Godot documentation for setup instructions.

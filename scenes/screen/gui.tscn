@@ -150,15 +150,18 @@ script = ExtResource("1_loh61")
 
 [node name="menu_click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_uydwx")
-volume_db = -8.0
-pitch_scale = 0.9
+volume_db = -10.0
+bus = &"Effects"
 
 [node name="menu_hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cvvtn")
 volume_db = -8.0
+pitch_scale = 0.6
+bus = &"Effects"
 
 [node name="start" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_hd1r6")
+bus = &"Effects"
 
 [node name="Results" type="Panel" parent="."]
 visible = false
@@ -778,7 +781,6 @@ text = "BACK"
 icon = ExtResource("7_628lv")
 
 [node name="Settings" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -943,6 +945,7 @@ https://freesound.org/people/Eponn/sounds/619835 (CC0)
 https://opengameart.org/content/bossa-nova (CC0)
 https://opengameart.org/content/up-3x (CC0)
 https://opengameart.org/content/win-sound-effect (CC0)
+https://freesound.org/people/StavSounds/sounds/546079/ (CC0)
 https://kenney.nl/assets/ui-audio (CC0)
 
 [b][u]Texture assets[/u][/b]
@@ -1234,6 +1237,7 @@ vertical_alignment = 2
 autowrap_mode = 2
 
 [node name="InGame" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 1125.0
 offset_bottom = 675.0
@@ -1317,6 +1321,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[connection signal="finished" from="menu_hover" to="." method="_on_menu_hover_finished"]
 [connection signal="pressed" from="Results/Continue" to="." method="back_to_main"]
 [connection signal="pressed" from="Results/NewRecord/Yes" to="." method="scoreboard_submit"]
 [connection signal="pressed" from="Results/NewRecord/No" to="." method="back_to_main"]
@@ -1329,26 +1334,24 @@ autowrap_mode = 2
 [connection signal="pressed" from="DifficultyDetail/Config/Levels/+" to="." method="custom_edit_button_diff" binds= ["Levels", 1]]
 [connection signal="mouse_entered" from="DifficultyDetail/Back" to="menu_hover" method="play"]
 [connection signal="pressed" from="DifficultyDetail/Back" to="." method="back_to_main"]
-[connection signal="pressed" from="DifficultyDetail/Back" to="menu_click" method="play"]
 [connection signal="mouse_entered" from="DifficultyDetail/Play" to="menu_hover" method="play"]
 [connection signal="pressed" from="DifficultyDetail/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="DifficultyDetail/Play" to="start" method="play"]
 [connection signal="pressed" from="Controls/Back" to="." method="back_to_main"]
 [connection signal="pressed" from="Settings/Back" to="." method="back_to_main"]
+[connection signal="pressed" from="Settings/Config/Languages/cs" to="menu_click" method="play"]
+[connection signal="pressed" from="Settings/Config/Languages/en" to="menu_click" method="play"]
 [connection signal="pressed" from="Settings/Config/ResetOptions/Scores" to="." method="reset_scores"]
+[connection signal="pressed" from="Settings/Config/ResetOptions/Scores" to="menu_click" method="play"]
 [connection signal="pressed" from="Settings/Config/ResetOptions/FirstRun" to="." method="reset_first_run"]
+[connection signal="pressed" from="Settings/Config/ResetOptions/FirstRun" to="menu_click" method="play"]
 [connection signal="pressed" from="Settings/Licenses" to="Settings/LicensesTest" method="show"]
 [connection signal="pressed" from="Settings/LicensesTest/Close" to="Settings/LicensesTest" method="hide"]
 [connection signal="mouse_entered" from="MainMenu/Easy" to="menu_hover" method="play"]
-[connection signal="pressed" from="MainMenu/Easy" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Easy" to="." method="difficulty_selected" binds= [&"easy"]]
 [connection signal="mouse_entered" from="MainMenu/Medium" to="menu_hover" method="play"]
-[connection signal="pressed" from="MainMenu/Medium" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Medium" to="." method="difficulty_selected" binds= [&"medium"]]
 [connection signal="mouse_entered" from="MainMenu/Hard" to="menu_hover" method="play"]
-[connection signal="pressed" from="MainMenu/Hard" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Hard" to="." method="difficulty_selected" binds= [&"hard"]]
 [connection signal="mouse_entered" from="MainMenu/Custom" to="menu_hover" method="play"]
-[connection signal="pressed" from="MainMenu/Custom" to="menu_click" method="play"]
 [connection signal="pressed" from="MainMenu/Custom" to="." method="difficulty_selected" binds= [&"custom"]]
-[connection signal="timeout" from="InGame/GiveUp/Timer" to="." method="emit_signal" binds= [&"giveup"]]
+[connection signal="timeout" from="InGame/GiveUp/Timer" to="." method="_on_giveup"]

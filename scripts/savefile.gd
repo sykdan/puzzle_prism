@@ -5,7 +5,7 @@ extends Node
 @export var hard = []
 
 var first_run = true
-var locale = "cs" :
+var locale = "en" :
 	set(new_locale):
 		TranslationServer.set_locale(new_locale)
 		locale = new_locale
@@ -19,6 +19,7 @@ func load_save():
 	var file = FileAccess.open("user://puzzleprism_data.dat", FileAccess.READ)
 	var e: Error = FileAccess.get_open_error()
 	if e != OK:
+		locale = OS.get_locale_language()
 		store_save()
 		return
 	

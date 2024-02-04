@@ -10,6 +10,7 @@ D_HARD_DESC,Obtížný hlavolam na zamotání hlavy.,A difficult puzzle to blow 
 D_CUSTOM_DESC,Nastav si svou vlastní velikost!,Set up your own puzzle size!
 RECORDS,Rekordy,Records
 BACK,Zpátky,Back
+CLOSE,Zavřít,Close
 SUBMIT_PROMPT,Napiš své jméno:,Write your name:
 PROMPT_PLACEHOLDER,Jméno...,Name...
 SPACEBAR,Mezera,Space

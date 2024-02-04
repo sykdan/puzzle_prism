@@ -95,12 +95,11 @@ font_size = 164
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_sofvo")
 volume_db = -10.0
-bus = &"BGM"
 
 [node name="finished" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_pdn1w")
 volume_db = -10.0
-bus = &"BGM"
+bus = &"Effects"
 
 [connection signal="init_done" from="XRPlayer" to="." method="player_ready"]
 [connection signal="init_error" from="XRPlayer" to="." method="xr_error"]

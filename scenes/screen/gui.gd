@@ -8,7 +8,7 @@ var difficulty = null
 var finish_game_time_taken = null
 
 func _ready():
-	back_to_main()
+	switch_to(^"MainMenu", true)
 	for lang in $Settings/Config/Languages.get_children():
 		if lang is Button:
 			lang.pressed.connect(set_lang.bind(lang.name))
@@ -23,12 +23,18 @@ func fmt_time(time: int):
 	@warning_ignore("integer_division")
 	return "%02d:%02d" % [time / 60, time % 60]
 
-func switch_to(screen_type):
+func switch_to(screen_type, mute = false):
 	for c in get_children():
 		if c is Control:
 			c.hide()
 	if screen_type:
-		get_node(screen_type).show()
+		var screen = get_node(screen_type)
+		screen.show()
+		if not mute:
+			if screen == $InGame:
+				$start.play()
+			else:
+				$menu_click.play()
 	at_screen.emit(screen_type)
 
 func difficulty_selected(diff: StringName):
@@ -77,6 +83,7 @@ func _on_play_pressed():
 			$DifficultyDetail/Config/Levels/Value.value
 		)
 	if SaveFile.first_run:
+		$menu_click.play()
 		switch_to("Controls")
 		$Controls/Onboarding_Confirm.show()
 		$Controls/Back.hide()
@@ -85,6 +92,7 @@ func _on_play_pressed():
 		$Controls/Back.show()
 		SaveFile.first_run = false
 		SaveFile.store_save()
+	$start.play()
 	switch_to(^"InGame")
 	play.emit(difficulty, params)
 	var tw = create_tween()
@@ -148,3 +156,10 @@ func start_giveup():
 func end_giveup():
 	$InGame/GiveUp/Timer.stop()
 	$InGame/GiveUp.hide()
+
+func _on_giveup():
+	switch_to(^"MainMenu", true)
+	giveup.emit()
+
+func _on_menu_hover_finished():
+	$menu_hover.pitch_scale = randi_range(6,12) / 10.0

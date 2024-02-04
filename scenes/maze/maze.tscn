@@ -124,5 +124,6 @@ visible = false
 [node name="floor_solved" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ivx3d")
 volume_db = -7.0
+bus = &"Effects"
 
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
