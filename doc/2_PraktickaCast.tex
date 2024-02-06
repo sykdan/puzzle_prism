@@ -10,19 +10,27 @@ V praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jse
   \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které VR platformy poskytují. Tedy ovládání pohybem, vliv fyzikálních zákonů atp.
 \end{itemize}
 
+\begin{quotation}
+  
 Dospěl jsem k následujícímu nápadu: Logická hra sestávající z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
+\end{quotation}
 
 Toto splňuje moje kritéria -- hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
 
-Výsledný projekt je složen z mnoha souborů, mnoho z nichž nejsou kód a není vhodné je do textu práce zahrnout. Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/sykdan/puzzle_prism/tree/mprace}. 
+Výsledný projekt je složen z mnoha souborů, mnoho z nichž nejsou kód a není vhodné je do textu práce zahrnout. 
+
+Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/sykdan/puzzle_prism/tree/mprace}. 
 
 \chapter{Struktura projektu}
 
 \begin{samepage}
   Můj projekt jsem rozdělil do jednotlivých, jednoduše spravovatelných scén. Tímto jsem mohl na mnohých funkcích pracovat odděleně a mohl bych je teoreticky použít i v budoucích projektech. Zde je zjednodušený diagram těchto scén:
 
-  \vspace{0.3cm}
-  \renewcommand\DTstyle{\rmfamily}
+  \vspace{1em}
+  \hrule
+  \vspace{1em}
+
+  \renewcommand\DTstyle{\sffamily}
   \dirtree{%
     .1 Hlavní scéna (spojuje a ovládá zbylé scény) .
     .2 Prostředí (skybox) .
@@ -36,6 +44,9 @@ Výsledný projekt je složen z mnoha souborů, mnoho z nichž nejsou kód a nen
     .5 Komnata (buňky, ze kterých se skládá bludiště) .
     .3 Kulička (volně se pohybující předmět s vlastní fyzikou) .
   }
+  \vspace{1em}
+  \hrule
+  \vspace{1em}
 
   Každá scéna reprezentuje odlišnou sadu problémů a výzev, které jsem musel při tvorbě projektu řešit.
 \end{samepage}
@@ -146,3 +157,18 @@ Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo
 Pro vykreslení orbazovky jsem použil uzel \texttt{SubViewport}, který umožňuje vytvořit virtuální plátno a libovolně ho v rámci enginu zobrazit. Tomuto uzlu můžu přiřadit libovolné dceřinné uzly, které jsou poté renderovány do tohoto plátna. Samo o sobě není vidět, ale může být přiřazeno jako textura k jinému uzlu. Pro můj účel jsem použil uzel \texttt{MeshInstance} (instance 3D objektu) a jako objekt použil jednoduchý obdélník.
 
 Interakce s obrazovkou využívá postup zvaný "raycasting", česky vysílání paprsků. Z ruky hráče vyšleme paprsek směrem, kterým ukazuje, a při kolizi s nějakým objektem (v tomto případě obrazovkou) vypočítáme pozici, kde ke kolizi došlo. Godot Engine má podporu pro ray casting v rámci uzlu \texttt{RayCast3D}, který jsem přidal do scény s hráčem. Pokud tento uzel zaznamená kolizi se scénou Obrazovka, zobrazí paprsek mířící od prstu hráče k obrazovce a začne v jejím \texttt{SubViewport}u simulovat vstup myší. Simulování vstupu mi umožňuje využít nespočet vestavěných uzlů pro tvorbu rozhraní.
+
+\chapter{Scénář hry}
+
+Při vstupu do hry se hráč ocitne v hlavní nabídce. Ta je koncipovaná co nejjednodušeji - hráči jsou ihned představeny čtyři herní režimy, stupňované dle komplexity.
+
+\begin{itemize}
+  \item \textbf{Lehká obtížnost} - Bludiště má rozměry 5x5 buněk a kostka má 5 úrovní.
+  \item \textbf{Střední obtížnost} - Bludiště má rozměry 8x8 buněk a kostka má 8 úrovní.
+  \item \textbf{Těžká obtížnost} - Bludiště má rozměry 14x14 buněk a kostka má 14 úrovní.
+  \item \textbf{Vlastní} - Hráč si může volně přizpůsobit rozměry hry.
+\end{itemize}
+
+K dispozici jsou i menší, méně důležitá tlačítka pro vstup do nastavení, ukončení hry a zobrazení návodu. Návod se hráči otevře také při úplně prvním spuštění hry.
+
+U všech režimů hra zaznamenává čas, za jaký byl hráč schopný hlasvolam vyřešit. Přednastavené obtížnosti (lehká, střední, těžká) taktéž ukládají pět nejlepších výsledků. Pokud hráč pokoří jeden z těchto rekordů, dostane možnost zadat své jméno a uložit tím svůj čas. 
