@@ -12,7 +12,7 @@ V praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jse
 
 \begin{quotation}
   
-Dospěl jsem k následujícímu nápadu: Logická hra sestávající z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
+\textbf{Dospěl jsem k následujícímu nápadu}: Logická hra sestávající z kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
 \end{quotation}
 
 Toto splňuje moje kritéria -- hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
@@ -55,9 +55,9 @@ Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/
 
 Scéna s hráčem je přímo spojena s headsetem a sledovanými ovladači. Sestává z uzlů \texttt{XRCamera3D}, pohledu do 3D prostředí synchronizovaným s umístěním headsetu, a dvou uzlů \texttt{XRController3D}, které jsou synchronizované s umístěním levého a pravého ovladače.
 
-V této scéně jsem použil svobodnou knihovnu Godot XR Tools, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod Creative Commons 0\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
+V této scéně jsem použil svobodnou knihovnu \textit{Godot XR Tools}, která nabízí podpůrné scény pro XR projekty. Z té jsem si zapůjčil kód nutný k inicializaci VR headsetu a 3D model ruky licencovaný pod \textit{Creative Commons 0}\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
 
-Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že jim hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč "vznáší v prázdnotě", čímž bych nepříjemný pocit odstranil. Testující na změnu reagovali pozitivně. 
+Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že jim hra způsobuje nevolnost. Přidal jsem proto do této scény i platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč \uv{vznáší v prázdnotě}, čímž bych nepříjemný pocit odstranil. Testující na změnu reagovali pozitivně. 
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v sekci \ref{uzivatelske_rozhrani}.
 
@@ -76,7 +76,7 @@ Hlavní výzvou v této scéně je vygenerování náhodného bludiště, aby by
   \label{maze_example}
 \end{figure}
 
-Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, na rozdíl od jiných algoritmů. Postup je následující: \cite{enwiki:1193338583}
+Pro vygenerování bludiště jsem použil \textit{\textbf{Wilsonův algoritmus}}. Důvodem je fakt, že tento algoritmus nemá sklony vytvářet extrémně dlouhé či extrémně krátké chodby, na rozdíl od jiných algoritmů. Postup je následující: \cite{enwiki:1193338583}
 
 \begin{enumerate}
   \setcounter{enumi}{0}
@@ -105,7 +105,7 @@ Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fak
     \includegraphics[height=100pt]{maze_gen_step_2.png}
   \end{minipage}
 
-  \caption{Příklad dvou iterací kroků \ref{pick} až \ref{lerw}. Žlutě jsou buňky v bludišti, modře buňky v iteraci.}
+  \caption{Příklad dvou iterací kroků \ref{pick} až \ref{lerw}. Žlutě jsou zvýrazněny buňky v bludišti, modře buňky v iteraci.}
 \end{figure}
 
 \begin{figure}[H]
@@ -114,7 +114,7 @@ Pro vygenerování bludiště jsem použil Wilsonův algoritmus. Důvodem je fak
   \caption{Stav po těchto dvou iteracích}
 \end{figure}
 
-Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z náhodně propletených buněk. V prvních verzích hry byl konec náhodně zvolený, docházelo ale k situacím, kdy byl konec velmi blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a nejvzdálenější buňku jako konec. Vizte přílohu \ref{apx_mazegen} pro celou implementaci.
+Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z náhodně propletených buněk. V prvních verzích hry byl konec náhodně zvolený, docházelo ale k situacím, kdy byl konec velmi blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a nejvzdálenější buňku jako konec. Celá implementace algoritmu je uvedena v příloze \ref{apx_mazegen}.
 
 \begin{figure}[H]
   \centering
@@ -131,7 +131,7 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
   \caption{Počítání vzdálenosti paralelně s generováním}
 \end{figure}
 
-Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi. Aby se zabránilo dlouhým načítacím dobám, lze hru hrát po vygenerování dvou úrovní. Zbytek je generován na pozadí.
+Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s úrovní a v jednotlivých komnatách připraví zdi. Aby se zabránilo dlouhým načítacím dobám, lze hru hrát již po vygenerování dvou úrovní. Zbytek je generován a doplněn na pozadí, předpokládá se, že hráč bude hrát pomaleji, než se hra generuje.
 
 Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simulaci fyziky, kterého jsem využil. Kuličku tvoří uzel \texttt{RigidBody3D} (tuhé těleso) a stěny uzel \texttt{StaticBody3D} (nehybné těleso). Fyzika je následně procesována automaticky. Přidal jsem však haptickou odezvu při srážce kuličky se stěnou bludiště -- při prudké změně v rychlosti kulička vyšle signál se sílou vibrace, který hlavní scéna zaznamená a ve scéně s hráčem vyvolá slabou vibraci v ovladačích.
 
@@ -145,7 +145,7 @@ Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simu
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z tradičních rozhraní. Většina programů používá pro své rozhraní virtuální "obrazovky", plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální "laserové ukazovátko", kterým na tyto obrazovky ukazuje a stisknutím tlačítka s nimi interaguje.
+Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z tradičních rozhraní. Většina VR softwaru používá pro své rozhraní virtuální \uv{obrazovky}, plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální \uv{laserové ukazovátko}, kterým na tyto obrazovky ukazuje a stisknutím tlačítka s nimi interaguje.
 
 \begin{figure}[H]
   \centering
@@ -156,7 +156,7 @@ Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo
 
 Pro vykreslení orbazovky jsem použil uzel \texttt{SubViewport}, který umožňuje vytvořit virtuální plátno a libovolně ho v rámci enginu zobrazit. Tomuto uzlu můžu přiřadit libovolné dceřinné uzly, které jsou poté renderovány do tohoto plátna. Samo o sobě není vidět, ale může být přiřazeno jako textura k jinému uzlu. Pro můj účel jsem použil uzel \texttt{MeshInstance} (instance 3D objektu) a jako objekt použil jednoduchý obdélník.
 
-Interakce s obrazovkou využívá postup zvaný "raycasting", česky vysílání paprsků. Z ruky hráče vyšleme paprsek směrem, kterým ukazuje, a při kolizi s nějakým objektem (v tomto případě obrazovkou) vypočítáme pozici, kde ke kolizi došlo. Godot Engine má podporu pro ray casting v rámci uzlu \texttt{RayCast3D}, který jsem přidal do scény s hráčem. Pokud tento uzel zaznamená kolizi se scénou Obrazovka, zobrazí paprsek mířící od prstu hráče k obrazovce a začne v jejím \texttt{SubViewport}u simulovat vstup myší. Simulování vstupu mi umožňuje využít nespočet vestavěných uzlů pro tvorbu rozhraní.
+Interakce s obrazovkou využívá postup zvaný \textit{ray casting}, česky \textit{vysílání paprsků}. Z ruky hráče vyšleme paprsek směrem, kterým ukazuje, a při kolizi s nějakým objektem (v tomto případě obrazovkou) vypočítáme pozici, kde ke kolizi došlo. Godot Engine má podporu pro ray casting v rámci uzlu \texttt{RayCast3D}, který jsem přidal do scény s hráčem. Pokud tento uzel zaznamená kolizi se scénou Obrazovka, zobrazí paprsek mířící od prstu hráče k obrazovce a začne v jejím \texttt{SubViewport}u simulovat vstup myší. Simulování vstupu mi umožňuje využít nespočet vestavěných uzlů pro tvorbu rozhraní.
 
 \chapter{Scénář hry}
 
