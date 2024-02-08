@@ -13,7 +13,7 @@ var is_finished: bool = false
 
 func _ready():
 	$Number.position.z = (maze.size.y * Shared.NODE_SIZE) - Shared.WALL_SIZE
-	$Number.position.x = $Number.position.z/2 - Shared.WALL_SIZE
+	$Number.position.x = (maze.size.x - 1)/2.0 * Shared.NODE_SIZE
 	$Number.position.y = Shared.WALL_SIZE/-2
 	$Number.position.z += 0.001
 

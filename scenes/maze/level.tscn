@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7irp01muchr2"]
+[gd_scene load_steps=3 format=3 uid="uid://b7irp01muchr2"]
 
 [ext_resource type="Script" path="res://scenes/maze/level.gd" id="1_tk5t6"]
+[ext_resource type="FontFile" uid="uid://gl2c4uwueqgw" path="res://assets/fonts/Jost-SemiBold.ttf" id="2_idah3"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_tk5t6")
@@ -13,6 +14,7 @@ pixel_size = 0.009
 shaded = true
 double_sided = false
 text = "1"
+font = ExtResource("2_idah3")
 font_size = 112
 outline_size = 32
 justification_flags = 0
