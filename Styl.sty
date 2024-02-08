@@ -51,6 +51,7 @@
 \titleformat{\chapter}{\normalfont\bfseries\LARGE}{\thechapter}{1em}{}
 % Odstranění „Kapitola“ z názvu kapitoly, děkuji Ambrymu
 
+\newcommand{\poml}{\textendash{} }
 \newcommand{\vedouci}[1]{\renewcommand{\vedouci}{#1}}		% Definování příkazu \vedouci tak, aby se do něj uložil název vedoucího
 \newcommand{\place}[1]{\renewcommand{\place}{#1}}			% Definování příkazu \place tak, aby se do něj uložilo místo
 \newcommand{\skolnirok}[1]{\renewcommand{\skolnirok}{#1}}	% Definování příkazu \skolnirok tak, aby se do něj uložil školní rok
@@ -150,7 +151,8 @@
 	Path=./fnt/,
 	BoldFont={RobotoSerif-Bold},
 	ItalicFont={RobotoSerif-Italic},
-	BoldItalicFont={RobotoSerif-BoldItalic}
+	BoldItalicFont={RobotoSerif-BoldItalic},
+	Ligatures=TeX
 ]{RobotoSerif-Regular}
 \setmonofont[
 	Path=./fnt/,

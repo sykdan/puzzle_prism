@@ -15,7 +15,7 @@ V~praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jse
 \textbf{Dospěl jsem k~následujícímu nápadu}: Logická hra sestávající z~kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a je odhalena další úroveň.
 \end{quotation}
 
-Toto splňuje moje kritéria -- hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
+Toto splňuje moje kritéria \poml hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a vyžaduje pohyb rukama pro naklánění bludiště.
 
 Výsledný projekt je složen z~mnoha souborů, mnoho z~nichž nejsou kód a není vhodné je do textu práce zahrnout. 
 
@@ -61,7 +61,7 @@ Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že jim hr
 
 Účel scény je kromě správného zobrazení hry také interpretace vstupu od hráče. Ve hře jsou klíčové dvě funkce: uchopení nějakého předmětu (např. kostky pro její naklánění) a interakce s~uživatelským rozhraním pomocí laserového ukazovátka. Druhý zmíněný bod popisuji podrobněji v~sekci \ref{uzivatelske_rozhrani}.
 
-Implementovat uchopení předmětu \textit{jednou rukou} je triviální -- Stačí, aby tento objekt sledoval změny v~transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření tlačítek na obou ovladačích hra vytvoří třetí, neviditelný ovladač. Tento ovladač působí ze středu mezi levým a pravým ovladačem a je rotován tak, aby vektor Z~tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Vektor Y míří vzhůru.} mířil od levého ovladače k~pravému ovladači a vektor Y mířil stejným směrem jako palce uživatele. Hra se poté odkazuje na tento virutální ovladač. Výsledný efekt je velmi přesvědčivý. Celá implementace této logiky je vložena v~příloze \ref{apx_gripped_object_transformation}.
+Implementovat uchopení předmětu \textit{jednou rukou} je triviální \poml Stačí, aby tento objekt sledoval změny v~transformaci uzlu \texttt{XRController3D}. Uchopení \textit{oběma rukama}, chování, kterého jsem chtěl dosáhnout ve své hře, je ale složitější. Protože je možné ovladače volně pohybovat a neexistují žádná fyzická omezení (hráč by mohl předmět např. volně kroutit), musel jsem přistoupit ke kompromisu. Při sevření tlačítek na obou ovladačích hra vytvoří třetí, neviditelný ovladač. Tento ovladač působí ze středu mezi levým a pravým ovladačem a je rotován tak, aby vektor Z~tranformační matice\footnote{Godot Engine používá pro rotaci uzlů transformační matice. Vektor Y míří vzhůru.} mířil od levého ovladače k~pravému ovladači a vektor Y mířil stejným směrem jako palce uživatele. Hra se poté odkazuje na tento virutální ovladač. Výsledný efekt je velmi přesvědčivý. Celá implementace této logiky je vložena v~příloze \ref{apx_gripped_object_transformation}.
 
 \section{Kostka, bludiště}
 
@@ -133,7 +133,7 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
 
 Po vygenerování bludiště hra podle výsledných dat postaví bludiště. Instancuje scénu s~úrovní a v~jednotlivých komnatách připraví zdi. Aby se zabránilo dlouhým načítacím dobám, lze hru hrát již po vygenerování dvou úrovní. Zbytek je generován a doplněn na pozadí, předpokládá se, že hráč bude hrát pomaleji, než se hra generuje.
 
-Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simulaci fyziky, kterého jsem využil. Kuličku tvoří uzel \texttt{RigidBody3D} (tuhé těleso) a stěny uzel \texttt{StaticBody3D} (nehybné těleso). Fyzika je následně procesována automaticky. Přidal jsem však haptickou odezvu při srážce kuličky se stěnou bludiště -- při prudké změně v~rychlosti kulička vyšle signál se sílou vibrace, který hlavní scéna zaznamená a ve scéně s~hráčem vyvolá slabou vibraci v~ovladačích.
+Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simulaci fyziky, kterého jsem využil. Kuličku tvoří uzel \texttt{RigidBody3D} (tuhé těleso) a stěny uzel \texttt{StaticBody3D} (nehybné těleso). Fyzika je následně procesována automaticky. Přidal jsem však haptickou odezvu při srážce kuličky se stěnou bludiště \poml při prudké změně v~rychlosti kulička vyšle signál se sílou vibrace, který hlavní scéna zaznamená a ve scéně s~hráčem vyvolá slabou vibraci v~ovladačích.
 
 \begin{figure}[H]
   \centering
@@ -160,13 +160,13 @@ Interakce s~obrazovkou využívá postup zvaný \textit{ray casting}, česky \te
 
 \chapter{Scénář hry}
 
-Při vstupu do hry se hráč ocitne v~hlavní nabídce. Ta je koncipovaná co nejjednodušeji - hráči jsou ihned představeny čtyři herní režimy, stupňované dle komplexity.
+Při vstupu do hry se hráč ocitne v~hlavní nabídce. Ta je koncipovaná co nejjednodušeji \poml hráči jsou ihned představeny čtyři herní režimy, stupňované dle komplexity.
 
 \begin{itemize}
-  \item \textbf{Lehká obtížnost} - Bludiště má rozměry 5x5 buněk a kostka má 5 úrovní.
-  \item \textbf{Střední obtížnost} - Bludiště má rozměry 8x8 buněk a kostka má 8 úrovní.
-  \item \textbf{Těžká obtížnost} - Bludiště má rozměry 14x14 buněk a kostka má 14 úrovní.
-  \item \textbf{Vlastní} - Hráč si může volně přizpůsobit rozměry hry.
+  \item \textbf{Lehká obtížnost} \poml Bludiště má rozměry 5x5 buněk a kostka má 5 úrovní.
+  \item \textbf{Střední obtížnost} \poml Bludiště má rozměry 8x8 buněk a kostka má 8 úrovní.
+  \item \textbf{Těžká obtížnost} \poml Bludiště má rozměry 14x14 buněk a kostka má 14 úrovní.
+  \item \textbf{Vlastní} \poml Hráč si může volně přizpůsobit rozměry hry.
 \end{itemize}
 
 K~dispozici jsou i menší, méně důležitá tlačítka pro vstup do nastavení, ukončení hry a zobrazení návodu. Návod se hráči otevře také při úplně prvním spuštění hry.
