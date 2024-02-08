@@ -6,7 +6,7 @@
 \title{Rozšířená realita}
 \date{14. února 2024}
 \vedouci{Dr.rer.nat. Michal Kočer}
-\place{v Českých Budějovicích}
+\place{v~Českých Budějovicích}
 \skolnirok{2023/2024}
 
 \logo{\includegraphics{GJ8_logotyp.pdf}}
@@ -16,13 +16,11 @@
 \mytitlepage
 \prohlaseni
 {
-	Prohlašuji, že jsem tuto práci vypracoval samostatně s vyznačením všech použitých pramenů.
+	Prohlašuji, že jsem tuto práci vypracoval samostatně s~vyznačením všech použitých pramenů.
 }
 \abstrakt
 { % Abstrakt
-	Rozšířená realita se v dnešní době stává čím dál častěji zmiňovaným tématem. \gls{xr} zařízení se stávají čím dál více dostupnějšími a v médiích často slýcháme o pojmu \textit{Metaverse} -- platformě, o kterou se technologické společnosti přou.
-
-	Tato práce popisuje historii \gls{xr} a její různá technologická zpracování, na úrovni hardwaru i softwaru. V druhé části se zaměřuje na softwarovou stránku \gls{xr} a postup při tvorbě vlastního projektu pro \gls{vr}.
+	Tato práce se zabývá širokým tématem \gls{xr} a jejího využití. V~první části přibližuje historii \gls{xr} a její zpracování po technické stránce, na úrovni hardwaru i softwaru. V~druhé části se zaměřuje na tvorbu videohry pro moderní \gls{vr} zařízení, ve které popisuji výzvy spojené s~vývojem videoher a zvláštnosti platformy \gls{xr}, které musí být při vývoji zohledněny.
 }
 { % Klíčová slova
 	\textit{Headset (HMD), Rozšířená realita, Virtuální realita, Augmentovaná realita, Smíšená realita, sledování pohybu (motion tracking), herní engine}
@@ -54,7 +52,7 @@
 
 \appendix
 
-\chapter{Ukázky ze hry}
+\chapter{Ukázky ze hry}\label{apx_screenshots}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.98\linewidth]{screenshot1.png}
@@ -65,13 +63,13 @@
 \lstinputlisting{code/sample_gdscript.gd}
 
 \chapter{Ovládání pohybem obou rukou}\label{apx_gripped_object_transformation}
-Tento kód z velké části využívá faktu, že uzly v Godotu dědí své transformace. Pokud se pohne rodičovský uzel, dceřinný uzel se pohne společně s ním, a rozdíl pozice a rotace mezi nimi zůstane stejný. Toto chování je ovšem ignorováno v instrukcích, které mění hodnoty atributů \texttt{global\_*}.
+Tento kód z~velké části využívá faktu, že uzly v~Godotu dědí své transformace. Pokud se pohne rodičovský uzel, dceřinný uzel se pohne společně s~ním, a rozdíl pozice a rotace mezi nimi zůstane stejný. Toto chování je ovšem ignorováno v~instrukcích, které mění hodnoty atributů \texttt{global\_*}.
 
-Většina pohybem ovládaných uzlů má proto jeden dceřinný uzel (v kódu nazván jako \textit{Origin}), který je při uchopení přemístěn úpravou \texttt{global\_transform} tak, aby umístěním splýval s uchyceným předmětem (toto v přiloženém kódu není obsaženo). Uchycený předmět je poté synchronizován s pozicí a rotací tohoto \textit{Origin}u. Není tak potřeba manuálně počítat rozdíl transformace.
+Většina pohybem ovládaných uzlů má proto jeden dceřinný uzel (v~kódu nazván jako \textit{Origin}), který je při uchopení přemístěn úpravou \texttt{global\_transform} tak, aby umístěním splýval s~uchyceným předmětem (toto v~přiloženém kódu není obsaženo). Uchycený předmět je poté synchronizován s~pozicí a rotací tohoto \textit{Origin}u. Není tak potřeba manuálně počítat rozdíl transformace.
 
 \lstinputlisting{code/gripped_object_transformation.gd}
 
-\chapter{Wilsonův algoritmus v GDScript}\label{apx_mazegen}
+\chapter{Wilsonův algoritmus v~GDScript}\label{apx_mazegen}
 \lstinputlisting{code/mazegen.gd}
 
 \end{document}
