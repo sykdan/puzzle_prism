@@ -28,22 +28,22 @@ CUST_PRISM_L,Počet úrovní,Level count
 XR_ERROR_TITLE,Nelze spustit hru,Cannot launch game
 E_NO_INTERFACE,Nebylo nalezeno rozhraní pro Virtuální Realitu,No Virtual Reality interface found
 E_OXR_INIT_FAILED,"Nebyl detekován Headset pro virtuální realitu.
-Připojte prosím Váš headset a zkuste to znovu.
+Připoj prosím svůj headset a zkus to znovu.
 Hra bude nyní uzavřena.","A Virtual Reality Headset was not detected.
 Please connect your headset and try again.
 The game will now close."
 E_WXR_INIT_FAILED,"Nebyl detekován Headset pro virtuální realitu.
-Připojte prosím Váš headset a zkuste to znovu.
+Připoj prosím svůj headset a zkus to znovu.
 Hra bude nyní uzavřena.","A Virtual Reality Headset was not detected.
 Please connect your headset and try again.
 The game will now close."
-E_WXR_NOT_SUPPORTED,"Váš prohlížeč nepodporuje WebXR, hra nemůže být spuštěna na Vašem headsetu.","Your browser does not support WebXR, the game cannot be launched on your headset."
+E_WXR_NOT_SUPPORTED,"Tvůj prohlížeč nepodporuje WebXR. Hra na tvém headsetu nemůže být spuštěna.","Your browser does not support WebXR, the game cannot be launched on your headset."
 OPTIONS,Možnosti,Options
 LANGUAGE,Jazyk,Language
 RESET,Resetovat,Reset
 R_RECORDS,Resetovat rekordy,Reset records
 R_FIRSTRUN,Obnovit první spuštění,Restore first-run experience
 CONTROLS,Ovládání,Controls
-HOWTO,"Obklopte kostku oběma rukama, sevřete ovladač (stiskněte postranní tlačítka) a naklánějte, dokud kulička nedorazí do cíle!","Embrace the cube with both hands, grip the controller (press the side buttons) and tilt, until the marble reaches the end!"
-GIVEUP_NOTICE,"Pokud se chcete vzdát a vrátit se na hlavní obrazovku, pusťte kostku a zvedněte obě ruce nad hlavu.","If you wish to give up and return to the main screen, release the cube and raise your hands above your head."
+HOWTO,"Obklop kostku oběma rukama, sevři ovladač (stiskni postranní tlačítka) a nakláněj, dokud kulička nedorazí do cíle!","Embrace the cube with both hands, grip the controller (press the side buttons) and tilt, until the marble reaches the end!"
+GIVEUP_NOTICE,"Pokud se chceš vzdát a vrátit se na hlavní obrazovku, pusť kostku a zvedni obě ruce nad hlavu.","If you wish to give up and return to the main screen, release the cube and raise your hands above your head."
 GIVEUP_ACTION,Návrat za:,Returning in:
