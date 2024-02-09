@@ -26,6 +26,15 @@ Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/
 \begin{samepage}
   Můj projekt jsem rozdělil do jednotlivých, jednoduše spravovatelných scén. Tímto jsem mohl na mnohých funkcích pracovat odděleně a mohl bych je teoreticky použít i v~budoucích projektech. Zde je zjednodušený diagram těchto scén:
 
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{diagram.pdf}
+    \caption{Diagram scén a tok dat mezi nimi}
+  \end{figure}
+\end{samepage}
+
+
+\begin{figure}[H]
   \vspace{1em}
   \hrule
   \vspace{1em}
@@ -33,7 +42,7 @@ Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/
   \renewcommand\DTstyle{\sffamily}
   \dirtree{%
     .1 Hlavní scéna (spojuje a ovládá zbylé scény) .
-    .2 Prostředí (skybox) .
+    .2 Prostředí (skybox \poml pozadí, osvětlení) .
     .2 Hráč .
     .3 Trackované ovladače, kamera synchronizovaná s~headsetem .
     .2 Obrazovka .
@@ -47,9 +56,10 @@ Celý zdrojový kód je veřejnosti dostupný na adrese \url{https://github.com/
   \vspace{1em}
   \hrule
   \vspace{1em}
+  \caption{Podrobný strom scén}
+\end{figure}
 
-  Každá scéna reprezentuje odlišnou sadu problémů a výzev, které jsem musel při tvorbě projektu řešit.
-\end{samepage}
+Každá scéna reprezentuje odlišnou sadu problémů a výzev, které jsem musel při tvorbě projektu řešit.
 
 \section{Hráč, interakce se zařízením}
 
