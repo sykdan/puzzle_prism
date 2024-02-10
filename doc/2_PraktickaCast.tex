@@ -11,8 +11,7 @@ V~praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jse
 \end{itemize}
 
 \begin{quotation}
-  
-\textbf{Dospěl jsem k~následujícímu nápadu}: Logická hra sestávající z~kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a~je odhalena další úroveň.
+  \textbf{Dospěl jsem k~následujícímu nápadu}: Logická hra sestávající z~kostky tvořené úrovněmi naskládanými na sebe. Každá úroveň představuje bludiště, skrze které musí nakláněním hráč navigovat kuličku. Při dosažení cíle je úroveň odebrána, kostka se zmenší a~je odhalena další úroveň.
 \end{quotation}
 
 Toto splňuje moje kritéria \poml hra je jednoduchá, na vykreslení potřebuje jen geometrické tvary a~vyžaduje pohyb rukama pro naklánění bludiště.
@@ -25,7 +24,7 @@ Celý zdrojový kód je veřejně dostupný na adrese \url{https://github.com/sy
 
 \begin{samepage}
   Můj projekt jsem rozdělil do jednotlivých, jednoduše spravovatelných scén. Tímto jsem mohl na mnohých funkcích pracovat odděleně a~mohl bych je teoreticky použít i~v~budoucích projektech. Zde je zjednodušený diagram těchto scén:
-
+  
   \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{diagram.pdf}
@@ -38,7 +37,7 @@ Celý zdrojový kód je veřejně dostupný na adrese \url{https://github.com/sy
   \vspace{1em}
   \hrule
   \vspace{1em}
-
+  
   \renewcommand\DTstyle{\sffamily}
   \dirtree{%
     .1 Hlavní scéna (spojuje a~ovládá zbylé scény) .
@@ -91,13 +90,13 @@ Pro vygenerování bludiště jsem použil \textit{\textbf{Wilsonův algoritmus}
 \begin{enumerate}
   \setcounter{enumi}{0}
   \item Mějme graf buněk, kde má každá buňka několik sousedních buněk (např. pro mřížku mají buňky 4 sousední buňky, vyjma těch na krajích a~v~rozích). Nechť je mezi všemi sousedícími buňkami spojení, které lze označit jako průchod nebo zeď.
-  \item Označme všechny spojení jako zdi a~jednu náhodně zvolenou buňku označme jako zahrnutou v~bludišti. \label{init}
+  \item Označme všechny spojení jako zdi a~jednu náhodně zvolenou buňku jako zahrnutou v~bludišti. \label{init}
   \item Libovolným způsobem zvolme buňku. Pokud je tato buňka zahrnuta v~bludišti, zvolme jinou buňku. \label{pick}
   \item Označme buňku jako zahrnutou v~současné iteraci.
   \item Přejděme na náhodnou sousedící buňku a~v~předchozí buňce uložíme ukazatel k~následující buňce. Poté: \label{lerw}
         \begin{itemize}
           \item Pokud tato buňka není zahrnuta ani v~iteraci, ani v~bludišti, označme ji jako zahrnutou v~iteraci a~přejděme na krok \ref{lerw}.
-          \item Pokud je tato buňka zahrnuta v~iteraci, vznikla smyčka. Pomocí ukazatelů uložených v~buňkách projděme tuto smyčku, odstraňme buňky ze současné iterace a~odeberme ukazatele.
+          \item Pokud je tato buňka zahrnuta v~iteraci, vznikla smyčka. Pomocí ukazatelů uložených v~buňkách projděme tuto smyčku, odstraňme buň\-ky ze současné iterace a~odeberme ukazatele.
           \item Pokud je tato buňka zahrnuta v~bludišti, všechny buňky v~iteraci označme jako buňky v~bludišti. Spoje mezi buňkami v~této iteraci označme jako průchody.
         \end{itemize}
   \item Pokud stále existují buňky, které nejsou zahrnuty v~bludišti, přejděme zpět ke kroku \ref{pick}.
@@ -105,7 +104,7 @@ Pro vygenerování bludiště jsem použil \textit{\textbf{Wilsonův algoritmus}
 
 \begin{figure}[H]
   \centering
-
+  
   \begin{minipage}{.5\textwidth}
     \centering
     \includegraphics[height=100pt]{maze_gen_step_1.png}
@@ -114,7 +113,7 @@ Pro vygenerování bludiště jsem použil \textit{\textbf{Wilsonův algoritmus}
     \centering
     \includegraphics[height=100pt]{maze_gen_step_2.png}
   \end{minipage}
-
+  
   \caption{Příklad dvou iterací kroků \ref{pick} až \ref{lerw}. Žlutě jsou zvýrazněny buňky v~bludišti, modře buňky v~iteraci.}
 \end{figure}
 
@@ -128,7 +127,7 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
 
 \begin{figure}[H]
   \centering
-
+  
   \begin{minipage}{.5\textwidth}
     \centering
     \includegraphics[height=100pt]{maze_gen_count_1.png}
@@ -137,7 +136,7 @@ Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené
     \centering
     \includegraphics[height=100pt]{maze_gen_count_2.png}
   \end{minipage}
-
+  
   \caption{Počítání vzdálenosti paralelně s~generováním}
 \end{figure}
 
