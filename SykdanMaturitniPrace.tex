@@ -20,14 +20,14 @@
 }
 \abstrakt
 { % Abstrakt
-	Tato práce se zabývá širokým tématem \gls{xr} a jejího využití. V~první části přibližuje historii \gls{xr} a její zpracování po technické stránce, na úrovni hardwaru i softwaru. V~druhé části se zaměřuje na tvorbu videohry pro moderní \gls{vr} zařízení a popisuje výzvy spojené s~vývojem videoher a zvláštnostmi platformy \gls{xr}, které musí být při vývoji zohledněny.
+	Tato práce se zabývá širokým tématem \gls{xr} a~jejího využití. V~první části přibližuje historii \gls{xr} a~její zpracování po technické stránce, na úrovni hardwaru i~softwaru. V~druhé části se zaměřuje na tvorbu videohry pro moderní \gls{vr} zařízení a~popisuje výzvy spojené s~vývojem videoher a~zvláštnostmi platformy \gls{xr}, které musí být při vývoji zohledněny.
 }
 { % Klíčová slova
 	\textit{Headset (HMD), Rozšířená realita, Virtuální realita, Augmentovaná realita, Smíšená realita, sledování pohybu (motion tracking), herní engine}
 }
 \podekovani
 {
-	Děkuji panu Michalovi Kočerovi za vedení mé práce a zpětnou vazbu. Také bych rád poděkoval rodině, přátelům a spolužákům, kteří testovali můj projekt a poskytli mi na něj zpětnou vazbu.
+	Děkuji panu Michalovi Kočerovi za vedení mé práce a~zpětnou vazbu. Také bych rád poděkoval rodině, přátelům a~spolužákům, kteří testovali moji hru a~poskytli mi na k~ní své nápady a~připomínky.
 }
 
 \tableofcontents
@@ -69,9 +69,9 @@ Dostupné také jako video na YouTube na adrese \url{https://youtu.be/SBnWp2jJ9S
 \lstinputlisting{code/sample_gdscript.gd}
 
 \chapter{Ovládání pohybem obou rukou}\label{apx_gripped_object_transformation}
-Tento kód z~velké části využívá faktu, že uzly v~Godotu dědí své transformace. Pokud se pohne rodičovský uzel, dceřinný uzel se pohne společně s~ním, a rozdíl pozice a rotace mezi nimi zůstane stejný. Toto chování je ovšem ignorováno v~instrukcích, které mění hodnoty atributů \texttt{global\_*}.
+Tento kód z~velké části využívá faktu, že uzly v~Godotu dědí své transformace. Pokud se pohne rodičovský uzel, dceřinný uzel se pohne společně s~ním, a~rozdíl pozice a~rotace mezi nimi zůstane stejný. Toto chování je ovšem ignorováno v~instrukcích, které mění hodnoty atributů \texttt{global\_*}.
 
-Většina pohybem ovládaných uzlů má proto jeden dceřinný uzel (v~kódu nazván jako \textit{Origin}), který je při uchopení přemístěn úpravou \texttt{global\_transform} tak, aby umístěním splýval s~uchyceným předmětem (toto v~přiloženém kódu není obsaženo). Uchycený předmět je poté synchronizován s~pozicí a rotací tohoto \textit{Origin}u. Není tak potřeba manuálně počítat rozdíl transformace.
+Většina pohybem ovládaných uzlů má proto jeden dceřinný uzel (v~kódu nazván jako \textit{Origin}), který je při uchopení přemístěn úpravou \texttt{global\_transform} tak, aby umístěním splýval s~uchyceným předmětem (toto v~přiloženém kódu není obsaženo). Uchycený předmět je poté synchronizován s~pozicí a~rotací tohoto \textit{Origin}u. Není tak potřeba manuálně počítat rozdíl transformace.
 
 \lstinputlisting{code/gripped_object_transformation.gd}
 
