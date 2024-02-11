@@ -123,7 +123,7 @@ Pro vygenerování bludiště jsem použil \textit{\textbf{Wilsonův algoritmus}
   \caption{Stav po těchto dvou iteracích}
 \end{figure}
 
-Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z~náhodně propletených buněk. V~prvních verzích hry byl konec náhodně zvolený, docházelo ale k~situacím, kdy byl konec velmi blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a~nejvzdálenější buňku jako konec. Celá implementace algoritmu je uvedena v~příloze \ref{apx_mazegen}.
+Takto vygenerované bludiště nemá žádný začátek ani konec; je stvořené z~náhodně propletených buněk. V~prvních verzích hry byl cíl úrovně náhodně zvolený, docházelo ale k~situacím, kdy byl konec příliš blízko počáteční pozici. Algoritmus jsem proto upravil, aby zároveň zaznamenával vzdálenost od úvodní buňky (viz krok \ref{init}). Jelikož výběr úvodní buňky nemá na výsledek algoritmu vliv, umožnil jsem explicitně zadat její pozici. Úvodní buňku teď můžu považovat za začátek bludiště, a~nejvzdálenější buňku jako konec. Celá implementace algoritmu je uvedena v~příloze \ref{apx_mazegen}.
 
 \begin{figure}[H]
   \centering
