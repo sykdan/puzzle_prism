@@ -18,10 +18,10 @@ func xr_error(type: StringName):
 	get_tree().quit()
 
 func _process(_delta):
-	if not _is_holding_maze():
+	if current_maze and not _is_holding_maze():
 		var giveup: bool = (
-			$XRPlayer/LeftHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y and 
-			$XRPlayer/RightHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y
+			$XRPlayer/LeftHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y + (0.4 * $XRPlayer.world_scale) and 
+			$XRPlayer/RightHand.global_position.y > $XRPlayer/XRCamera3D.global_position.y + (0.4 * $XRPlayer.world_scale)
 		)
 		if giveup != _is_giving_up && not _is_giving_up:
 			$MainScreen/Viewport/GUI.start_giveup()
