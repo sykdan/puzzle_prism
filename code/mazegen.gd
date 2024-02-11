@@ -43,7 +43,7 @@ func step(now: Vector2i, size: Vector2i, previous: Vector2i) -> Vector2i:
                 direction = Vector2i.RIGHT
             3:
                 direction = Vector2i.DOWN
-            _: # Nutne pro potlaceni kompilacnich chyb, nepouziva se
+            _: # Potlaceni chyb v kompilaci
                 direction = Vector2i.ZERO
         
         var would_be = now + direction
@@ -57,7 +57,7 @@ func step(now: Vector2i, size: Vector2i, previous: Vector2i) -> Vector2i:
         
         return would_be
 
-    # Nutne pro potlaceni kompilacnich chyb, nepouziva se
+    # Potlaceni chyb v kompilaci
     return Vector2i.ZERO
 
 # Pozada o vygenerovani bludiste

@@ -42,7 +42,10 @@
 
 \addcontentsline{toc}{part}{Přílohy}
 \addcontentsline{toc}{chapter}{Bibliografie}
+
+\sloppy
 \printbibliography
+\fussy
 
 \setglossarystyle{list}
 \printglossary[title={Zkratky}]
@@ -53,7 +56,7 @@
 \appendix
 
 \chapter{Ukázky ze hry}\label{apx_screenshots}
-Dostupné také jako video na YouTube na adrese \url{https://youtu.be/SBnWp2jJ9SY}.
+Dostupné také jako video na na adrese \url{https://youtu.be/SBnWp2jJ9SY}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.98\linewidth]{screenshot1.png}
@@ -68,7 +71,7 @@ Dostupné také jako video na YouTube na adrese \url{https://youtu.be/SBnWp2jJ9S
 \chapter{Základní ukázka GDScript kódu}\label{apx_gscript_sample}
 \lstinputlisting{code/sample_gdscript.gd}
 
-\chapter{Ovládání pohybem obou rukou}\label{apx_gripped_object_transformation}
+\chapter{Ovládání pohybem oběma rukama}\label{apx_gripped_object_transformation}
 Tento kód z~velké části využívá faktu, že uzly v~Godotu dědí své transformace. Pokud se pohne rodičovský uzel, dceřinný uzel se pohne společně s~ním, a~rozdíl pozice a~rotace mezi nimi zůstane stejný. Toto chování je ovšem ignorováno v~instrukcích, které mění hodnoty atributů \texttt{global\_*}.
 
 Většina pohybem ovládaných uzlů má proto jeden dceřinný uzel (v~kódu nazván jako \textit{Origin}), který je při uchopení přemístěn úpravou \texttt{global\_transform} tak, aby umístěním splýval s~uchyceným předmětem (toto v~přiloženém kódu není obsaženo). Uchycený předmět je poté synchronizován s~pozicí a~rotací tohoto \textit{Origin}u. Není tak potřeba manuálně počítat rozdíl transformace.
