@@ -22,7 +22,7 @@ Tuto představu se Sutherland snažil realizovat se svými studenty. Společně 
 
 \section{XR v~armádě}
 
-V~80. letech 20. století o~\gls{xr} projevila zájem armáda USA, ve snaze snadněji a~efektivněji připravit americké piloty na ovládání letadel. Začala využívat speciálních simulačních kabin, které obsahovaly mimo jiné i~speciální headset. Tento headset pomocí stereoskopického zobrazení informoval o~průběhu letu, zobrazoval 3D mapy a~snímky z~radaru. Díky možnosti systém ovládat pomocí hlasu nebo pohybu očí se tento headset přibližuje k~dnešnímu stavu \gls{vr}, jelikož reaguje na vstup uživatele. \cite{otechnice}
+V~80. letech 20. století o~\gls{xr} projevila zájem armáda USA, ve snaze snadněji a~efektivněji připravit americké piloty na ovládání letadel. Začala využívat speciálních simulačních kabin, které obsahovaly mimo jiné i~speciální headset. Tento headset pomocí stereoskopického zobrazení informoval o~průběhu letu, zobrazoval 3D mapy a~snímky z~radaru. Díky možnosti systém ovládat pomocí hlasu nebo pohybu očí se tento headset přibližuje k~dnešnímu stavu \gls{xr}, jelikož reaguje na vstup uživatele. \cite{otechnice}
 
 
 \begin{figure}[H]
@@ -47,7 +47,7 @@ V~80. letech 20. století o~\gls{xr} projevila zájem armáda USA, ve snaze snad
 
 O~počátku dostupnosti \gls{xr} zařízení můžeme mluvit v~90. letech 20. století, kdy se tato technologie mohla dostat i~do rukou obyčejných lidí. Dva zaměstnanci herní společnosti \textit{Atari}, \textit{Jaron Lanier} a~\textit{Thomas Zimmermann}, společně založili společnost \textit{VPL Research} a~začali s~vývojem produktů pro \gls{xr}. Kromě vývoje \gls{vr} brýlí se zaměřili na výrobu speciálních obleků a~rukavic, které dokázaly přenést pohyby uživatele do počítače. Snímání pohybu ale nebylo dostatečně kvalitní a~zařízení úspěch nezaznamenala; dodnes jsou ovšem známá jako první cenově dostupné \gls{xr} produkty. \cite{otechnice_2}
 
-Herní společnosti na sebe také nenechaly dlouho čekat a~začaly s~vývojem \gls{vr} konzolí pro hraní \gls{vr} her. První takovou byla britská společnost \textit{Virtuality}, která v~roce 1991 uvedla na trh stejnojmenné zařízení představující arkádový stroj se stereoskopickými brýlemi. Kvůli vysoké pořizovací ceně nebylo dostupné pro domácnosti, Virtuality ovšem otevřela nespočet heren po celé Velké Británii. \cite{otechnice_2} \cite{independent_virtuality}
+Herní společnosti na sebe také nenechaly dlouho čekat a~začaly s~vývojem \gls{vr} konzolí pro hraní \gls{vr} her. První takovou byla britská společnost \textit{Virtuality}, která v~roce 1991 uvedla na trh stejnojmenné zařízení představující arkádový stroj se stereoskopickými \gls{vr} brýlemi. Kvůli vysoké pořizovací ceně nebylo dostupné pro domácnosti, Virtuality ovšem otevřela nespočet heren po celé Velké Británii. \cite{otechnice_2} \cite{independent_virtuality}
 
 Do světa \gls{vr} herních konzolí vstoupily i~dnes stále známé japonské společnosti \textit{SEGA} a~\textit{Nintendo}, se svými \textit{SEGA VR} a~\textit{Virtual Boy}. Obě tato zařízení však byla komerčními selháními. SEGA byla nucena kvůli technickým problémům vydání několikrát posunout a~krátce po vydání skončila jeho výrobu. Nintendo sice své zařízení vydalo, ale rok po uvedení na trh jej stáhlo. Kvůli vysoké ceně a~špatným grafickým schopnostem (konzole uměla zobrazit pouze červenou a~černou barvu) si zálibu u~hráčů nenašlo.\cite{otechnice_2}
 
@@ -93,7 +93,7 @@ Gyroskop je elektronické zařízení, které umožňuje vypočítat úhlové zr
 
 Sledování pohybu v~prostoru je řešeno různými způsoby. Podle postavení zařízení je možné je seskupit do dvou kategorií: vnější sledování (outside-in) a~vnitřní sledování (inside-out).
 
-Vnější sledování využívá speciální zařízení (\uv{věže}) rozmístěná v~prostředí, ve kterém je sledován pohyb. Taková zařízení mohou být např. emitery infračerveného světla, které sledované zařízení zaznamená a~vypočítá podle nich svoji pozici v~prostoru. Protože pro sledování jsou použita tato genercká zařízení, těší se tento způsob sledování vysoké kompatibilitě \poml pro různá zařízení není potřeba pořizovat jiné věže (za předpokladu, že toto nové zařízení také využívá vnějšího sledování). Nevýhodou je naopak obtížná přenosnost takového systému. \cite{vr_tracking_suvi}
+Vnější sledování využívá speciální zařízení (\uv{věže}) rozmístěná v~prostředí, ve kterém je sledován pohyb. Těmi mohou být např. emitery infračerveného světla, které sledované zařízení zaznamená a~vypočítá podle nich svoji pozici v~prostoru. Protože pro sledování jsou použita tato genercká zařízení, těší se tento způsob sledování vysoké kompatibilitě \poml pro různá zařízení není potřeba pořizovat jiné věže (za předpokladu, že toto nové zařízení také využívá vnějšího sledování). Nevýhodou je naopak obtížná přenosnost takového systému. \cite{vr_tracking_suvi}
 
 Vnitřní sledování se v~dnešní době stává populárnějším. Na rozdíl od vnějšího sledování nevyužívá žádných externích zařízení a~je úplně samostatné. První takový systém představil Google se svým ARCore, zmíněným v~předchozí kapitole. Ten umožnil sledování pozice pouze pomocí pohledu z~kamery. Protože je ale navržen pro spuštění na většině mobilních zařízení, výsledky jsou poněkud nekonzistentní (kvůli lišícím se kvalitám kamer).
 Revoluci v~tom\-to odvětví způsobila společnost Meta se svým inovativním řešením. Používá sadu čtyř kamer, které průběžně sledují a~analyzují prostor kolem uživatele. V~tomto prostoru si poté vytvoří záchytné body, jejichž pozici analyzuje použitím AI algoritmů. Tímto je takový systém velice přenosný a~pro běžného uživatele neuvěřitelně přesný. V~nevhodném prostředí tento systém ale přestává fungovat (např. v~špatných světelných podmínkách). \cite{vr_tracking_suvi} \cite{enwiki:1182789097}
@@ -115,9 +115,9 @@ Existují také \textit{autostereoskopické displeje}, které obraz rozdělí po
 
 \chapter{Software}
 
-V~dnešní době, díky standardizovaným rozhraním, je vývoj pro \gls{xr} mnohem jednodušší než kdysi. S~vydáním prvních komerčních \gls{vr} zařízení se začínaly formovat první \gls{SDK} pro virtuální realitu. V~principu výrobce při vývoji zařízení stanoví rozhraní, přes které software komunikuje s~hardwarem. 
+V~dnešní době, díky standardizovaným rozhraním, je vývoj pro \gls{xr} mnohem jednodušší než kdysi. S~vydáním prvních komerčních \gls{vr} zařízení se začínala formovat první \gls{SDK} pro virtuální realitu. V~principu výrobce při vývoji zařízení stanoví rozhraní, přes které software komunikuje s~hardwarem. 
 
-Například Oculus se svým zařízením Oculus Rift přišel se svým vlastním řešením, \textit{Oculus SDK}, jehož použití bylo bezplatné a~bylo integrováno do většiny herních enginů. \cite{enwiki:1193283032} Toto ale přispělo k~fragmentaci \gls{xr} ekosystému \poml aplikace vyvinuté pro jednu platformu bylo obtížné spustit na konkurenční platformě.
+Například Oculus se svým zařízením Oculus Rift přišel s vlastním řešením, \textit{Oculus SDK}, jehož použití bylo bezplatné a~bylo integrováno do většiny herních enginů. \cite{enwiki:1193283032} Toto ale přispělo k~fragmentaci \gls{xr} ekosystému \poml aplikace vyvinuté pro jednu platformu bylo obtížné spustit na konkurenční platformě.
 
 Této fragmentaci se snažila zabránit americká společnost \textit{Valve}, provozovatel známé herní platformy \textit{Steam}. Ve spolupráci s~výrobci vytvořila otevřený standard \textit{OpenVR}, který vývoj \gls{vr} aplikací značně usnadnil. Vývojáři nyní mohli vyvíjet pro jeden standard a~zpřístupnit jejich aplikace na všech zařízeních, která implementovala toto jednotné rozhraní. OpenVR se stalo výchozím rozhraním pro headset Vive od společnosti HTC. \cite{enwiki:1192992480}
 
