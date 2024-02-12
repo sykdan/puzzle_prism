@@ -2,12 +2,12 @@
 
 \chapter{Cíl projektu}
 
-V~praktické části mé práce jsem vytvořil vlastní hru pro VR. Stanovil jsem si následující kritéria:
+V~praktické části mé práce jsem vytvořil vlastní hru pro \gls{vr}. Stanovil jsem si následující kritéria:
 
 \begin{itemize}
-  \item \textbf{Nenáročnost}. Chtěl jsem, aby má hra nebyla obtížná na pochopení. Většina VR her vyžaduje zvýšenou fyzickou aktivitu nebo hlubší porozumění VR konceptů. Ideálně jsem chtěl vytvořit hru, kterou bych mohl komukoliv půjčit, aniž bych musel dlouze vysvětlovat její princip.
+  \item \textbf{Nenáročnost}. Chtěl jsem, aby má hra nebyla obtížná na pochopení. Většina \gls{vr} her vyžaduje zvýšenou fyzickou aktivitu nebo hlubší porozumění \gls{vr} konceptů. Ideálně jsem chtěl vytvořit hru, kterou bych mohl komukoliv půjčit, aniž bych musel dlouze vysvětlovat její princip.
   \item \textbf{Grafická jednoduchost}. Nepovažuji se za umělce a~umím vytvářet pouze základní modely a~textury. Bylo pro mě tedy klíčové přijít s~takovým konceptem, který by byl vzhledově nenáročný.
-  \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které VR platformy poskytují. Tedy ovládání pohybem, vliv fyzikálních zákonů atp.
+  \item \textbf{Interaktivita}. Od své hry jsem chtěl, aby doopravdy využívala funkce, které \gls{vr} platformy poskytují. Tedy ovládání pohybem, vliv fyzikálních zákonů atp.
 \end{itemize}
 
 \begin{quotation}
@@ -64,7 +64,7 @@ Každá scéna reprezentuje odlišnou sadu problémů a~výzev, které jsem muse
 
 Scéna s~hráčem je přímo spojena s~headsetem a~sledovanými ovladači. Sestává z~uzlů \texttt{XRCamera3D}, pohledu do 3D prostředí synchronizovaným s~umístěním headsetu, a~dvou uzlů \texttt{XRController3D}, které jsou synchronizované s~umístěním levého a~pravého ovladače.
 
-V~této scéně jsem použil svobodnou knihovnu \textit{Godot XR Tools}, která nabízí podpůrné scény pro XR projekty. Z~té jsem si zapůjčil kód nutný k~inicializaci VR headsetu a~3D model ruky licencovaný pod \textit{Creative Commons 0}\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
+V~této scéně jsem použil svobodnou knihovnu \textit{Godot XR Tools}, která nabízí podpůrné scény pro \gls{xr} projekty. Z~té jsem si zapůjčil kód nutný k~inicializaci \gls{vr} headsetu a~3D model ruky licencovaný pod \textit{Creative Commons 0}\footnote{CC0 je licence používaná pro díla ve veřejné doméně. Autoři modelu se vzdali autorských práv. Vizte \url{https://creativecommons.org/publicdomain/zero/1.0/deed.cs}}.
 
 Od přátel, kteří hru testovali, jsem často slýchal stížnosti, že jim hra způsobuje nevolnost. Přidal jsem proto do této scény i~platformu, umístěnou pod hráčem ve výšce, kterou si ve svém zařízení předem nastavil jako výšku podlahy. Mým záměrem bylo zabránit pocitu, že se hráč \uv{vznáší v~prázdnotě}, čímž bych nepříjemný pocit odstranil. Testující na změnu reagovali pozitivně. 
 
@@ -154,7 +154,7 @@ Druhou výzvou je samotná fyzika kuličky. Godot Engine nabízí modul pro simu
 \label{uzivatelske_rozhrani}
 \section{Uživatelské rozhraní}
 
-Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve VR ovšem nemáme k~dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z~tradičních rozhraní. Většina VR softwaru používá pro své rozhraní virtuální \uv{obrazovky}, plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální \uv{laserové ukazovátko}, kterým na tyto obrazovky ukazuje a~stisknutím tlačítka s~nimi interaguje.
+Grafické uživatelské rozhraní je nedílnou součástí každé aplikace nebo hry. Ve \gls{vr} ovšem nemáme k~dispozici myš ani klávesnici, vše je ovládáno pohybem. Přesto je ale možné dosáhnout podobného chování, jaké známe z~tradičních rozhraní. Většina \gls{vr} softwaru používá pro své rozhraní virtuální \uv{obrazovky}, plošiny, které zobrazují 2D obsah podobně jako monitor. Uživatel poté využívá virtuální \uv{laserové ukazovátko}, kterým na tyto obrazovky ukazuje a~stisknutím tlačítka s~nimi interaguje.
 
 \begin{figure}[H]
   \centering
