@@ -5,7 +5,6 @@ This project is part of my [exam of Maturity](https://en.wikipedia.org/wiki/Matu
 ## Building
 To build the game, use the Godot Engine editor only.
 The game has been tested and works on:
-Hra byla testována a funguje na:
 - Windows using Oculus (Rift and Quest) or SteamVR (all others)
 - Android-based headsets (e.g. Quest)
 - Some Chromium browsers using WebXR
